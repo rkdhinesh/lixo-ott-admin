@@ -1,0 +1,40 @@
+.fs-12 {
+    font-size: 12px;
+}
+.modal-content{
+    border-radius: 0px;
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+    transition: 0.3s;
+    background: #fff;
+    margin: 5px 0px 5px 0px; 
+}
+.modal-header {
+background: #f7f7f7;
+}
+.d_btn{
+   border:0px solid bisque; 
+   background: transparent;
+   color:#0275d8; 
+}
+.d_btn:hover{
+    border:0px solid bisque; 
+   background: transparent;
+   color:#42776b; 
+}
+.align{
+    text-align: center;
+    font-size: 24px;
+    color: rgba(67, 67, 74, 0.9);
+}
+::-webkit-input-placeholder { /* Chrome/Opera/Safari */
+  color: rgba(0, 0, 0, 0.2);
+}
+::-moz-placeholder { /* Firefox 19+ */
+  color: rgba(0, 0, 0, 0.2);
+}
+:-ms-input-placeholder { /* IE 10+ */
+  color: rgba(0, 0, 0, 0.2);
+}
+:-moz-placeholder { /* Firefox 18- */
+  color: rgba(0, 0, 0, 0.2);
+}

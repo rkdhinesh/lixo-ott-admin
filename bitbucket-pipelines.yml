@@ -1,0 +1,26 @@
+# This is a sample build configuration for JavaScript.
+# Check our guides at https://confluence.atlassian.com/x/14UWN for more examples.
+# Only use spaces to indent your .yml configuration.
+# -----
+# You can specify a custom docker image from Docker Hub as your build environment.
+image: node:6.9.4
+
+pipelines:
+  default:
+    - step:
+        caches:
+          - node
+        script: # Modify the commands below to build your repository.
+          - npm install
+          - npm run build --prod  
+          - pwd
+          - ls -lrt
+          - git status
+          - git config --global user.email "lixo.technologies@gmail.com"
+          - git config --global user.name "lixo_technologies"
+          - git config --global user.passwors "Lixo$123"
+          - git config --global user.passwors "Lixo$123"
+          - git config --global push.default simple
+          - git add .
+          - git commit -m  "commiting dist"
+          - git push https://lixo_technologies@bitbucket.org/lixotechnologies/lixohealthcareui.bitbucket.io.git --all

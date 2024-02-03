@@ -1,0 +1,90 @@
+<div class="main-content">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="card">
+          <div class="card-header card-header-primary card-header-icon">
+            <div class="card-icon">
+              <i class="material-icons">movie</i>
+            </div>
+            <h4 class="card-title">Movie Mapping</h4>
+          </div>
+          <div class="card-body">
+            <div class="row" *ngIf="operationAccessMap.get('Movie-Mapping-Create')">
+              <div class="col-12 text-right">
+                <a [routerLink]="['/add-movie-mapping']" [routerLinkActive]="['router-link-active']"
+                  class="btn btn-sm btn-primary">Add Cineast</a>
+                <!-- <div>sdsftdsfgdxgfxc</div>
+                <div *ngFor="let row of response.movieCineasts">
+                  <div *ngFor="let ci of row.cineastDetails">
+                    {{ci.cineastName}}
+                  </div>
+                </div> -->
+              </div>
+            </div>
+
+            <mat-table [dataSource]="dataSource" matSort
+              class="table table-striped table-no-bordered table-hover dataTable no-footer dtr-inline">
+              <ng-container matColumnDef="movieName">
+                <mat-header-cell *matHeaderCellDef mat-sort-header>Movie Name </mat-header-cell>
+                <mat-cell *matCellDef="let row" data-label="Movie Name">
+                  {{row.movieName}}
+                </mat-cell>
+              </ng-container>
+              <ng-container matColumnDef="cineastName">
+                <mat-header-cell *matHeaderCellDef mat-sort-header> Cineast Name </mat-header-cell>
+                <mat-cell *matCellDef="let row" data-label="Cineast Name">
+                  <div *ngFor="let ci of row.mapp">
+                    {{ci.cineastName}}
+                  </div>
+                </mat-cell>
+              </ng-container>
+              <ng-container matColumnDef="roleName">
+                <mat-header-cell *matHeaderCellDef mat-sort-header> Role Name
+                </mat-header-cell>
+                <mat-cell *matCellDef="let row" data-label="roleName">
+                  <div *ngFor="let ci of row.mapp">
+                    {{ci.roleName}}
+                  </div>
+                </mat-cell>
+              </ng-container>
+
+              <ng-container matColumnDef="roleType">
+                <mat-header-cell *matHeaderCellDef mat-sort-header>Role Type
+                </mat-header-cell>
+                <mat-cell *matCellDef="let row" data-label="roleType">
+                  <div *ngFor="let ci of row.mapp">
+                    {{ci.roleType}}
+                  </div>
+                </mat-cell>
+              </ng-container>
+
+
+              <ng-container matColumnDef="action">
+                <mat-header-cell *matHeaderCellDef> Action </mat-header-cell>
+                <mat-cell *matCellDef="let row" data-label="action" class="td-actions text-right">
+
+
+                  <button type="button" rel="tooltip" title="" class="btn btn-danger btn-link btn-sm"
+                    (click)="delete(row)" *ngIf="operationAccessMap.get('Movie-Mapping-Delete')"
+                    style="background: none !important;color: #f44336" data-original-title="Remove">
+                    <i class="material-icons">close</i>
+                  </button>
+
+                </mat-cell>
+              </ng-container>
+
+              <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+              <mat-row *matRowDef="let row; columns: displayedColumns;">
+              </mat-row>
+            </mat-table>
+
+            <mat-paginator [pageSizeOptions]="[25, 50, 100]" showFirstLastButtons></mat-paginator>
+
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,48 @@
+<div class="main-content">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-11">
+        <div class="card">
+          <div class="card-header card-header-primary card-header-icon">
+            <div class="card-icon">
+              <i class="material-icons">local_movies</i>
+            </div>
+            <h4 class="card-title">Edit Cineast Role </h4>
+          </div>
+          <div class="card-body">
+            <form>
+              <div class="row">
+                <div class="col-md-4">
+                  <mat-form-field class="dialog-full-width">
+                    <input matInput name="roleName" [(ngModel)]="selectedData.roleName" placeholder="Role Name"
+                      required>
+                  </mat-form-field>
+                </div>
+
+                <div class="col-md-4">
+                  <mat-form-field class="dialog-full-width">
+                    <input matInput name="roleDescription" [(ngModel)]="selectedData.roleDescription"
+                      placeholder="Role Description" required>
+                  </mat-form-field>
+                </div>
+              </div>
+              <div class="col-md-4">
+                <mat-radio-group aria-label="Select an Cineast" [value]="selectedData.roleType">
+                  <mat-radio-button value="CAST" (change)="radioChange($event)">Cast
+                  </mat-radio-button>
+                  <mat-radio-button value="CREW" (change)="radioChange($event)">Crew
+                  </mat-radio-button>
+                </mat-radio-group>
+
+              </div>
+              <button mat-raised-button class="btn btn-primary pull-right" [routerLink]="['/cineast-roles']"
+              [routerLinkActive]="['router-link-active']">Cancel</button>
+              <button mat-raised-button class="btn btn-primary pull-right" (click)="saveDetail()">Save</button>
+              
+              <div class="clearfix"></div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>

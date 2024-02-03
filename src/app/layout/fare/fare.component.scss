@@ -1,0 +1,78 @@
+table {
+  width: 100%;
+}
+
+::ng-deep .success-fare-snackbar {
+  color: black !important;
+  background-color: white !important;
+  display: flex !important;
+  text-align: center !important;
+  min-width: 100px !important;
+}
+
+::ng-deep .success-fare-snackbar::after{      
+  font-family: "FontAwesome" !important;
+  content: "\f00c" !important;
+  color: green !important;
+  display: inline-block !important;
+  margin-left: 15px !important;
+}
+
+.mat-column-taxes {
+  word-wrap: break-word !important;
+  white-space: unset !important;
+  flex: 0 0 20% !important;
+  width: 20% !important;
+  overflow-wrap: break-word;
+  word-wrap: break-word;
+}
+
+.mat-column-charges {
+  word-wrap: break-word !important;
+  white-space: unset !important;
+  flex: 0 0 20% !important;
+  width: 20% !important;
+  overflow-wrap: break-word;
+  word-wrap: break-word;
+}
+
+.mat-column-fareName {
+  word-wrap: break-word !important;
+  white-space: unset !important;
+  flex: 0 0 15% !important;
+  width: 15% !important;
+  overflow-wrap: break-word;
+  word-wrap: break-word;
+}
+
+.mat-column-discountFare {
+  word-wrap: break-word !important;
+  white-space: unset !important;
+  flex: 0 0 10% !important;
+  width: 10% !important;
+  overflow-wrap: break-word;
+  word-wrap: break-word;
+}
+.mat-column-extraFare {
+  word-wrap: break-word !important;
+  white-space: unset !important;
+  flex: 0 0 10% !important;
+  width: 10% !important;
+  overflow-wrap: break-word;
+  word-wrap: break-word;
+}
+.mat-column-fareAmount {
+  word-wrap: break-word !important;
+  white-space: unset !important;
+  flex: 0 0 10% !important;
+  width: 10% !important;
+  overflow-wrap: break-word;
+  word-wrap: break-word;
+}
+
+.spinner-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 20px; /* Adjust as needed */
+}

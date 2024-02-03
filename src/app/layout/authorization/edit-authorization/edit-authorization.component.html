@@ -1,0 +1,70 @@
+<div class="main-content">
+  <div class="container-fluid">
+      <div class="row">
+          <div class="col-md-11">
+              <div class="card">
+                  <div class="card-header card-header-primary card-header-icon">
+                      <div class="card-icon">
+                          <i class="material-icons">category</i>
+                      </div>
+                      <h4 class="card-title">Edit Authorization</h4>
+                  </div>
+                  <div class="card-body">
+                      <form>
+                        <div class="row">
+                            <div class="col-md-4">
+                              <!-- <mat-form-field appearance="outline">
+                                <mat-label>Company</mat-label>
+                                <mat-select placeholder="Select Company" [(ngModel)]="selectedCompany"  ngDefaultControl name="company" required>
+                                  <mat-option *ngFor="let company of companyList" [value]="company">
+                                    {{company.name}}
+                                  </mat-option>
+                                </mat-select>
+                              </mat-form-field> -->
+                              <mat-form-field appearance="outline">
+                                <mat-label>Company</mat-label>
+                                <mat-select placeholder="Select Company" [(ngModel)]="selectedCompany"  name="company" required>
+                                  <mat-option *ngFor="let company of companyList"  [value]= "company.id">
+                                    {{company.name}}
+                                  </mat-option>
+                                </mat-select>
+                              </mat-form-field>
+                            </div>
+                            
+                          <div class="col-md-4">
+                              <mat-form-field appearance="outline">
+                                <mat-label>System</mat-label>
+                                <mat-select placeholder="Select System" [(ngModel)]="selectedSystem"  name="system" required>
+                                  <mat-option *ngFor="let system of systemList" ngDefaultControl [value]="system.name">
+                                    {{system.name}}
+                                  </mat-option>
+                                </mat-select>
+                              </mat-form-field>
+                            </div>
+                        
+                          </div>
+                          <div class="row">
+                              <div class="col-md-4">
+                                  <mat-form-field>
+                                      <mat-label>Authorization Name</mat-label>
+                                      <input matInput [(ngModel)]="selectedData.authorization_code" name="authorizationName" placeholder="Authorization Name" required>
+                                  </mat-form-field>
+                              </div>
+                              <div class="col-md-6">
+                                  <mat-form-field>
+                                      <mat-label>Authorization Description</mat-label>
+                                      <input matInput [(ngModel)]="selectedData.authorization_description" name="authorizationDescription" placeholder="Authorization Description" required>
+                                  </mat-form-field>
+                              </div>
+                          </div>
+                          <button mat-raised-button class="btn btn-primary pull-right" [routerLink]="['/authorization']" [routerLinkActive]="['router-link-active']">Cancel</button>
+                          <button mat-raised-button class="btn btn-primary pull-right" (click)="saveDetail()">Save</button>
+                          
+                          <div class="clearfix"></div>
+                      </form>
+                  </div>
+              </div>
+          </div>
+
+      </div>
+  </div>

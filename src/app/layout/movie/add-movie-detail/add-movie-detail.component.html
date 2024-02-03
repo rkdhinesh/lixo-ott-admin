@@ -1,0 +1,131 @@
+<div class="main-content">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-11">
+        <div class="card">
+          <div class="card-header card-header-primary card-header-icon">
+            <div class="card-icon">
+              <i class="material-icons">local_movies</i>
+            </div>
+            <h4 class="card-title">Add Movie Details</h4>
+          </div>
+          <div class="card-body">
+            <form [formGroup]="createMovieDetailForm">
+              <div class="row">
+                <!--Select Movie Name dropdown Input-->
+                <div class="col-md-4">
+                  <mat-form-field class="dialog-full-width">
+                    <input type="text" placeholder="Select Movie Name" formControlName="movieName" aria-label="Number"
+                      matInput name="movieName" [matAutocomplete]="autoMovieName">
+                    <mat-autocomplete #autoMovieName="matAutocomplete" (optionSelected)="onMovieSelected($event)">
+                      <mat-option *ngIf="!unAddedMovieNames || unAddedMovieNames.length === 0" disabled>No movies to select</mat-option>
+                      <mat-option *ngFor="let movie of unAddedMovieNames" [value]="movie">
+                        {{movie}}
+                      </mat-option>
+                    </mat-autocomplete>
+                    <!--Select Movie Name dropdown error handling-->
+                    <mat-error *ngIf="createMovieDetailForm.get('movieName')?.hasError('required')">
+                      This Field is required
+                    </mat-error>
+                  </mat-form-field>
+                </div>
+                <!--Language Input-->
+                <div class="col-md-4">
+                  <mat-form-field class="dialog-full-width">
+                    <input matInput name="language" placeholder="Languages" formControlName="language">
+                    <!--Language error handling-->
+                    <mat-error *ngIf="createMovieDetailForm.get('language')?.hasError('required')">
+                      This Field is required
+                    </mat-error>
+                    <mat-error *ngIf="createMovieDetailForm.get('language')?.hasError('pattern')">
+                      Invalid language details or format entered
+                    </mat-error>
+                  </mat-form-field>
+                </div>
+                <!--Subtitles Input-->
+                <div class="col-md-4">
+                  <mat-form-field class="dialog-full-width">
+                    <input matInput name="subtitle" placeholder="Subtitles" formControlName="subtitles">
+                    <!--Subtitles error handling-->
+                    <mat-error *ngIf="createMovieDetailForm.get('subtitles')?.hasError('required')">
+                      This Field is required
+                    </mat-error>
+                    <mat-error *ngIf="createMovieDetailForm.get('subtitles')?.hasError('pattern')">
+                      Invalid subtitle details or format entered
+                    </mat-error>
+                  </mat-form-field>
+                </div>
+              </div>
+              <div class="row">
+                <!--Directors Input-->
+                <div class="col-md-4">
+                  <mat-form-field class="dialog-full-width">
+                    <input matInput name="director" placeholder="Directors" formControlName="directors">
+                    <!--Directors error handling-->
+                    <mat-error *ngIf="createMovieDetailForm.get('directors')?.hasError('required')">
+                      This Field is required
+                    </mat-error>
+                    <mat-error *ngIf="createMovieDetailForm.get('directors')?.hasError('pattern')">
+                      Invalid director details entered
+                    </mat-error>
+                  </mat-form-field>
+                </div>
+                <!--Producers Input-->
+                <div class="col-md-4">
+                  <mat-form-field class="dialog-full-width">
+                    <input matInput name="producer" placeholder="Producers" formControlName="producers">
+                    <!--Producers error handling-->
+                    <mat-error *ngIf="createMovieDetailForm.get('producers')?.hasError('required')">
+                      This Field is required
+                    </mat-error>
+                  </mat-form-field>
+                </div>
+                <!--Studio Input-->
+                <div class="col-md-4">
+                  <mat-form-field class="dialog-full-width">
+                    <input matInput name="studio" placeholder="Studio" formControlName="studio">
+                    <!--Studio error handling-->
+                    <mat-error *ngIf="createMovieDetailForm.get('studio')?.hasError('required')">
+                      This Field is required
+                    </mat-error>
+                  </mat-form-field>
+                </div>
+              </div>
+              <div class="row">
+                <!--Cast Input-->
+                <div class="col-md-4">
+                  <mat-form-field class="dialog-full-width">
+                    <input matInput name="cast" placeholder="Star Cast" formControlName="starCast">
+                    <!--Cast error handling-->
+                    <mat-error *ngIf="createMovieDetailForm.get('starCast')?.hasError('required')">
+                      This Field is required
+                    </mat-error>
+                    <mat-error *ngIf="createMovieDetailForm.get('starCast')?.hasError('pattern')">
+                      Invalid star cast details entered
+                    </mat-error>
+                  </mat-form-field>
+                </div>
+              </div>
+              <div class="row">
+                <!--synopsis Input-->
+                <div class="col-md-8">
+                  <mat-form-field class="dialog-full-width">
+                    <textarea matInput name="synopsis" placeholder="synopsis" formControlName="synopsis"></textarea>
+                    <!--synopsis error handling-->
+                    <mat-error *ngIf="createMovieDetailForm.get('synopsis')?.hasError('required')">
+                      This Field is required
+                    </mat-error>
+                  </mat-form-field>
+                </div>
+              </div>
+              <button mat-raised-button class="btn btn-primary pull-right" [routerLink]="['/movie-detail']"
+                [routerLinkActive]="['router-link-active']">Cancel</button>
+              <button mat-raised-button (click)="submitForm()" class="btn btn-primary pull-right"
+                [disabled]="!createMovieDetailForm.valid">Create</button>
+              <div class="clearfix"></div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>

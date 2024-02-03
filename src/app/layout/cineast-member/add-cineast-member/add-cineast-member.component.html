@@ -1,0 +1,43 @@
+<div class="main-content">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-11">
+        <div class="card">
+
+          <div class="card-header card-header-primary card-header-icon">
+            <div class="card-icon">
+              <i class="material-icons">group_add</i>
+            </div>
+            <h4 class="card-title">New Cineast Member</h4>
+          </div>
+          <div class="card-body">
+            <form>
+              <div class="row">
+                <div class="col-md-4">
+                  <mat-form-field appearance="outline">
+                    <mat-label>Cineast Name</mat-label>
+                    <input matInput [(ngModel)]="selectedData.cineastName" name="cineastName" placeholder="Cineast Name"
+                      required>
+                  </mat-form-field>
+                </div>
+                <div class="col-md-4">
+                  <mat-form-field appearance="outline">
+                    <mat-label>Image Url</mat-label>
+                    <input matInput [(ngModel)]="selectedData.profileImage" name="imageUrl" placeholder="ImageUrl"
+                      required>
+                  </mat-form-field>
+                </div>
+              </div>
+              <button mat-raised-button class="btn btn-primary pull-right"
+              [routerLink]="['/cineast-member']">Cancel</button>
+              <button mat-raised-button (click)="saveDetail()" class="btn btn-primary pull-right">Save</button>
+              
+              <div class="clearfix"></div>
+
+            </form>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>

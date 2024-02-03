@@ -1,0 +1,111 @@
+<div class="main-content">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-11">
+        <div class="card">
+
+          <div class="card-header card-header-primary card-header-icon">
+            <div class="card-icon">
+              <i class="material-icons">group_add</i>
+            </div>
+            <h4 class="card-title">New Cineast Movie Mapping</h4>
+          </div>
+          <div class="card-body">
+            <form>
+              <div class="row">
+                <div class="col-md-3">
+                  <mat-form-field>
+                    <mat-select placeholder="Select Movie" [(ngModel)]="selectedMovie" name="movie"
+                      (ngModelChange)="onMovieChange($event)">
+                      <mat-option *ngFor="let movie of movieList" [value]="movie">
+                        {{movie.name}}
+                      </mat-option>
+                    </mat-select>
+                  </mat-form-field>
+
+                </div>
+                <div class="col-md-3">
+                  <mat-form-field>
+                    <mat-select placeholder="Select Cineast" [(ngModel)]="selectedCineast" name="cineast"
+                      (ngModelChange)="onCineastChange($event)">
+                      <mat-option *ngFor="let cineast of cineastList" [value]="cineast">
+                        {{cineast.name}}
+                      </mat-option>
+                    </mat-select>
+                  </mat-form-field>
+                </div>
+
+                <div class="col-md-3">
+                  <mat-form-field>
+                    <mat-select placeholder="Select Role" [(ngModel)]="selectedRole" name="role"
+                      (ngModelChange)="onRoleChange($event)">
+                      <mat-option *ngFor="let role of roleList" [value]="role">
+                        {{role.name}} ({{role.type}})
+                      </mat-option>
+                    </mat-select>
+                  </mat-form-field>
+                </div>
+
+                <div class="col-md-3">
+                  <mat-form-field>
+                    <mat-select placeholder="Select Display Order" [(ngModel)]="selectedDisplay" name="displayOrder"
+                      (selectionChange)="displayOrder($event)">
+                      <mat-option *ngFor="let Order of displayOrders" [value]="Order">
+                        {{Order}}
+                      </mat-option>
+                    </mat-select>
+                  </mat-form-field>
+                </div>
+
+              </div>
+              <button mat-raised-button class="btn btn-primary pull-right" [routerLink]="['/movie-mapping']"
+              [routerLinkActive]="['router-link-active']">Cancel</button>
+              <div *ngIf="displaySave">
+                <button mat-raised-button class="btn btn-primary pull-right" (click)="saveDetail()">Add</button>
+              </div>
+              
+              <div class="clearfix"></div>
+            </form>
+          </div>
+          <div class="row" *ngIf="showMovie">
+            <div class="col-md-10">
+              <div class="card">
+                <div class="card-body">
+                  <mat-table [dataSource]="dataSource" matSort
+                    class="table table-striped table-no-bordered table-hover dataTable no-footer dtr-inline">
+                    <ng-container matColumnDef="cineastName">
+                      <mat-header-cell *matHeaderCellDef mat-sort-header> Cineast Name </mat-header-cell>
+                      <mat-cell *matCellDef="let row" data-label="Cineast Name"> {{row.cineastName}} </mat-cell>
+                    </ng-container>
+                    <ng-container matColumnDef="roleName">
+                      <mat-header-cell *matHeaderCellDef mat-sort-header> Role Name
+                      </mat-header-cell>
+                      <mat-cell *matCellDef="let row" data-label="Role Name"> {{row.roleName}}
+                      </mat-cell>
+                    </ng-container>
+
+                    <ng-container matColumnDef="roleType">
+                      <mat-header-cell *matHeaderCellDef mat-sort-header>Role type
+                      </mat-header-cell>
+                      <mat-cell *matCellDef="let row" data-label="Role type"> {{row.roleType}}
+                      </mat-cell>
+                    </ng-container>
+
+                    <ng-container matColumnDef="displayOrder">
+                      <mat-header-cell *matHeaderCellDef mat-sort-header>Display Order
+                      </mat-header-cell>
+                      <mat-cell *matCellDef="let row" data-label="Role type"> {{row.displayOrder}}
+                      </mat-cell>
+                    </ng-container>
+                    <mat-header-row *matHeaderRowDef="classSummaryDisplaycolumns"></mat-header-row>
+                    <mat-row *matRowDef="let row; columns: classSummaryDisplaycolumns;">
+                    </mat-row>
+                  </mat-table>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="clearfix"></div>
+
+        </div>
+      </div>

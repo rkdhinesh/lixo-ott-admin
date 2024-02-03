@@ -1,0 +1,41 @@
+<div class="main-content">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-11">
+        <div class="card">
+          <div class="card-header card-header-primary card-header-icon">
+            <div class="card-icon">
+              <i class="material-icons">work</i>
+            </div>
+            <h4 class="card-title">Edit Experience</h4>
+          </div>
+          <div class="card-body">
+            <form>
+              <div class="row">
+              
+                <div class="col-md-4">
+                  <mat-form-field class="dialog-full-width">
+                    <input matInput name="experienceName" [(ngModel)]="selectedData.experienceName"
+                      placeholder="ExperienceName" required>
+                  </mat-form-field>
+                </div>
+
+                <div class="col-md-4">
+                  <mat-form-field class="dialog-full-width">
+                    <input matInput name="experienceDesc" [(ngModel)]="selectedData.experienceDesc"
+                      placeholder="ExperienceDesc" required>
+                  </mat-form-field>
+                </div>
+
+                <button mat-raised-button (click)="saveDetail()" class="btn btn-primary pull-right">Save</button>
+                <button mat-raised-button class="btn btn-primary pull-right" [routerLink]="['/review']"
+                  [routerLinkActive]="['router-link-active']">Cancel</button>
+                <div class="clearfix"></div>
+              </div>
+              </form>
+            </div>
+          </div>
+        </div>
+  
+      </div>
+    </div>

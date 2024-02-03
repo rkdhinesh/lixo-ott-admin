@@ -1,0 +1,93 @@
+<div class="main-content">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-11">
+        <div class="card">
+          <div class="card-header card-header-primary card-header-icon">
+            <div class="card-icon">
+              <i class="material-icons">local_movies</i>
+            </div>
+            <h4 class="card-title">View Movie Detail</h4>
+          </div>
+          <div class="card-body">
+            <form>
+              <div class="row">
+                <!-- Movie Id Input-->
+                <div class="col-md-4">
+                  <mat-form-field class="dialog-full-width">
+                    <input matInput name="movieId" placeholder="Movie Id" [(ngModel)]="selectedData.movieId"
+                      [readonly]="true" [matTooltip]="'This field is Read-only'" matTooltipPosition="below">
+                  </mat-form-field>
+                </div>
+                <!--Movie Name Input-->
+                <div class="col-md-4">
+                  <mat-form-field class="dialog-full-width">
+                    <input matInput name="movieName" placeholder="Movie Name" [(ngModel)]="selectedData.movieName"
+                      [readonly]="true" [matTooltip]="'This field is Read-only'" matTooltipPosition="below">
+                  </mat-form-field>
+                </div>
+                <!--Language Input-->
+                <div class="col-md-4">
+                  <mat-form-field class="dialog-full-width">
+                    <input matInput name="language" placeholder="Languages" [(ngModel)]="selectedData.language"
+                      [readonly]="true" [matTooltip]="'This field is Read-only'" matTooltipPosition="below">
+                  </mat-form-field>
+                </div>
+              </div>
+              <div class="row">
+                <!--Subtitles Input-->
+                <div class="col-md-4">
+                  <mat-form-field class="dialog-full-width">
+                    <input matInput name="subtitle" placeholder="Subtitles" [(ngModel)]="selectedData.subtitles"
+                      [readonly]="true" [matTooltip]="'This field is Read-only'" matTooltipPosition="below">
+                  </mat-form-field>
+                </div>
+                <!--Directors Input-->
+                <div class="col-md-4">
+                  <mat-form-field class="dialog-full-width">
+                    <input matInput name="director" placeholder="Directors" [(ngModel)]="selectedData.directors"
+                      [readonly]="true" [matTooltip]="'This field is Read-only'" matTooltipPosition="below">
+                  </mat-form-field>
+                </div>
+                <!--Producers Input-->
+                <div class="col-md-4">
+                  <mat-form-field class="dialog-full-width">
+                    <input matInput name="producer" placeholder="Producers" [(ngModel)]="selectedData.producers"
+                      [readonly]="true" [matTooltip]="'This field is Read-only'" matTooltipPosition="below">
+                  </mat-form-field>
+                </div>
+              </div>
+              <div class="row">
+                <!--Studio Input-->
+                <div class="col-md-4">
+                  <mat-form-field class="dialog-full-width">
+                    <input matInput name="studio" placeholder="Studio" [(ngModel)]="selectedData.studio"
+                      [readonly]="true" [matTooltip]="'This field is Read-only'" matTooltipPosition="below">
+                  </mat-form-field>
+                </div>
+                <!--Cast Input-->
+                <div class="col-md-4">
+                  <mat-form-field class="dialog-full-width">
+                    <input matInput name="cast" placeholder="Star Cast" [(ngModel)]="selectedData.starCast"
+                      [readonly]="true" [matTooltip]="'This field is Read-only'" matTooltipPosition="below">
+                  </mat-form-field>
+                </div>
+              </div>
+              <div class="row">
+                <!--synopsis Input-->
+                <div class="col-md-8">
+                  <mat-form-field class="dialog-full-width">
+                    <textarea matInput name="synopsis" placeholder="synopsis" [(ngModel)]="selectedData.synopsis"
+                      [value]="selectedData.synopsis" [readonly]="true" [matTooltip]="'This field is Read-only'" matTooltipPosition="below"></textarea>
+                  </mat-form-field>
+                </div>
+              </div>
+              <button mat-raised-button class="btn btn-primary pull-right" (click)="goBack()"
+                [routerLinkActive]="['router-link-active']">Cancel</button>
+              <div class="clearfix"></div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>

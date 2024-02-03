@@ -1,0 +1,51 @@
+<div class="main-content">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-11">
+        <div class="card">
+
+          <div class="card-header card-header-primary card-header-icon">
+            <div class="card-icon">
+              <i class="material-icons">group_add</i>
+            </div>
+            <h4 class="card-title">New Cineast Roles</h4>
+          </div>
+          <div class="card-body">
+            <form>
+              <div class="row">
+                <div class="col-md-4">
+                  <mat-form-field appearance="outline">
+                    <mat-label>Role Name</mat-label>
+                    <input matInput [(ngModel)]="selectedData.roleName" name="roleName" placeholder="Role Name"
+                      required>
+                  </mat-form-field>
+                </div>
+                <div class="col-md-4">
+                  <mat-form-field appearance="outline">
+                    <mat-label>Role Description</mat-label>
+                    <input matInput [(ngModel)]="selectedData.roleDescription" name="roleDescription">
+
+                  </mat-form-field>
+                </div>
+
+                <div class="col-md-4">
+                  <mat-radio-group aria-label="Role Type">
+                    <mat-radio-button *ngFor="let type of selectedType" [value]="type" (change)="radioChange($event)">
+                      {{type}}
+                    </mat-radio-button>
+                  </mat-radio-group>
+                </div>
+              </div>
+              <button mat-raised-button class="btn btn-primary pull-right" [routerLink]="['/cineast-roles']"
+              [routerLinkActive]="['router-link-active']">Cancel</button>
+              <button mat-raised-button (click)="saveDetail()" class="btn btn-primary pull-right">Add</button>
+              
+              <div class="clearfix"></div>
+
+            </form>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>

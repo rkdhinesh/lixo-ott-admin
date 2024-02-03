@@ -1,0 +1,79 @@
+<div class="main-content">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-11">
+        <div class="card">
+          <div class="card-header card-header-primary card-header-icon">
+            <div class="card-icon">
+              <i class="material-icons">attach_money</i>
+            </div>
+            <h4 class="card-title">Edit Fare</h4>
+          </div>
+          <div class="card-body">
+            <form [formGroup]="editFareForm">
+              <div class="row">
+                <!--Fare Id Input-->
+                <div class="col-md-4">
+                  <mat-form-field class="dialog-full-width">
+                    <input matInput formControlName="fareId" name="fareId" placeholder="fare Id" class="text-secondary"
+                      [readonly]="true" [matTooltip]="'This field is Read-only'" matTooltipPosition="below">
+                  </mat-form-field>
+                </div>
+                <!--Amount Input-->
+                <div class="col-md-4">
+                  <mat-form-field class="dialog-full-width">
+                    <input matInput formControlName="amount" name="amount" placeholder="Amount" required>
+                    <!--Amount error handling-->
+                    <mat-error *ngIf="editFareForm.get('amount')?.hasError('required')">
+                      This field is required
+                    </mat-error>
+                    <mat-error *ngIf="editFareForm.get('amount')?.hasError('pattern')">
+                      The amount must be a number > 0
+                    </mat-error>
+                  </mat-form-field>
+                </div>
+                <!--Taxes Input-->
+                <div class="col-md-4">
+                  <mat-form-field class="dialog-full-width">
+                    <mat-chip-list #chipList>
+                      <mat-chip *ngFor="let tax of existingTaxes" required [selectable]="selectable"
+                        [removable]="removable" (removed)="remove(tax)">
+                        {{tax.taxName}}
+                        <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
+                      </mat-chip>
+                      <input formControlName="tax" placeholder="Taxes" #taxInput
+                        [matAutocomplete]="autoTaxComplete" [matChipInputFor]="chipList"
+                        [matChipInputSeparatorKeyCodes]="separatorKeysCodes" [matChipInputAddOnBlur]="addOnBlur"
+                        (matChipInputTokenEnd)="add($event)">
+                    </mat-chip-list>
+                    <mat-autocomplete #autoTaxComplete="matAutocomplete" (optionSelected)="selected($event)"
+                      [displayWith]="displayFns">
+                      <mat-option *ngFor="let tax of result" [value]="tax">
+                        {{tax.taxName}}
+                      </mat-option>
+                    </mat-autocomplete>
+                  </mat-form-field>
+                </div>
+              </div>
+              <div class="row">
+                <!--Total Amount Input-->
+                <div class="col-md-4">
+                  <mat-form-field class="dialog-full-width">
+                    <input matInput formControlName="totalAmount" name="totalAmount" placeholder="Total Amount"
+                      class="text-secondary" [readonly]="true" [matTooltip]="'This field is Read-only'"
+                      matTooltipPosition="below" required>
+                  </mat-form-field>
+                </div>
+              </div>
+              <button mat-raised-button class="btn btn-primary pull-right" [routerLink]="['/fare']"
+                [routerLinkActive]="['router-link-active']">Cancel</button>
+              <button mat-raised-button (click)="saveDetail()" class="btn btn-primary pull-right"
+                [disabled]="!editFareForm.valid">Save</button>
+
+              <div class="clearfix"></div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>

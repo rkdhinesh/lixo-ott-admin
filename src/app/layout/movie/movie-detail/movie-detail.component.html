@@ -1,0 +1,103 @@
+<div class="main-content">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="card">
+          <div class="card-header card-header-primary card-header-icon">
+            <div class="card-icon">
+              <i class="material-icons">local_movies</i>
+            </div>
+            <h4 class="card-title">Movie Details</h4>
+          </div>
+          <div class="card-body">
+            <div class="row"> <!--*ngIf="operationAccessMap.get('Movie-Create')" -->
+              <div class="col-sm p-3 text-right">
+                <a [routerLink]="['/add-movie-detail']" [routerLinkActive]="['router-link-active']"
+                  class="btn btn-sm btn-primary">New Movie Detail</a>
+              </div>
+            </div>
+            <mat-table [dataSource]="dataSource" matSort
+              class="table table-striped table-no-bordered table-hover dataTable no-footer dtr-inline">
+              <!--Movie Name column-->
+              <ng-container matColumnDef="movieName">
+                <mat-header-cell *matHeaderCellDef mat-sort-header> Movie Name
+                </mat-header-cell>
+                <mat-cell *matCellDef="let row" data-label="Name"> {{row.movieName}}
+                </mat-cell>
+              </ng-container>
+              <!--Language column-->
+              <ng-container matColumnDef="language">
+                <mat-header-cell *matHeaderCellDef mat-sort-header> Language </mat-header-cell>
+                <mat-cell *matCellDef="let row" data-label="Duration"> {{row.language}} </mat-cell>
+              </ng-container>
+              <!--Subtitles column-->
+              <ng-container matColumnDef="subtitle">
+                <mat-header-cell *matHeaderCellDef mat-sort-header> Subtitles </mat-header-cell>
+                <mat-cell *matCellDef="let row" data-label="Quality"> {{row.subtitles}} </mat-cell>
+              </ng-container>
+              <!--Directors column-->
+              <ng-container matColumnDef="director">
+                <mat-header-cell *matHeaderCellDef mat-sort-header> Directors
+                </mat-header-cell>
+                <mat-cell *matCellDef="let row" data-label="Language"> {{row.directors}}
+                </mat-cell>
+              </ng-container>
+              <!--Producers column-->
+              <ng-container matColumnDef="producer">
+                <mat-header-cell *matHeaderCellDef mat-sort-header> Producers
+                </mat-header-cell>
+                <mat-cell *matCellDef="let row" data-label="Censor"> {{row.producers}}
+                </mat-cell>
+              </ng-container>
+              <!--Action column-->
+              <ng-container matColumnDef="action">
+                <mat-header-cell *matHeaderCellDef> Action </mat-header-cell>
+                <mat-cell *matCellDef="let row" data-label="action" class="td-actions text-right">
+                  <!--View button-->
+                  <button type="button" rel="tooltip" title="" class="btn btn-primary btn-link btn-sm"
+                    style="background: none !important" (click)="editdata(row)" [routerLink]="['/view-movie-detail']"
+                    [routerLinkActive]="['router-link-active']" data-original-title="View Task"
+                    aria-describedby="tooltip275129">
+                    <i class="material-icons">visibility</i>
+                  </button>
+                  <!-- *ngIf="operationAccessMap.get('Movie-View')" -->
+                  <!--Edit button-->
+                  <button type="button" rel="tooltip" title="" class="btn btn-primary btn-link btn-sm"
+                    style="background: none !important" (click)="editdata(row)" [routerLink]="['/edit-movie-detail']"
+                    [routerLinkActive]="['router-link-active']" data-original-title="Edit Task"
+                    aria-describedby="tooltip275129">
+                    <i class="material-icons">edit</i>
+                  </button>
+                  <!-- *ngIf="operationAccessMap.get('Movie-Edit')" -->
+                  <!--Delete button-->
+                  <button type="button" rel="tooltip" title="" class="btn btn-danger btn-link btn-sm"
+                    (click)="delete(row)" style="background: none !important;color: #f44336"
+                    data-original-title="Remove">
+                    <i class="material-icons">close</i>
+                  </button>
+                  <!-- *ngIf="operationAccessMap.get('Movie-Delete')" -->
+                </mat-cell>
+              </ng-container>
+              <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+              <mat-row *matRowDef="let row; columns: displayedColumns;">
+              </mat-row>
+            </mat-table>
+            <!--Loading Spinner div-->
+            <div *ngIf="isLoading && !noContent && !isContent" class="d-flex justify-content-center">
+              <div class="spinner-container">
+                <div class="spinner-border text-success" role="status">
+                </div>
+                <h4>Loading...</h4>
+              </div>
+            </div>
+            <!--No content div-->
+            <div *ngIf="noContent" class="d-flex justify-content-center">
+              <h4>There isn't a movie detail available. Consider adding a new one.</h4>
+            </div>
+            <mat-paginator [pageSizeOptions]="[25, 50, 100]" showFirstLastButtons></mat-paginator>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

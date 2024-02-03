@@ -1,0 +1,64 @@
+<div fxLayout="row" fxLayout.xs="column" fxLayout.sm="column">
+  <div fxLayout="column" fxFlex="100">
+    <mat-toolbar color="primary">
+      <span>Screen</span>
+      <span class="lx_fill_remaining_space"></span>
+      <mat-icon matPrefix>search</mat-icon>
+      <mat-form-field color="secondary" class="lx_form lx_full-width">
+        <input type="text" class="search" matInput placeholder="search" color="secondary" [(ngModel)]="queryString">
+      </mat-form-field>
+      <span class="lx_fill_remaining_space"></span>
+      <button mat-mini-fab class="example-fab" color="secondary" (click) = "addScreen()">
+                      <mat-icon>add</mat-icon>
+      </button>
+    </mat-toolbar>
+    <section *ngIf="isLoading && !errorMessage">
+      <div style="margin-left: 40%;margin-top: 17%;">
+          <mat-spinner color="primary" [strokeWidth]="1.6" [diameter]="32"></mat-spinner>
+        </div>
+  </section> 
+  </div>
+</div>
+
+<div fxLayout="row" fxLayout.xs="column" fxLayout.sm="column">
+    <div fxLayout="column" fxFlex="100">
+      <div class="module_container">
+        <div class="row">
+          <div class="col-xs-6 col-sm-6 col-mat-4 col-lg-3 card_layout" 
+              *ngFor="let screen of items | ScreenFilterPipe:queryString:totalItems">
+           
+              <mat-card class="cardtype-card">
+  
+                  <mat-card-header class="card_header">
+                    <span class="lx_fill_remaining_space"></span>
+                    <mat-card-title>{{screen.screenName}}</mat-card-title>
+                    <mat-icon class="lx_header_icon" matTooltip="Edit" mat-button 
+                        (click)="editdata(screen)" routerLink="./edit-venue"
+                      routerLinkActive="active">mode_edit</mat-icon>
+                    <mat-icon class="lx_header_icon" matTooltip="Delete!" mat-button 
+                        (click)="delete(screen)">delete</mat-icon>
+                  </mat-card-header>
+                  <mat-card-content>
+                     <button mat-button  routerLink="./view-seat-layout"
+                          routerLinkActive="active"
+                          (click)="editdata(screen)">Seat Layout</button>  
+                  </mat-card-content>
+      
+                </mat-card>
+  
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+<div fxLayout="row" fxLayout.xs="column" fxLayout.sm="column">
+  <div fxLayout="column" fxFlex="100">
+    <footer class="fixed-bottom">
+      <mat-paginator [length]="length" [pageSize]="pageSize" 
+              [pageSizeOptions]="pageSizeOptions" (page)="pagenationEvent($event)">
+      </mat-paginator>
+    </footer>
+  </div>
+</div>
+
+      

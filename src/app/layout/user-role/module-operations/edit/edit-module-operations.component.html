@@ -1,0 +1,78 @@
+<form>
+    <div fxLayout="row" fxLayout.xs="column" fxLayout.sm="column">
+      <div fxLayout="column" fxFlex="100">
+        <mat-toolbar class="color">
+          <span class="dialog-full-width">Module & Operations</span>
+          <span class="lx_fill_remaining_space"></span>
+          <div class="lx_button_list">
+          </div>
+        </mat-toolbar>
+      </div>
+    </div>
+  
+    <div fxLayout="row" style="height:calc(100vh - 200px)" fxLayoutAlign="start start">
+      <div fxLayout="column" fxLayoutAlign="start start" style="width:70%;">
+        <div style="width:100%">
+  
+          <div fxLayout="column">
+  
+            <div fxLayout="row" fxLayout.xs="column" fxLayout.sm="column" fxFlex="130">
+              <div fxLayout="column" fxFlex="1"></div>
+              <div fxLayout="column" fxFlex="40">
+                <mat-form-field>
+                  <input matInput name="moduleName" [(ngModel)]="selectedData.moduleName" placeholder="Module Name">
+                </mat-form-field>
+              </div>
+              <div fxLayout="column" fxFlex="1"></div>
+              <div fxLayout="column" fxFlex="40">
+                <mat-form-field>
+                  <input matInput name="moduleDescription" [(ngModel)]="selectedData.moduleDescription" placeholder="Module Description">
+                </mat-form-field>
+              </div>
+            </div>
+  
+            <div fxLayout="row" fxLayout.xs="column" fxLayout.sm="column" fxFlex="130">
+              <div fxLayout="column" fxFlex="1"></div>
+              <div fxLayout="column" fxFlex="40">
+                <mat-form-field>
+                  <input matInput name="operationName" [(ngModel)]="selectedData.operationName" placeholder="Operation Name">
+                </mat-form-field>
+              </div>
+              <div fxLayout="column" fxFlex="1"></div>
+              <div fxLayout="column" fxFlex="40">
+                <mat-form-field>
+                  <input matInput name="operationDescription" [(ngModel)]="selectedData.operationDescription" placeholder="Operation Description">
+                </mat-form-field>
+              </div>
+              <div fxLayout="column" fxFlex="1"></div>
+  
+              <div fxLayout="column" fxFlex="40">
+                <button mat-mini-fab class="example-fab" color="secondary" (click)="addOperationNameList()">
+                  <mat-icon>add</mat-icon>
+                </button>
+              </div>
+            </div>
+  
+            <div class="col-xs-12">
+              <mat-label>Operations</mat-label>
+              <ul class="list-group">
+                <li *ngFor="let item of selectedData.moduleOperationList" class="list-group-item">
+                  {{item.operationName}} {{item.operationDescription}}
+                  <button style="margin-left: auto;" class="pull-right btn btn-sm btn-warning" (click)="deleteItem(item)">Delete</button>
+                </li>
+              </ul>
+            </div>
+  
+            <div fxLayout="row" fxLayout.xs="column" fxLayout.sm="column"></div>
+            <br/>
+            <div class="lx_button_list dialog-full-width">
+              <button mat-raised-button class="button" (click)="saveDetail()">Save</button>
+              <button mat-raised-button color="" [routerLink]="['/module-operations']" [routerLinkActive]="['router-link-active']">Cancel</button>
+            </div>
+  
+          </div>
+  
+        </div>
+      </div>
+    </div>
+  </form>

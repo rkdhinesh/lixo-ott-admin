@@ -1,0 +1,91 @@
+<div class="main-content">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-11">
+        <div class="card">
+
+          <div class="card-header card-header-primary card-header-icon">
+            <div class="card-icon">
+              <i class="material-icons">location_on</i>
+            </div>
+            <h4 class="card-title">Edit City</h4>
+          </div>
+          <div class="card-body">
+            <form>
+              <div class="row">
+                <div class="col-md-4">
+                  <mat-form-field appearance="outline">
+                    <mat-label>City Name</mat-label>
+                    <input matInput [(ngModel)]="selectedData.city" name="cityname" placeholder="City Name" required>
+                  </mat-form-field>
+                </div>
+               
+
+                <div class="col-md-4">
+                  <mat-form-field appearance="outline">
+                    <mat-label>Country</mat-label>
+                    <input type="text" placeholder="Country" matInput [formControl]="countryFormControl"
+                      [(ngModel)]="selectedCountryData" [matAutocomplete]="auto" required>
+                    <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayFn">
+                      <mat-option *ngFor="let option of filteredCountries | async" (focusout)="onSelect(option.code)"
+                        [value]="option">
+                        {{ option.name }}
+                      </mat-option>
+                    </mat-autocomplete>
+                  </mat-form-field>
+                </div>
+
+                <div class="col-md-4">
+                  <mat-form-field appearance="outline">
+                    <mat-label>State</mat-label>
+                    <input type="text" placeholder="State" matInput [formControl]="stateFormControl"
+                      [(ngModel)]="selectedStateData" [matAutocomplete]="stateAuto" required>
+                    <mat-autocomplete #stateAuto="matAutocomplete" [displayWith]="displayStateFn">
+                      <mat-option *ngFor="let option of filteredStates | async" [value]="option">
+                        {{ option.name }}
+                      </mat-option>
+                    </mat-autocomplete>
+                  </mat-form-field>
+                </div>
+
+                <div class="col-md-4">
+                  <mat-form-field appearance="outline">
+                    <mat-label>Zone</mat-label>
+                    <input type="text" placeholder="Zone" matInput [formControl]="zoneFormControl"
+                      [(ngModel)]="selectedZoneData" [matAutocomplete]="zoneAuto" required>
+                    <mat-autocomplete #zoneAuto="matAutocomplete" [displayWith]="displayZoneFn">
+                      <mat-option *ngFor="let option of filteredZones | async" [value]="option">
+                        {{ option.zoneName }}
+                      </mat-option>
+                    </mat-autocomplete>
+                  </mat-form-field>
+                </div>
+
+                <div class="col-md-4">
+                  <mat-form-field appearance="outline">
+                    <mat-label>Image Url</mat-label>
+                    <input matInput [(ngModel)]="selectedData.image_icon" name="image_icon" placeholder="Image Url"
+                      required>
+                  </mat-form-field>
+                </div>
+
+                <div class="col-md-4">
+                  <label></label>
+                  <section>
+                    <mat-checkbox name="popular_city" [checked]="popular" [(ngModel)]="selectedData.popular_city">PopularCity</mat-checkbox>
+                  </section>
+                </div> 
+
+              </div>
+              <button mat-raised-button class="btn btn-primary pull-right" [routerLink]="['/city']"
+              [routerLinkActive]="['router-link-active']">Cancel</button>
+              <button mat-raised-button (click)="saveDetail()" class="btn btn-primary pull-right">Save</button>
+              
+              <div class="clearfix"></div>
+            </form>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>

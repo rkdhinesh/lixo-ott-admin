@@ -1,0 +1,168 @@
+::ng-deep .mat-form-field-underline {
+  display: none;
+}
+
+::ng-deep .success-movie-snackbar {
+  color: black !important;
+  background-color: white !important;
+  display: flex !important;
+  text-align: center !important;
+  min-width: 100px !important;
+}
+
+::ng-deep .success-movie-snackbar::after{      
+  font-family: "FontAwesome" !important;
+  content: "\f00c" !important;
+  color: green !important;
+  display: inline-block !important;
+  margin-left: 15px !important;
+}
+
+::ng-deep .both-success-movie-snackbar {
+  color: black !important;
+  background-color: white !important;
+  display: flex !important;
+  text-align: center !important;
+  min-width: 100px !important;
+}
+
+::ng-deep .both-success-movie-snackbar::after{      
+  font-family: "FontAwesome" !important;
+  content: "\f00c \f00c" !important;
+  color: green !important;
+  display: inline-block !important;
+  margin-left: 15px !important;
+}
+
+::ng-deep .movie-success-movie-snackbar {
+  color: black !important;
+  background-color: white !important;
+  display: flex !important;
+  text-align: center !important;
+  min-width: 100px !important;
+}
+
+::ng-deep .movie-success-movie-snackbar::after{      
+  font-family: "FontAwesome" !important;
+  content: "\f00c \f00d" !important;
+  color: green !important;
+  display: inline-block !important;
+  margin-left: 15px !important;
+}
+
+::ng-deep .movie-success-movie-snackbar::after::before {
+  content: "\00a0" !important; /* Add a non-breaking space between the two icons */
+}
+
+::ng-deep .movie-success-movie-snackbar::after::before::after {
+  font-family: "FontAwesome" !important;
+  content: "\f00d" !important;
+  color: red !important; /* Set color for the second icon */
+}
+
+::ng-deep .movie-detail-success-movie-snackbar {
+  color: black !important;
+  background-color: white !important;
+  display: flex !important;
+  text-align: center !important;
+  min-width: 100px !important;
+}
+
+::ng-deep .movie-detail-success-movie-snackbar::after::before {
+  content: "\00a0" !important; /* Add a non-breaking space between the two icons */
+}
+
+::ng-deep .movie-detail-success-movie-snackbar::after::before::after {
+  font-family: "FontAwesome" !important;
+  content: "\f00d" !important;
+  color: red !important; /* Set color for the second icon */
+}
+
+::ng-deep .movie-detail-success-movie-snackbar::after{      
+  font-family: "FontAwesome" !important;
+  content: "\f00c \f00d" !important;
+  color: green !important;
+  display: inline-block !important;
+  margin-left: 15px !important;
+}
+
+::ng-deep .both-failure-movie-snackbar {
+  color: black !important;
+  background-color: white !important;
+  display: flex !important;
+  text-align: center !important;
+  min-width: 100px !important;
+}
+
+::ng-deep .both-failure-movie-snackbar::after{      
+  font-family: "FontAwesome" !important;
+  content: "\f00d \f00d" !important;
+  color: red !important;
+  display: inline-block !important;
+  margin-left: 15px !important;
+}
+
+/* Apply these styles to all input elements */
+input {
+  font-weight: 500;
+  font-size: 1rem;
+  color: #495055;
+  width: 550px;
+  padding: 12px 12px;
+  border-radius: 0.3rem;
+  border: 2px solid #D9D9D9;
+  outline: none;
+  transition: border-color 0.2s; /* Add transition for border-color */
+}
+
+/* Style for the placeholder span */
+span.placeholder {
+  position: absolute;
+  margin: 24px 0;
+  padding: 0 3px;
+  font-family: Roboto, sans-serif;
+  color: #6c757d;
+  display: flex;
+  align-items: center;
+  font-size: 0.9rem;
+  top: 0;
+  left: 10px;
+  transition: transform 0.2s, background 0.2s, color 0.2s, border-color 0.2s; /* Combine transitions */
+  transform-origin: 0% 0%;
+  background: none;
+}
+
+/* Apply styles when the input is focused */
+input:focus + span.placeholder {
+  transform: scale(0.8) translateY(-30px);
+  background: #fff;
+  color: green;
+  border-color: green;
+}
+
+/* Apply styles when the input or its children are focused */
+input:focus-within {
+  color: black;
+  border-color: green;
+}
+
+/* Apply styles on hover, but only if not focused */
+input:not(:focus):hover {
+  border-color: black;
+}
+
+/* Apply styles on click (active) */
+input:active {
+  border-color: green;
+  pointer-events: none;
+}
+
+.spinner-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 20px; /* Adjust as needed */
+}
+
+
+

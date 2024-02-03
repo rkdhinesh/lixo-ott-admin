@@ -1,0 +1,246 @@
+<div class="main-content">
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-md-12">
+<div class="card">
+  <div class="card-header card-header-primary card-header-icon">
+    <div class="card-icon">
+      <i class="material-icons">theaters</i>
+  </div>
+  <h4 class="card-title">Edit Screen</h4>
+  </div>
+  <div class="card-body">
+    <form>
+      <!-- <div fxLayout="row" fxLayout.xs="column" fxLayout.sm="column">
+          <div fxLayout="column" fxFlex="100">
+            <mat-toolbar color="primary">
+              <span>Screen</span>
+              <span class="lx_fill_remaining_space"></span> -->
+              <!-- <div class="lx_button_list">
+                <button mat-raised-button color="secondary" (click)="saveScreenDetail()">Save</button>
+                <button mat-raised-button color="secondary" (click)="editScreenCancel()">Cancel</button>
+              </div> -->
+            <!-- </mat-toolbar>
+          </div>
+        </div> -->
+    
+        <div fxLayout="row" fxLayoutAlign="start start">
+          <div fxLayout="column" fxLayoutAlign="start start" style="width:100%;">
+              <div style="width:100%">
+                
+                  <div fxLayout="column" *ngIf="isScreenPage">
+                      
+                      <div fxLayout="row" fxLayout.xs="column" fxLayout.sm="column" fxFlex="130">
+                          <div fxLayout="column" fxFlex="1"></div>  
+                          <div fxLayout="column" fxFlex="40"> 
+                              <mat-form-field >
+                                  <input matInput name="screenName" [(ngModel)]="selectedData.screenName" 
+                                        placeholder="Screen Name" >
+                                </mat-form-field>
+                          
+                          </div>
+                          <div fxLayout="column" fxFlex="2"></div>
+                          <div fxLayout="column" fxFlex="40">
+                              <mat-form-field >
+                                  <input matInput name="dimension" [(ngModel)]="selectedData.dimension" 
+                                        placeholder="Dimension" >
+                                </mat-form-field> 
+                                   
+                          </div>
+                          
+                          <div fxLayout="column" fxFlex="3"></div>
+                          <div fxLayout="column" fxFlex="40">
+                            <mat-form-field >
+                                <input matInput name="synopsis" [(ngModel)]="selectedData.synopsis" 
+                                      placeholder="Synopsis" >
+                              </mat-form-field> 
+                                 
+                        </div>
+                      </div>
+
+                      <div fxLayout="row" fxLayout.xs="column" fxLayout.sm="column" fxFlex="130">
+                        <div fxLayout="column" fxFlex="1"></div>  
+                        <div fxLayout="column" fxFlex="40"> 
+                            <mat-form-field >
+                                <input matInput name="classes" [(ngModel)]="selectedData.classes" 
+                                      placeholder="Classes" >
+                              </mat-form-field>
+                        
+                        </div>
+                        <div fxLayout="column" fxFlex="2"></div>
+                        <div fxLayout="column" fxFlex="40">
+                            <mat-form-field >
+                                <input matInput name="rows count" [(ngModel)]="selectedData.rowCount" 
+                                      placeholder="Rows Count" >
+                              </mat-form-field> 
+                                 
+                        </div>
+                        
+                        <div fxLayout="column" fxFlex="3"></div>
+                        <div fxLayout="column" fxFlex="40">
+                          <mat-form-field>
+                              <!-- <input matInput name="type" [(ngModel)]="selectedData.rowType" 
+                                    placeholder="Type" > -->
+                                    <mat-label>Type</mat-label>
+                                    <mat-select
+                                            [(ngModel)]="selectedData.rowType" style="padding-bottom: 0px;">
+                                            <mat-option *ngFor="let type of rowTypes" [value]="type.value">
+                                              {{type.viewValue}}  </mat-option>
+                                        </mat-select>
+                            </mat-form-field> 
+                               
+                      </div>
+                    </div>
+
+                    <div fxLayout="row" fxLayout.xs="column" fxLayout.sm="column" fxFlex="130">
+                      <div fxLayout="column" fxFlex="1"></div>  
+                      <div fxLayout="column" fxFlex="40"> 
+                          <mat-form-field >
+                              <!-- <input matInput name="row order" [(ngModel)]="selectedData.rowOrder" 
+                                    placeholder="Row Order" > -->
+                                    <mat-label>Row Order</mat-label>
+                                    <mat-select
+                                            [(ngModel)]="selectedData.rowOrder" style="padding-bottom: 0px;">
+                                            <mat-option *ngFor="let rowOrder of rowOrders" [value]="rowOrder.value">
+                                               {{rowOrder.viewValue}} </mat-option>
+                                        </mat-select>
+                            </mat-form-field>
+                      
+                      </div>
+                      <div fxLayout="column" fxFlex="2"></div>
+                      <div fxLayout="column" fxFlex="40">
+                          <mat-form-field >
+                              <input matInput name="column count" [(ngModel)]="selectedData.columnCount" 
+                                    placeholder="Columns Count" >
+                            </mat-form-field> 
+                               
+                      </div>
+                      
+                      <div fxLayout="column" fxFlex="3"></div>
+                      <div fxLayout="column" fxFlex="40">
+                        <mat-form-field >
+                            <!-- <input matInput name="column order" [(ngModel)]="selectedData.columnOrder" 
+                                  placeholder="Column Order" > -->
+                                  <mat-label>Column Order</mat-label>
+                                    <mat-select
+                                            [(ngModel)]="selectedData.columnOrder" style="padding-bottom: 0px;">
+                                            <mat-option *ngFor="let columnOrder of coloumnOrders" [value]="columnOrder.value">
+                                               {{columnOrder.viewValue}} </mat-option>
+                                        </mat-select>
+                          </mat-form-field> 
+                             
+                    </div>
+                  </div>
+
+                  <div fxLayout="row" fxLayout.xs="column" fxLayout.sm="column" fxFlex="130">
+                    <div fxLayout="column" fxFlex="1"></div>  
+                    <div fxLayout="column" fxFlex="31.5"> 
+                        <mat-form-field >
+                            <!-- <input matInput name="experiences" [(ngModel)]="selectedData.screenName" 
+                                  placeholder="Experiences" > -->
+                                  <mat-label>Experiences</mat-label>
+                                    <mat-select
+                                            [(ngModel)]="selectedData.screenName" style="padding-bottom: 0px;">
+                                            <mat-option [value]="">
+                                                </mat-option>
+                                        </mat-select>
+                          </mat-form-field>
+                    
+                    </div>
+                    <div fxLayout="column" fxFlex="2"></div>
+                    <div fxLayout="column" fxFlex="68">
+                        <mat-form-field >
+                            <input matInput name="default shows" [(ngModel)]="selectedData.defaultShowTimes" 
+                                  placeholder="Default Shows" >
+                          </mat-form-field> 
+                             
+                    </div>
+                    
+
+                </div>
+                      
+                      <!-- <div fxLayout="row" fxLayout.xs="column" fxLayout.sm="column" fxFlex="130">
+                          <div fxLayout="column" fxFlex="1"></div>  
+                          <div fxLayout="column" fxFlex="2"></div>
+                           <div fxLayout="column" fxFlex="80"> -->
+                                 <!-- <mat-form-field class="demo-chip-list">
+                                          <mat-chip-list #chipList>
+                                            <mat-chip
+                                              *ngFor="let showTime of showTimes"
+                                              [selectable]="selectable"
+                                              [removable]="removable"
+                                              (removed)="remove(showTime)">
+                                              {{showTime}}
+                                              <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
+                                            </mat-chip>
+                                            <input
+                                              placeholder="Default Shows"
+                                              #showTimeInput
+                                              [formControl]="showFormControl"
+                                              [matAutocomplete]="auto"
+                                              [matChipInputFor]="chipList"
+                                              [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+                                              [matChipInputAddOnBlur]="addOnBlur"
+                                              (matChipInputTokenEnd)="add($event)"
+                                            />
+                                          </mat-chip-list>
+                                          <mat-autocomplete #auto="matAutocomplete" (optionSelected)="selected($event)">
+                                            <mat-option *ngFor="let showTime of filteredShows | async" [value]="showTime">
+                                              {{ showTime }}
+                                            </mat-option>
+                                          </mat-autocomplete>
+                                        </mat-form-field> -->
+                          <!-- </div>
+                          
+                          <div fxLayout="column" fxFlex="1"></div>
+                        </div> -->
+                      
+                        <!-- <div fxLayout="row" fxLayout.xs="column" fxLayout.sm="column" fxFlex="130">
+                            <div fxLayout="column" fxFlex="1"></div>
+                            <div fxLayout="column" fxFlex="40">
+                              <mat-form-field >
+                                  <input matInput name="synopsis" [(ngModel)]="selectedData.synopsis" 
+                                                placeholder="Synopsis" >
+                              </mat-form-field>
+                          </div>
+                          <div fxLayout="column" fxFlex="1"></div>
+                            
+                        </div>
+                        <div fxLayout="row" fxLayout.xs="column" fxLayout.sm="column" fxFlex="130">
+                            <div fxLayout="column" fxFlex="1"></div>
+                          
+                            <div fxLayout="column" fxFlex="45"></div>
+                            
+                        </div> -->
+                      <div fxLayout="row" fxLayout.xs="column" fxLayout.sm="column" fxFlex="130">
+                          <div fxLayout="column" fxFlex="1"></div>
+                          <div fxLayout="column" fxFlex="40"> 
+                            <section class="example-section">
+                                <mat-checkbox name="live" class="example-margin" 
+                                       [(ngModel)]="selectedData.live">Enable</mat-checkbox>
+                              </section>
+                          </div>
+                          <div fxLayout="column" fxFlex="45"></div>
+                          <div fxLayout="column" fxFlex="1"></div>
+                          <div class="lx_button_list">
+                            <button mat-raised-button class="btn btn-primary" >Save</button>
+                            <button mat-raised-button class="btn btn-primary" [routerLink]="['/screen']" [routerLinkActive]="['router-link-active']">Cancel</button>
+                            </div> 
+                            <div fxLayout="column" fxFlex="1"></div>
+                      </div>
+                                         
+                  </div>
+    
+                  <!--  -->
+              
+              </div>
+          </div>
+        </div>
+    </form>
+    
+  </div>
+</div>
+    </div>
+  </div>
+</div>
+</div>

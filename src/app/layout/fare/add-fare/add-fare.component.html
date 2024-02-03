@@ -1,0 +1,103 @@
+<div class="main-content">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-11">
+        <div class="card">
+          <div class="card-header card-header-primary card-header-icon">
+            <div class="card-icon">
+              <i class="material-icons">attach_money</i>
+            </div>
+            <h4 class="card-title">New Fare</h4>
+          </div>
+          <div class="card-body">
+            <form [formGroup]="createFareForm">
+              <div class="row">
+                <!--Fare Id Input-->
+                <div class="col-md-4">
+                  <mat-form-field class="dialog-full-width">
+                    <input matInput formControlName="fareId" name="fareId" placeholder="fare Id" required
+                      (focusout)="fareIdFocusOut($event)">
+                    <!--Fare Id error handling-->
+                    <mat-error *ngIf="createFareForm.get('fareId')?.hasError('required')">
+                      This field is required
+                    </mat-error>
+                    <mat-error *ngIf="createFareForm.get('fareId')?.hasError('pattern')">
+                      Incorrect FareId format
+                    </mat-error>
+                    <!--Fare Id already exist error-->
+                    <button mat-button matSuffix mat-icon-button aria-label="Info" matTooltip="Fare Id already exist"
+                      matTooltipPosition="left" matTooltipClass="custom-tooltip" *ngIf="fareIdExist">
+                      <mat-icon class="error-icon-color">error</mat-icon>
+                    </button>
+                    <!--Fare Id help Icon-->
+                    <button mat-button matSuffix mat-icon-button aria-label="Info"
+                      matTooltip="Eg: Fare_50, here 50 is the amount" matTooltipPosition="left">
+                      <mat-icon class="success-icon-color">help</mat-icon>
+                    </button>
+                  </mat-form-field>
+                </div>
+                <!--Amount Input-->
+                <div class="col-md-4">
+                  <mat-form-field class="dialog-full-width">
+                    <input matInput formControlName="amount" name="amount" placeholder="Amount" required>
+                    <!--Amount error handling-->
+                    <mat-error *ngIf="createFareForm.get('amount')?.hasError('required')">
+                      This field is required
+                    </mat-error>
+                    <mat-error *ngIf="createFareForm.get('amount')?.hasError('pattern')">
+                      The amount must be a number > 0
+                    </mat-error>
+                  </mat-form-field>
+                </div>
+                <!--Taxes Input-->
+                <div class="col-md-4">
+                  <div class="example-chip-list-wrapper dialog-full-width">
+                    <mat-form-field>
+                      <mat-chip-list #chipList>
+                        <mat-chip *ngFor="let tax of existingTaxes" required [selectable]="selectable"
+                          [removable]="removable" (removed)="remove(tax)">
+                          {{tax.taxName}}
+                          <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
+                        </mat-chip>
+                        <input formControlName="tax" placeholder="Taxes" #taxInput [matAutocomplete]="autoTaxComplete"
+                          [matChipInputFor]="chipList" [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+                          [matChipInputAddOnBlur]="addOnBlur" (matChipInputTokenEnd)="add($event)" (blur)="onTaxesBlur()">
+                      </mat-chip-list>
+                      <mat-autocomplete #autoTaxComplete="matAutocomplete" (optionSelected)="selected($event)"
+                        [displayWith]="displayFns">
+                        <mat-option *ngIf="!result || result.length === 0" disabled>No taxes available</mat-option>
+                        <mat-option *ngFor="let tax of result" [value]="tax">
+                          {{tax.taxName}}
+                        </mat-option>
+                      </mat-autocomplete>
+                    </mat-form-field>
+                    <!--Taxes error handling-->
+                    <div class="error-message">
+                      <mat-error *ngIf="isTaxesTouched && createFareForm.get('tax')?.hasError('required')">
+                        This field is required
+                      </mat-error>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <!--Total Amount Input-->
+                <div class="col-md-4">
+                  <mat-form-field class="dialog-full-width">
+                    <input matInput formControlName="totalAmount" name="totalAmount" placeholder="Total Amount"
+                      class="text-secondary" [readonly]="true" [matTooltip]="'This field is Read-only'"
+                      matTooltipPosition="below" required>
+                  </mat-form-field>
+                </div>
+              </div>
+              <button mat-raised-button class="btn btn-primary pull-right" [routerLink]="['/fare']"
+                [routerLinkActive]="['router-link-active']">Cancel</button>
+              <button mat-raised-button (click)="submitForm()" class="btn btn-primary pull-right"
+                [disabled]="!createFareForm.valid">Create</button>
+              <div class="clearfix"></div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>

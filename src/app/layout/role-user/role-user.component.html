@@ -1,0 +1,76 @@
+<div class="main-content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header card-header-primary card-header-icon">
+                        <div class="card-icon">
+                            <i class="material-icons">people_outline</i>
+                        </div>
+                        <h4 class="card-title">Admin Users</h4>
+                    </div>
+                    <div class="card-body">
+                        <div class="row" *ngIf="operationAccessMap.get('User-Role-Create')">
+                            <div class="col-12 text-right">
+                                <a [routerLink]="['/add-role-user']" [routerLinkActive]="['router-link-active']"
+                                    class="btn btn-sm btn-primary">New User Role</a>
+                            </div>
+                        </div>
+
+                        <mat-table [dataSource]="dataSource" matSort
+                            class="table table-striped table-no-bordered table-hover dataTable no-footer dtr-inline">
+
+                            <ng-container matColumnDef="user">
+                                <mat-header-cell *matHeaderCellDef mat-sort-header> User
+                                </mat-header-cell>
+                                <mat-cell *matCellDef="let row" data-label="User">
+                                    {{row.userId}}
+                                </mat-cell>
+                            </ng-container>
+
+
+                            <ng-container matColumnDef="role">
+                                <mat-header-cell *matHeaderCellDef mat-sort-header> Role </mat-header-cell>
+                                <mat-cell *matCellDef="let row" data-label="Role">
+                                    <button mat-button (click)="selectRole(userRole)">{{row.roleName}}</button>
+                                </mat-cell>
+                            </ng-container>
+
+
+                            <ng-container matColumnDef="action">
+                                <mat-header-cell *matHeaderCellDef> Action </mat-header-cell>
+
+                                <mat-cell *matCellDef="let row" data-label="action" class="td-actions text-right">
+
+                                    <button type="button" rel="tooltip" title="" class="btn btn-primary btn-link btn-sm"
+                                        style="background: none !important"
+                                        *ngIf="operationAccessMap.get('User-Role-Edit')" (click)="editdata(row)"
+                                        [routerLink]="['./edit-role-user']" [routerLinkActive]="['router-link-active']"
+                                        data-original-title="Edit Task" aria-describedby="tooltip275129"
+                                        [disabled]="row.roleName =='Super Admin'">
+                                        <i class="material-icons">edit</i>
+                                    </button>
+
+                                    <button type="button" rel="tooltip" title="" class="btn btn-danger btn-link btn-sm"
+                                        *ngIf="operationAccessMap.get('User-Role-Delete')" (click)="delete(row)"
+                                        style="background: none !important;color: #f44336" data-original-title="Remove"
+                                        [disabled]="row.roleName =='Super Admin'">
+                                        <i class="material-icons">close</i>
+                                    </button>
+
+                                </mat-cell>
+                            </ng-container>
+
+                            <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+                            <mat-row *matRowDef="let row; columns: displayedColumns;">
+                            </mat-row>
+                        </mat-table>
+
+                        <mat-paginator [pageSizeOptions]="[25, 50, 100]" showFirstLastButtons></mat-paginator>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

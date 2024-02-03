@@ -1,0 +1,88 @@
+.example-icon {
+  padding: 0 14px;
+}
+
+.example-spacer {
+  flex: 1 1 auto;
+}
+.example-card {
+  width: 400px;
+  margin: 10% auto;
+}
+.mat-card-title{
+  font-size: 20px;
+}
+
+
+
+
+.main{
+    width: 300px;
+    height: 70vh;
+    min-height: 505px;
+    margin: auto;
+    background-color: white;
+    position: absolute;
+      left: 0; right: 0;
+      margin-bottom: 20px;
+      margin-top: 20px;
+      display: table;
+    text-align: center;
+      
+  }
+  
+  .logo{
+    display: block;
+    margin: 0 auto;
+    border-radius: 50%;
+    width: 100px;
+    text-align: center;
+    margin-top: 10%;
+    
+    left: 0;
+    right: 0;
+  
+  }
+  
+  .intro-txt{
+   
+      font-family: 'Roboto', sans-serif;
+    font-size: .8rem;
+    font-weight: black;
+    margin: auto;
+   left: 0; right: 0;
+    padding-top: 10%;
+  }
+  
+  table{
+    margin: auto;
+   
+    border-spacing: 15px;
+  }
+  
+  td{
+    padding-bottom: 0.1px;
+    padding-top: 0.1px;
+  }
+  
+  button{
+    margin-top: 10%;
+    width: 80%;
+    margin-bottom: 8%;
+  }
+  
+  a{
+    text-decoration: none;
+    color: #00bcd4;
+  }
+  
+  .left{
+    text-align: left;
+    padding-right: 20%;
+  }
+  
+  p{
+    margin-bottom: 8%;
+  }
+  
+  

@@ -1,0 +1,80 @@
+<div class="logo">
+    <div class="logoright">
+        <a href="http://www.lixotechnologies.com" class="simple-text logo-normal">
+            Lixo OTT Admin
+        </a>
+    </div>
+</div>
+
+<div class="sidebar-wrapper ps-container ps-active-y">
+
+    <ul class="nav">
+
+        <li class="nav-item " *ngFor="let module of modules;let i = index;" [ngClass]="calculateClasses(i)"
+            (click)="test(i)">
+            <span *ngIf="module.subNavHide; then subNavHideTrue else subNavHideFalse"></span>
+
+            <ng-template #subNavHideTrue>
+        <li class="nav-item" *ngFor="let subModule of module.subModules; ">
+
+            <a class="nav-link" data-toggle="collapse" aria-expanded="true" href="#module_Name_{{module.moduleName.replace(' ','')}}">
+                <i class="material-icons">{{module.moduleIconName}}</i>
+                <p>
+                    {{module.moduleName}}
+                </p>
+
+            </a>
+        </li>
+        <div class="collapse" id="module_Name_{{module.moduleName.replace(' ','')}}">
+            <ul class="nav">
+                <li class="nav-item submenu" routerLinkActive="active" *ngFor="let subModule of module.subModules; ">
+                    <a class="nav-link" routerLink="{{subModule.subModuleRouterLink}}">
+                        <span class="sidebar-mini">
+                            <i class="material-icons">{{subModule.subModuleIconName}}</i>
+                        </span>
+                        <p>
+                            {{subModule.subModuleName}}
+                        </p>
+                    </a>
+                </li>
+            </ul>
+        </div>
+        </ng-template>
+        <ng-template #subNavHideFalse>
+            <li class="nav-item">
+                <a class="nav-link" data-toggle="collapse" aria-expanded="true"
+                    href="#module_Name_{{module.moduleName.replace(' ','')}}">
+                    <i class="material-icons">{{module.moduleIconName}}</i>
+                    <p>
+                        {{module.moduleName}}
+                    </p>
+                </a>
+            </li>
+            <div class="collapse" id="module_Name_{{module.moduleName.replace(' ','')}}">
+                <ul class="nav">
+                    <li class="nav-item submenu" routerLinkActive="active"
+                        *ngFor="let subModule of module.subModules; ">
+
+                        <a class="nav-link" routerLink="{{subModule.subModuleRouterLink}}">
+                            <span class="sidebar-mini">
+                                <i class="material-icons">{{subModule.subModuleIconName}}</i>
+                            </span>
+                            <p>
+                                {{subModule.subModuleName}}
+                            </p>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </ng-template>
+        </li>
+    </ul>
+    <div class="ps-scrollbar-x-rail" style="left: 0px; bottom: -309.727px; width: 405px;">
+        <div class="ps-scrollbar-x" tabindex="0" style="left: 0px; width: 0px;"></div>
+    </div>
+    <div class="ps-scrollbar-y-rail" style="top: 312.727px; height: 506px; right: 3px;">
+        <div class="ps-scrollbar-y" tabindex="0"></div>
+    </div>
+</div>
+<div class="sidebar-background" style="background-image: url(./assets/img/sidebar-1.jpg) ">
+</div>

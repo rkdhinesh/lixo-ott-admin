@@ -1,0 +1,149 @@
+<div class="main-content">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-11">
+        <div class="card">
+          <div class="card-header card-header-primary card-header-icon">
+            <div class="card-icon">
+              <i class="material-icons">people_outline</i>
+            </div>
+            <h4 class="card-title">Edit User</h4>
+          </div>
+          <div class="card-body">
+            <form>
+              <div class="row">
+                <div class="col-md-4">
+                  <mat-form-field appearance="outline">
+                    <mat-label>User Id</mat-label>
+                    <input matInput [(ngModel)]="selectedData.userId" name="userId" placeholder="User Id" required>
+                  </mat-form-field>
+                </div>
+                <div class="col-md-4">
+                  <mat-form-field appearance="outline">
+                    <mat-label>Role</mat-label>
+                    <mat-select placeholder="Select Role" [(ngModel)]="selectedRole" ngDefaultControl name="role">
+                      <mat-option *ngFor="let role of roleList" [value]="role">
+                        {{role.name}}
+                      </mat-option>
+                    </mat-select>
+                  </mat-form-field>
+                </div>
+
+                <div class="col-md-4">
+                  <mat-form-field appearance="outline">
+                    <mat-label>Company</mat-label>
+                    <mat-select placeholder="Select Company" [(ngModel)]="selectedCompany" name="company"
+                      (selectionChange)="getAllVenueBaesdOnCompany()">
+                      <mat-option *ngFor="let company of companyList" ngDefaultControl [value]="company">
+                        {{company.name}}
+                      </mat-option>
+                    </mat-select>
+                  </mat-form-field>
+                </div>
+
+                <div class="col-md-4">
+                  <mat-form-field appearance="outline">
+                    <mat-label>First Name</mat-label>
+                    <input matInput [(ngModel)]="selectedData.firstName" name="firstName" placeholder="First Name">
+                  </mat-form-field>
+                </div>
+                <div class="col-md-4">
+                  <mat-form-field appearance="outline">
+                    <mat-label>Middle Name</mat-label>
+                    <input matInput [(ngModel)]="selectedData.middleName" name="middleName" placeholder="Middle Name">
+                  </mat-form-field>
+                </div>
+                <div class="col-md-4">
+                  <mat-form-field appearance="outline">
+                    <mat-label>Last Name</mat-label>
+                    <input matInput [(ngModel)]="selectedData.lastName" name="lastName" placeholder="Last Name">
+                  </mat-form-field>
+                </div>
+
+                <div class="col-md-4">
+                  <mat-form-field appearance="outline">
+                    <mat-label>Primary Email</mat-label>
+                    <input matInput [(ngModel)]="selectedData.primaryEmail" name="primaryEmail"
+                      placeholder="Primary Email">
+                  </mat-form-field>
+                </div>
+                <div class="col-md-4">
+                  <mat-form-field appearance="outline">
+                    <mat-label>Alternative Email</mat-label>
+                    <input matInput [(ngModel)]="selectedData.alternativeEmailId" name="alternativeEmailId"
+                      placeholder="Alternative Email">
+                  </mat-form-field>
+                </div>
+
+                <div class="col-md-4">
+                  <mat-form-field appearance="outline">
+                    <mat-label>Primary Phone</mat-label>
+                    <input matInput [(ngModel)]="selectedData.primaryPhoneNumber" name="primaryPhoneNumber"
+                      placeholder="Primary Phone">
+                  </mat-form-field>
+                </div>
+
+                <div class="col-md-4">
+                  <mat-form-field appearance="outline">
+                    <mat-label>Alternative Phone</mat-label>
+                    <input matInput [(ngModel)]="selectedData.secondaryPhoneNumber" name="secondaryPhoneNumber"
+                      placeholder="Alternative Phone">
+                  </mat-form-field>
+                </div>
+                <div class="col-md-4">
+                  <label id="example-radio-group-label">Gender</label>
+                  <mat-radio-group aria-labelledby="example-radio-group-label" class="radio-group"
+                    [(ngModel)]="selectedData.gender" name="gender">
+                    <mat-radio-button value="male">Male</mat-radio-button>
+                    <mat-radio-button value="female">Female</mat-radio-button>
+                  </mat-radio-group>
+                </div>
+
+                <div class="col-md-4">
+                  <mat-form-field appearance="outline">
+                    <mat-label>Date Of Birth</mat-label>
+                    <input matInput name="dateOfBirth" [matDatepicker]="dateOfBirthDatepicker "
+                      (focus)="dateOfBirthDatepicker.open()" [(ngModel)]="dateOfBirth" placeholder="Date Of Birth">
+                    <mat-datepicker-toggle matSuffix [for]="dateOfBirthDatepicker "></mat-datepicker-toggle>
+                    <mat-datepicker #dateOfBirthDatepicker></mat-datepicker>
+                  </mat-form-field>
+                </div>
+
+                <div class="col-md-4">
+                  <mat-form-field appearance="outline">
+                    <mat-label>Marital Status</mat-label>
+                    <input matInput [(ngModel)]="selectedData.maritalStatus" name="maritalStatus"
+                      placeholder="Marital Status">
+                  </mat-form-field>
+                </div>
+                <div class="col-md-4">
+                  <mat-form-field appearance="outline">
+                    <mat-label>Marriage Date</mat-label>
+                    <input matInput name="marriageDate" [matDatepicker]="marriageDateDatepicker "
+                      (focus)="marriageDateDatepicker.open()" [(ngModel)]="marriageDate" placeholder="Marriage Date">
+                    <mat-datepicker-toggle matSuffix [for]="marriageDateDatepicker "></mat-datepicker-toggle>
+                    <mat-datepicker #marriageDateDatepicker></mat-datepicker>
+                  </mat-form-field>
+                </div>
+
+                <div class="col-md-4">
+                  <mat-form-field appearance="outline">
+                    <mat-label>Image URL Path</mat-label>
+                    <input matInput [(ngModel)]="selectedData.profileImageUrl" name="profileImageUrl"
+                      placeholder="Image URL Path">
+                  </mat-form-field>
+                </div>
+
+              </div>
+
+              <button mat-raised-button (click)="save()" class="btn btn-primary pull-right">Save</button>
+              <button mat-raised-button class="btn btn-primary pull-right" [routerLink]="['/box-office-users']"
+                [routerLinkActive]="['router-link-active']">Cancel</button>
+              <div class="clearfix"></div>
+            </form>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>

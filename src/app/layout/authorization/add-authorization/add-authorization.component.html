@@ -1,0 +1,115 @@
+<div class="main-content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-11">
+                <div class="card">
+                    <div class="card-header card-header-primary card-header-icon">
+                        <div class="card-icon">
+                            <i class="material-icons">school</i>
+                        </div>
+                        <h4 class="card-title">New Authorization</h4>
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-md-4">
+                                <mat-form-field appearance="outline">
+                                    <mat-label>Company</mat-label>
+                                    <mat-select placeholder="Select Company" [(ngModel)]="selectedCompany"
+                                        name="company" (selectionChange)="getAllAuthorizationBasedOnCompanyandSystem()"
+                                        required>
+                                        <mat-option *ngFor="let company of companyList" [value]="company">
+                                            {{company.name}}
+                                        </mat-option>
+                                    </mat-select>
+                                </mat-form-field>
+                            </div>
+
+                            <div class="col-md-4">
+                                <mat-form-field appearance="outline">
+                                    <mat-label>System</mat-label>
+                                    <mat-select placeholder="Select System" [(ngModel)]="selectedSystem" name="system"
+                                        (selectionChange)="getAllAuthorizationBasedOnCompanyandSystem()" required>
+                                        <mat-option *ngFor="let system of systemList" [value]="system">
+                                            {{system.name}}
+                                        </mat-option>
+                                    </mat-select>
+                                </mat-form-field>
+                            </div>
+                        </div>
+                        <div class="row" [hidden]="showAuthorize">
+                            <div class="col-md-10">
+                                <div class="card">
+                                    <div class="card-body">
+                                        <mat-table [dataSource]="dataSource" matSort
+                                            class="table table-striped table-no-bordered table-hover dataTable no-footer dtr-inline">
+                                            <ng-container matColumnDef="authorizationName">
+                                                <mat-header-cell *matHeaderCellDef mat-sort-header> Authorization Name
+                                                </mat-header-cell>
+                                                <mat-cell *matCellDef="let row" data-label="Authorization Name">
+                                                    {{row.authorizationName}} </mat-cell>
+                                            </ng-container>
+                                            <ng-container matColumnDef="authorizationDescription">
+                                                <mat-header-cell *matHeaderCellDef mat-sort-header> Authorization
+                                                    Description
+                                                </mat-header-cell>
+                                                <mat-cell *matCellDef="let row" data-label="Authorization Description">
+                                                    {{row.authorizationDescription}}
+                                                </mat-cell>
+                                            </ng-container>
+                                            <mat-header-row
+                                                *matHeaderRowDef="classSummaryDisplaycolumns"></mat-header-row>
+                                            <mat-row *matRowDef="let row; columns: classSummaryDisplaycolumns;">
+                                            </mat-row>
+                                        </mat-table>
+                                        <mat-paginator [pageSizeOptions]="[25, 50, 100]"
+                                            showFirstLastButtons></mat-paginator>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="container">
+                                <table class="table table-bordered">
+                                    <tbody>
+                                        <tr *ngFor="let dynamic of authorizeList; let i = index;">
+
+                                            <td>
+                                                <mat-form-field class="dialog-full-width">
+                                                    <input [(ngModel)]="authorizeList[i].authorization_code" type="text"
+                                                        matInput name="authorizationName"
+                                                        placeholder="Authorization Name" required />
+                                                </mat-form-field>
+                                            </td>
+                                            <td>
+                                                <mat-form-field class="dialog-full-width">
+                                                    <input [(ngModel)]="authorizeList[i].authorization_description"
+                                                        type="text" matInput name="authorizationDescription"
+                                                        placeholder="Authorization Description" required />
+                                                </mat-form-field>
+                                            </td>
+                                            <td (click)="deleteRow(i)">
+                                                <i class="fa fa-trash fa-2x"></i>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <button mat-mini-fab class="example-fab" color="secondary"
+                                                    (click)="addRow()">
+                                                    <mat-icon>add</mat-icon>
+                                                </button>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        <button mat-raised-button (click)="saveDetail()"
+                            class="btn btn-primary pull-right">Save</button>
+                        <button mat-raised-button class="btn btn-primary pull-right" [routerLink]="['/authorization']"
+                            [routerLinkActive]="['router-link-active']">Cancel</button>
+                        <div class="clearfix"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>

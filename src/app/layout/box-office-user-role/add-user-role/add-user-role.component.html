@@ -1,0 +1,81 @@
+<div class="main-content">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-11">
+        <div class="card">
+          <div class="card-header card-header-primary card-header-icon">
+            <div class="card-icon">
+              <i class="material-icons">people_outline</i>
+            </div>
+            <h4 class="card-title">New User</h4>
+          </div>
+          <div class="card-body">
+            <form>
+              <div class="row">
+                <div class="col-md-4">
+                  <mat-form-field appearance="outline">
+                    <mat-label>User Id</mat-label>
+                    <input matInput [(ngModel)]="selectedData.userId" name="userId" placeholder="User Id" required>
+                  </mat-form-field>
+                </div>
+                <div class="col-md-4">
+                  <mat-form-field appearance="outline">
+                    <mat-label>Role</mat-label>
+                    <mat-select placeholder="Select Role" [(ngModel)]="selectedRole" name="role">
+                      <mat-option *ngFor="let role of roleList" [value]="role">
+                        {{role.name}}
+                      </mat-option>
+                    </mat-select>
+                  </mat-form-field>
+                </div>
+                <div class="col-md-4">
+                  <mat-form-field appearance="outline">
+                    <mat-label>Company</mat-label>
+                    <mat-select placeholder="Select Company" [(ngModel)]="selectedCompany" name="company"
+                      (selectionChange)="getAllVenueBasedOnCompany()">
+                      <mat-option *ngFor="let company of companyList" [value]="company">
+                        {{company.name}}
+                      </mat-option>
+                    </mat-select>
+                  </mat-form-field>
+                </div>
+
+                <div class="col-md-4">
+                  <mat-form-field appearance="outline">
+                    <mat-label>Venue</mat-label>
+                    <mat-select placeholder="Select Venue" [(ngModel)]="selectedVenue" name="venue"
+                      (ngModelChange)="getSelectedVenueOptions($event)">
+                      <mat-option *ngFor="let venue of venueList" [value]="venue">
+                        {{venue.name}}
+                      </mat-option>
+                    </mat-select>
+                  </mat-form-field>
+                </div>
+                <div class="col-md-4">
+                  <mat-form-field appearance="outline">
+                    <mat-label>Primary Email</mat-label>
+                    <input matInput [(ngModel)]="selectedData.primaryEmail" name="primaryEmail"
+                      placeholder="Primary Email">
+                  </mat-form-field>
+                </div>
+
+                <div class="col-md-4">
+                  <mat-form-field appearance="outline">
+                    <mat-label>Primary Phone</mat-label>
+                    <input matInput [(ngModel)]="selectedData.primaryPhoneNumber" name="primaryPhoneNumber"
+                      placeholder="Primary Phone">
+                  </mat-form-field>
+                </div>
+              </div>
+              <button mat-raised-button class="btn btn-primary pull-right" [routerLink]="['/box-office-users']"
+              [routerLinkActive]="['router-link-active']">Cancel</button>
+              <button mat-raised-button class="btn btn-primary pull-right" (click)="userProfile()">Save</button>
+             
+              <div class="clearfix"></div>
+            </form>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>

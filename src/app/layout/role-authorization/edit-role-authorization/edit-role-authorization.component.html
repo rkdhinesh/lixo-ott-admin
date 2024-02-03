@@ -1,0 +1,90 @@
+<div class="main-content">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-11">
+        <div class="card">
+          <div class="card-header card-header-primary card-header-icon">
+            <div class="card-icon">
+              <i class="material-icons">accessibility_new</i>
+            </div>
+            <h4 class="card-title">Edit Role</h4>
+          </div>
+          <div class="card-body">
+              <div class="row">
+                <div class="col-md-4">
+                  <mat-form-field appearance="outline">
+                    <mat-label>Company</mat-label>
+                    <mat-select placeholder="Select Company" [(ngModel)]="selectedCompany" name="company" >
+                      <mat-option *ngFor="let company of companyList" [value]="company.id">
+                        {{company.name}}                                                                                                                                                                                                                                                      
+                      </mat-option>
+                    </mat-select>
+                  </mat-form-field>
+                </div>
+                <div class="col-md-4">
+                  <mat-form-field appearance="outline">
+                    <mat-label>System</mat-label>
+                    <mat-select placeholder="Select System" [(ngModel)]="selectedSystem" name="system" >
+                      <mat-option *ngFor="let system of systemList" [value]="system.name">
+                        {{system.name}}
+                      </mat-option>
+                    </mat-select>
+                  </mat-form-field>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-4">
+                  <mat-form-field class="dialog-full-width">
+                    <input matInput [(ngModel)]="selectedData.role_name" name="roleName" placeholder="Role Name"
+                      required>
+                  </mat-form-field>
+                </div>
+                <div class="col-md-6">
+                  <mat-form-field class="dialog-full-width">
+                    <input matInput [(ngModel)]="selectedData.role_description" name="roleDescription"
+                      placeholder="Role Description" required>
+                  </mat-form-field>
+                </div>
+              </div>
+              <div class="clearfix"></div>
+          </div>
+          <div class="row" *ngIf="showAuthorize">
+            <div class="col-md-10">
+              <div class="card">
+                <div class="card-body">
+                  <table mat-table [dataSource]="dataSource" style="width:60%">
+                    <ng-container matColumnDef="authorizationName">
+                      <th class="table_border_style mat-header-row" mat-header-cell *matHeaderCellDef> Authorization </th>
+                      <td class="table_border_style" mat-cell *matCellDef="let data; let i = index">
+                        {{data.authorizationName}} 
+                        </td>
+                    </ng-container>
+                    <ng-container matColumnDef="access">
+                      <th class="table_border_style mat-header-row" mat-header-cell *matHeaderCellDef> Access </th>
+                      <td class="table_border_style" mat-cell *matCellDef="let data; let i = index">
+                      
+                       <mat-checkbox name="Access" [(ngModel)]="data.access" (ngModelChange)="onAccessChange(data.authorizationId,data.access)">
+                        </mat-checkbox> 
+                      
+                   </td>
+                    </ng-container>
+                    <tr mat-header-row *matHeaderRowDef="classSummaryDisplaycolumns"></tr>
+                    <tr mat-row *matRowDef="let row; columns: classSummaryDisplaycolumns;"></tr>
+                  </table>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="clearfix"></div>
+          <div class="card-body">
+            <button mat-raised-button class="btn btn-primary pull-right" [routerLink]="['/role-authorization']"
+            [routerLinkActive]="['router-link-active']">Cancel</button>
+            <button mat-raised-button (click)="saveDetail()" class="btn btn-primary pull-right">Save</button>
+          
+          <div class="clearfix"></div>
+          </div>  
+        </div>
+      </div>
+
+    </div>
+  </div>

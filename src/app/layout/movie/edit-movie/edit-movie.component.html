@@ -1,0 +1,242 @@
+<div class="main-content">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-11">
+        <div class="card">
+          <div class="card-header card-header-primary card-header-icon">
+            <div class="card-icon">
+              <i class="material-icons">local_movies</i>
+            </div>
+            <h4 class="card-title">Edit Movie</h4>
+          </div>
+          <div class="card-body">
+            <form [formGroup]="editMovieForm">
+              <div class="row">
+                <!--Movie Id Input-->
+                <div class="col-md-4">
+                  <mat-form-field class="dialog-full-width">
+                    <input matInput name="movieId" formControlName="movieId" placeholder="Movie Id" required
+                      [readonly]="true">
+                  </mat-form-field>
+                </div>
+                <!--Movie Name Input-->
+                <div class="col-md-4">
+                  <mat-form-field class="dialog-full-width">
+                    <input matInput name="movieName" formControlName="movieName" placeholder="Movie Name" required>
+                    <!--Movie Name Input error handling-->
+                    <mat-error *ngIf="editMovieForm.get('movieName')?.hasError('required')">
+                      This field is required
+                    </mat-error>
+                  </mat-form-field>
+                </div>
+                <!--Year of Release Input-->
+                <div class="col-md-4">
+                  <mat-form-field class="dialog-full-width">
+                    <input matInput name="yearReleased" formControlName="yearReleased" placeholder="Year of Release"
+                      required>
+                    <!--Year of Release Input error handling-->
+                    <mat-error *ngIf="editMovieForm.get('yearReleased')?.hasError('required')">
+                      This field is required
+                    </mat-error>
+                    <mat-error *ngIf="editMovieForm.get('yearReleased')?.hasError('pattern')">
+                      Incorrect Year format / Year out-of-range
+                    </mat-error>
+                  </mat-form-field>
+                </div>
+              </div>
+              <div class="row">
+                <!--Quality Input-->
+                <div class="col-md-4">
+                  <mat-form-field class="dialog-full-width">
+                    <input type="text" placeholder="Quality" formControlName="quality" aria-label="Number" matInput
+                      name="quality" [matAutocomplete]="autoQuality">
+                    <mat-autocomplete #autoQuality="matAutocomplete" (optionSelected)="onQualitySelected($event)">
+                      <mat-option *ngFor="let option of quality" [value]="option">
+                        {{option}}
+                      </mat-option>
+                    </mat-autocomplete>
+                    <mat-error *ngIf="editMovieForm.get('quality')?.hasError('required')">
+                      This field is required
+                    </mat-error>
+                  </mat-form-field>
+                </div>
+                <!--Duration Input-->
+                <div class="col-md-4">
+                  <mat-form-field class="dialog-full-width">
+                    <input matInput name="duration" formControlName="duration" placeholder="Duration">
+                    <!--Duration Input error handling-->
+                    <mat-error *ngIf="editMovieForm.get('duration')?.hasError('required')">
+                      This field is required
+                    </mat-error>
+                    <mat-error *ngIf="editMovieForm.get('duration')?.hasError('pattern')">
+                      Incorrect duration format
+                    </mat-error>
+                  </mat-form-field>
+                </div>
+                <!--Genre dropdown Input-->
+                <div class="col-md-4">
+                  <div class="example-chip-list-wrapper dialog-full-width">
+                    <mat-form-field>
+                      <mat-chip-list #chipList>
+                        <mat-chip *ngFor="let genre of genres" required [selectable]="selectable"
+                          [removable]="removable" (removed)="remove(genre)">
+                          {{genre.genreName}}
+                          <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
+                        </mat-chip>
+                        <input formControlName="genreId" placeholder="Genre..." #genreInput
+                          [matAutocomplete]="autoGenreComplete" [matChipInputFor]="chipList"
+                          [matChipInputSeparatorKeyCodes]="separatorKeysCodes" [matChipInputAddOnBlur]="addOnBlur"
+                          (matChipInputTokenEnd)="add($event)" (blur)="onGenreIdBlur()">
+                      </mat-chip-list>
+                      <mat-autocomplete #autoGenreComplete="matAutocomplete" (optionSelected)="selected($event)"
+                        [displayWith]="displayFn">
+                        <mat-option *ngFor="let genre of genreList | FilterPipe:selectedData.genres:totalItems "
+                          [value]="genre">
+                          {{genre.genreName}}
+                        </mat-option>
+                      </mat-autocomplete>
+                    </mat-form-field>
+                    <!--Genre Input error handling-->
+                    <div class="error-message">
+                      <mat-error *ngIf="isGenreIdTouched && editMovieForm.get('genreId').hasError('required')">
+                        This field is required
+                      </mat-error>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <!--Fare dropdown Input-->
+                <div class="col-md-4">
+                  <mat-form-field class="dialog-full-width">
+                    <input type="text" placeholder="Fare" formControlName="fareId" aria-label="Number" matInput
+                      name="fare" [matAutocomplete]="autoFare">
+                    <mat-autocomplete #autoFare="matAutocomplete" (optionSelected)="onFareSelected($event)">
+                      <mat-option *ngFor="let fare of fareList" [value]="fare.fareId">
+                        {{fare.fareId}}
+                      </mat-option>
+                    </mat-autocomplete>
+                    <mat-error *ngIf="editMovieForm.get('fareId')?.hasError('required')">
+                      This field is required
+                    </mat-error>
+                  </mat-form-field>
+                </div>
+                <!--Censor Rating Input-->
+                <div class="col-md-4">
+                  <mat-form-field class="dialog-full-width">
+                    <input matInput name="censorRating" placeholder="censorRating" formControlName="censorRating">
+                    <!--Censor Rating Input error handling-->
+                    <mat-error *ngIf="editMovieForm.get('censorRating')?.hasError('required')">
+                      This field is required
+                    </mat-error>
+                  </mat-form-field>
+                </div>
+                <!--Security Token Input-->
+                <div class="col-md-4">
+                  <mat-form-field class="dialog-full-width">
+                    <input matInput name="securityToken" placeholder="securityToken" formControlName="securityToken">
+                    <!--Security Token Input error handling-->
+                    <mat-error *ngIf="editMovieForm.get('securityToken')?.hasError('required')">
+                      This field is required
+                    </mat-error>
+                  </mat-form-field>
+                </div>
+              </div>
+              <div class="row">
+                <!--Available From Input-->
+                <div class="col-md-4">
+                  <mat-form-field class="dialog-full-width">
+                    <input matInput name="releaseDate" [matDatepicker]="releaseDatepicker "
+                      (focus)="releaseDatepicker.open()" formControlName="availableFrom" placeholder="Available From"
+                      class="form-control" id="releaseDate">
+                    <mat-datepicker-toggle matSuffix [for]="releaseDatepicker "></mat-datepicker-toggle>
+                    <mat-datepicker #releaseDatepicker></mat-datepicker>
+                    <!--Available From Input error handling-->
+                    <mat-error *ngIf="editMovieForm.get('availableFrom')?.hasError('required')">
+                      This field is required
+                    </mat-error>
+                  </mat-form-field>
+                </div>
+                <!--available To Input-->
+                <div class="col-md-4">
+                  <mat-form-field class="dialog-full-width">
+                    <input matInput name="bookingOpeningDate" [matDatepicker]="bookingopeningDateDatepicker "
+                      (focus)="bookingopeningDateDatepicker .open()" formControlName="availableTo"
+                      placeholder="Available Till" class="form-control" id="bookingOpeningDate">
+                    <mat-datepicker-toggle matSuffix [for]="bookingopeningDateDatepicker  "></mat-datepicker-toggle>
+                    <mat-datepicker #bookingopeningDateDatepicker></mat-datepicker>
+                    <!--Available To Input error handling-->
+                    <mat-error *ngIf="editMovieForm.get('availableTo')?.hasError('required')">
+                      This field is required
+                    </mat-error>
+                  </mat-form-field>
+                </div>
+              </div>
+              <div class="row">
+                <!--Thumbnail URL Input-->
+                <div class="col-md-8">
+                  <mat-form-field class="dialog-full-width">
+                    <input matInput name="thumbnailUrl" formControlName="thumbnailUrl" placeholder="Thumbnail URL"
+                      required>
+                    <!--Thumbnail URL Input error handling-->
+                    <mat-error *ngIf="editMovieForm.get('thumbnailUrl')?.hasError('required')">
+                      This field is required
+                    </mat-error>
+                    <mat-error *ngIf="editMovieForm.get('thumbnailUrl')?.hasError('pattern')">
+                      Incorrect url format
+                    </mat-error>
+                  </mat-form-field>
+                </div>
+              </div>
+              <div class="row">
+                <!--Preview Animation URL Input-->
+                <div class="col-md-8">
+                  <mat-form-field class="dialog-full-width">
+                    <input matInput name="previewUrl" formControlName="previewUrl" placeholder="Preview Animation URL"
+                      required>
+                    <!--Preview Animation URL Input error handling-->
+                    <mat-error *ngIf="editMovieForm.get('previewUrl')?.hasError('required')">
+                      This field is required
+                    </mat-error>
+                    <mat-error *ngIf="editMovieForm.get('previewUrl')?.hasError('pattern')">
+                      Incorrect url format
+                    </mat-error>
+                  </mat-form-field>
+                </div>
+                <br>
+              </div>
+              <div class="row">
+                <!--Movie URL Input-->
+                <div class="col-md-8">
+                  <mat-form-field class="dialog-full-width">
+                    <input matInput name="movieUrl" formControlName="movieUrl" placeholder="Movie URL" required>
+                    <!--Movie URL Input error handling-->
+                    <mat-error *ngIf="editMovieForm.get('movieUrl')?.hasError('required')">
+                      This field is required
+                    </mat-error>
+                    <mat-error *ngIf="editMovieForm.get('movieUrl')?.hasError('pattern')">
+                      Incorrect url format
+                    </mat-error>
+                  </mat-form-field>
+                </div>
+                <!--Upcoming Movie Checkbox-->
+                <div class="col-md-4">
+                  <section>
+                    <mat-checkbox name="Upcoming" (change)="upcomingFlagChange($event.checked)"
+                      [checked]="selectedData.movie.upcomingMovie">Upcoming Movie
+                    </mat-checkbox>
+                  </section>
+                </div>
+              </div>
+              <button mat-raised-button class="btn btn-primary pull-right" [routerLinkActive]="['router-link-active']"
+                [routerLink]="['/movie']">Cancel</button>
+              <button mat-raised-button (click)="saveDetail()" class="btn btn-primary pull-right"
+                [disabled]="!editMovieForm.valid">Save</button>
+              <div class="clearfix"></div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

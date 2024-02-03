@@ -1,0 +1,51 @@
+<div class="main-content">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-11">
+        <div class="card">
+          <div class="card-header card-header-primary card-header-icon">
+            <div class="card-icon">
+              <i class="material-icons">list</i>
+            </div>
+            <h4 class="card-title">Edit Genre</h4>
+          </div>
+          <div class="card-body">
+            <form [formGroup]="editGenreForm">
+              <div class="row">
+                <!--Genre Name Input-->
+                <div class="col-md-6">
+                  <mat-form-field class="dialog-full-width">
+                    <input matInput formControlName="genreName" name="genreName" placeholder="Genre Name" required>
+                    <!--Genre Name error handling-->
+                    <mat-error *ngIf="editGenreForm.get('genreName')?.hasError('required')">
+                      Genre Name is required
+                    </mat-error>
+                    <mat-error *ngIf="editGenreForm.get('genreName')?.hasError('pattern')">
+                      The genre name cannot contain a number
+                    </mat-error>
+                  </mat-form-field>
+                </div>
+                <!--Genre Description Input-->
+                <div class="col-md-6">
+                  <mat-form-field class="dialog-full-width">
+                    <input matInput formControlName="description" name="description" placeholder="Description" required>
+                    <!--Genre Description error handling-->
+                    <mat-error *ngIf="editGenreForm.get('description')?.hasError('required')">
+                      Description is required
+                    </mat-error>
+                  </mat-form-field>
+                </div>
+              </div>
+              <button mat-raised-button class="btn btn-primary pull-right" [routerLink]="['/genre']"
+                [routerLinkActive]="['router-link-active']">Cancel</button>
+              <button mat-raised-button (click)="saveDetail()" class="btn btn-primary pull-right"
+                [disabled]="!editGenreForm.valid">Save</button>
+
+              <div class="clearfix"></div>
+            </form>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>

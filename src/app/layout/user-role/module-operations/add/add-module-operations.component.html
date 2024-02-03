@@ -1,0 +1,116 @@
+<div class="main-content">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-11">
+        <div class="card">
+          <div class="card-header card-header-primary card-header-icon">
+            <div class="card-icon">
+              <i class="material-icons">view_module</i>
+            </div>
+            <h4 class="card-title">New Module Operarions</h4>
+          </div>
+          <div class="card-body">
+            <form>
+              <div class="row" *ngIf="moduleFlag">
+                <div class="col-md-5">
+                  <mat-form-field>
+                    <input matInput name="moduleName" [(ngModel)]="moduleName" placeholder="Module Name">
+                  </mat-form-field>
+                </div>
+                <div class="col-md-5">
+                  <mat-form-field>
+                    <input matInput name="moduleDescription" [(ngModel)]="moduleDescription"
+                      placeholder="Module Description">
+                  </mat-form-field>
+                </div>
+              </div>
+
+              <button mat-raised-button *ngIf="moduleFlag" (click)="moduleNext()"
+                class="btn btn-primary pull-right">Next</button>
+
+              <div class="row" *ngIf="subModuleFlag">
+                <div class="col-md-3">
+                  <mat-form-field>
+                    <input matInput name="ModuleName" [(ngModel)]="moduleName" disabled placeholder="Module Name">
+                  </mat-form-field>
+                </div>
+                <div class="col-md-3">
+                  <mat-form-field>
+                    <input matInput name="subModuleName" [(ngModel)]="subModuleName" placeholder="Sub Module Name">
+                  </mat-form-field>
+                </div>
+                <div class="col-md-3">
+                  <mat-form-field>
+                    <input matInput name="subModuleDescription" [(ngModel)]="subModuleDescription"
+                      placeholder="Sub Module Description">
+                  </mat-form-field>
+                </div>
+                <div class="col-md-3">
+                  <button mat-mini-fab class="example-fab" *ngIf="subModuleFlag" color="secondary"
+                    (click)="openDialog()" matTooltip="Add Operations">
+                    <mat-icon>add</mat-icon>
+                  </button>
+                </div>
+              </div>
+
+
+
+              <div class="row" *ngIf="subModuleFlag">
+                <div class="col-md-12">
+
+                  <mat-table [dataSource]="dataSource" matSort
+                    class="table table-striped table-no-bordered table-hover dataTable no-footer dtr-inline">
+
+                    <ng-container matColumnDef="name">
+                      <mat-header-cell *matHeaderCellDef mat-sort-header> Name
+                      </mat-header-cell>
+                      <mat-cell *matCellDef="let row" data-label="Name"> {{row.subModuleName}}
+                      </mat-cell>
+                    </ng-container>
+
+
+                    <ng-container matColumnDef="description">
+                      <mat-header-cell *matHeaderCellDef mat-sort-header> Description </mat-header-cell>
+                      <mat-cell *matCellDef="let row" data-label="Description"> {{row.subModuleDescription}} </mat-cell>
+                    </ng-container>
+
+                    <ng-container matColumnDef="operations">
+                      <mat-header-cell *matHeaderCellDef mat-sort-header> Operations </mat-header-cell>
+                      <mat-cell *matCellDef="let row" data-label="Description">
+                        <div *ngFor="let operation of row.operations">
+                          - {{operation.operationName}}
+                        </div>
+                      </mat-cell>
+                    </ng-container>
+
+                    <ng-container matColumnDef="action">
+                      <mat-header-cell *matHeaderCellDef> Action </mat-header-cell>
+                      <mat-cell *matCellDef="let row" data-label="action">
+                        <mat-icon class="material-icons" mat-button>delete</mat-icon>
+                      </mat-cell>
+                    </ng-container>
+
+                    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+                    <mat-row *matRowDef="let row; columns: displayedColumns;">
+                    </mat-row>
+                  </mat-table>
+
+                  <mat-paginator [pageSizeOptions]="[25, 50, 100]" showFirstLastButtons></mat-paginator>
+
+                </div>
+              </div>
+
+              <button mat-raised-button *ngIf="subModuleFlag" (click)="saveDetail()"
+                class="btn btn-primary pull-right">Save</button>
+              <button mat-raised-button class="btn btn-primary pull-right" [routerLink]="['/module-operations']"
+                [routerLinkActive]="['router-link-active']">Cancel</button>
+              <div class="clearfix"></div>
+
+
+            </form>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>

@@ -1,0 +1,159 @@
+<div class="main-content">
+
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header card-header-primary card-header-icon">
+                        <div class="card-icon">
+                            <i class="material-icons">work</i>
+                        </div>
+                        <h4 class="card-title">{{selectedData.companyName}}</h4>
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-md-4">
+                                <mat-form-field appearance="outline">
+                                    <mat-label>Synopsis</mat-label>
+                                    <input matInput name="synopsis" [(ngModel)]="selectedData.synopsis"
+                                        placeholder="Synopsis" [disabled]="true">
+                                </mat-form-field>
+                            </div>
+                            <div class="col-md-4">
+                                <mat-form-field appearance="outline">
+                                    <mat-label>LandMark</mat-label>
+                                    <input matInput name="landMark" [(ngModel)]="selectedData.landMark"
+                                        placeholder="LandMark" [disabled]="true">
+                                </mat-form-field>
+                            </div>
+                            <div class="col-md-4">
+                                <mat-form-field appearance="outline">
+                                    <mat-label>Address Line1</mat-label>
+                                    <input matInput name="addressLine1" [(ngModel)]="selectedData.addressLine1"
+                                        placeholder="Address Line1" [disabled]="true">
+                                </mat-form-field>
+                            </div>
+                            <div class="col-md-4">
+                                <mat-form-field appearance="outline">
+                                    <mat-label>Address Line2</mat-label>
+                                    <input matInput name="addressLine2" [(ngModel)]="selectedData.addressLine2"
+                                        placeholder="Address Line2" [disabled]="true">
+                                </mat-form-field>
+                            </div>
+
+                            <div class="col-md-4">
+                                <mat-form-field appearance="outline">
+                                    <mat-label>Pincode</mat-label>
+                                    <input matInput name="pinCode" [(ngModel)]="selectedData.pinCode"
+                                        placeholder="Pincode" [disabled]="true" required maxlength="6"
+                                        pattern="[0-9]{6}" #pinCode="ngModel">
+
+                                </mat-form-field>
+
+                            </div>
+                            <div class="col-md-4">
+                                <mat-form-field appearance="outline">
+                                    <mat-label>City</mat-label>
+                                    <input matInput [(ngModel)]="selectedData.city" name="city" placeholder="City"
+                                        [disabled]="true" required>
+                                </mat-form-field>
+
+                            </div>
+
+                            <div class="col-md-4">
+                                <mat-form-field appearance="outline">
+                                    <mat-label>Website</mat-label>
+                                    <input matInput name="website" [(ngModel)]="selectedData.website"
+                                        placeholder="Website" [disabled]="true">
+                                </mat-form-field>
+                            </div>
+                            <div class="col-md-4">
+                                <section>
+                                    <mat-checkbox name="live" class="example-margin" [(ngModel)]="selectedData.live"
+                                        [disabled]="true">Enable</mat-checkbox>
+                                </section>
+                            </div>
+
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-10">
+                                <div class="card">
+                                    <div class="card-header card-header-primary card-header-icon">
+                                        <div class="card-icon">
+                                            <i class="material-icons">my_location</i>
+                                        </div>
+                                        <h4 class="card-title">Venues</h4>
+                                    </div>
+                                    <div class="card-body">
+                                        <div class="tab-content">
+                                            <div class="tab-pane active" id="profile">
+
+                                                <mat-table [dataSource]="dataSource" matSort
+                                                    class="table table-striped table-no-bordered table-hover dataTable no-footer dtr-inline">
+
+                                                    <ng-container matColumnDef="venue">
+                                                        <mat-header-cell *matHeaderCellDef mat-sort-header> Name
+                                                        </mat-header-cell>
+                                                        <mat-cell *matCellDef="let row" data-label="Name">
+                                                            {{row.venueName}}
+                                                        </mat-cell>
+                                                    </ng-container>
+
+                                                    <ng-container matColumnDef="action">
+                                                        <mat-header-cell *matHeaderCellDef> Action </mat-header-cell>
+                                                        <mat-cell *matCellDef="let row" data-label="action"
+                                                            class="td-actions text-right">
+                                                            <button type="button" rel="tooltip" title=""
+                                                                class="btn btn-primary btn-link btn-sm"
+                                                                style="background: none !important"
+                                                                data-original-title="View Task"
+                                                                [routerLink]="['./view-venue']"
+                                                                (click)="venueNavigation(row)"
+                                                                aria-describedby="tooltip275129">
+                                                                <i class="material-icons">info_outline</i>
+                                                            </button>
+                                                            <button type="button" rel="tooltip" title=""
+                                                                class="btn btn-primary btn-link btn-sm"
+                                                                style="background: none !important"
+                                                                data-original-title="Edit Task"
+                                                                [routerLink]="['./venue/edit-venue']"
+                                                                (click)="editdata(row)"
+                                                                aria-describedby="tooltip275129">
+                                                                <i class="material-icons">edit</i>
+                                                            </button>
+
+                                                            <button type="button" rel="tooltip" title=""
+                                                                class="btn btn-danger btn-link btn-sm"
+                                                                (click)="delete(row)"
+                                                                style="background: none !important;color: #f44336"
+                                                                data-original-title="Remove">
+                                                                <i class="material-icons">close</i>
+                                                            </button>
+                                                        </mat-cell>
+                                                    </ng-container>
+
+                                                    <mat-header-row *matHeaderRowDef="displayedColumns">
+                                                    </mat-header-row>
+                                                    <mat-row *matRowDef="let row; columns: displayedColumns;">
+                                                    </mat-row>
+                                                </mat-table>
+
+                                                <mat-paginator [pageSizeOptions]="[25, 50, 100]" showFirstLastButtons>
+                                                </mat-paginator>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <button mat-raised-button class="btn btn-primary pull-right" [routerLink]="['/company']"
+                            [routerLinkActive]="['router-link-active']">Back</button>
+                        <div class="clearfix"></div>
+                    </div>
+
+
+                </div>
+            </div>
+        </div>

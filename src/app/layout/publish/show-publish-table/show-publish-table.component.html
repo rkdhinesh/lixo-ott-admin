@@ -1,0 +1,71 @@
+<!-- <h1 mat-dialog-title>Delete</h1> -->
+<div mat-dialog-content>
+  <form>
+      <ng-container>
+        <table>
+          <th>Show Date</th>
+          <th>Booking Opening Date</th>
+          <th>Show Time</th>
+          <th>Movie</th>
+          <th>Class</th>
+          <th>Base Fare</th>
+          <th>Extra Amount</th>
+          <th>Discount</th>
+          <th>Taxes</th>
+          <th>Taxes Total Fare(Including Taxes)</th>
+          <tr *ngFor="let date of selectedData.showsPublished ;let k=index">
+            <td> {{date.showDate}}
+            </td>
+            <td>
+              <mat-form-field>
+                <input matInput name="BookingDate_{{k}}" [(ngModel)]="date.bookingOpeningDate" [matDatepicker]="publishBookingDatepicker"
+                  (focus)="publishBookingDatepicker.open()" id="datetime" class="form-control" id="from" disabled>
+                <mat-datepicker-toggle matSuffix [for]="publishBookingDatepicker"></mat-datepicker-toggle>
+                <mat-datepicker #publishBookingDatepicker></mat-datepicker>
+              </mat-form-field>
+            </td>
+            <td> {{date.showTime}}</td>
+            <td>
+              <mat-form-field>
+                <input [readonly]="true" matInput name="movi_{{k}}" class="Drop-down" [(ngModel)]="date.selectMovie.name">
+              </mat-form-field>
+    
+            </td>
+            <td>
+              <tr *ngFor="let da of date.classesPublished;let j=index ">
+                <input [readonly]="true" matInput name="clas_{{k}}_{{j}}" [(ngModel)]="da.className">
+              </tr>
+            </td>
+            <td>
+              <tr *ngFor="let da of date.classesPublished;let j=index ">
+                <input [readonly]="true" matInput name="baseFare_{k}_{{j}}" [(ngModel)]="da.baseFare">
+              </tr>
+            </td>
+            <td>
+              <tr *ngFor="let da of date.classesPublished;let j=index ">
+                <input [readonly]="true" matInput name="extraFare_{k}_{{j}}" [(ngModel)]="da.extraFare">
+              </tr>
+            </td>
+            <td>
+              <tr *ngFor="let da of date.classesPublished;let j=index ">
+                <input [readonly]="true" matInput name="discount_{k}_{{j}}" [(ngModel)]="da.discount">
+              </tr>
+            </td>
+            <td>
+              <tr *ngFor="let da of date.classesPublished;let j=index ">
+                <input [readonly]="true" matInput name="fareId_{k}_{{j}}" [(ngModel)]="da.fareId">
+              </tr>
+            </td>
+          </tr>
+        </table>
+       
+      </ng-container>
+     
+    
+    </form>
+</div>
+<div mat-dialog-actions>
+   
+  <button mat-button [mat-dialog-close]="true"tabindex="2" (click)="saveDetail()">Save</button>
+  <button mat-button [mat-dialog-close]="false" tabindex="-1">Cancel</button>
+</div>

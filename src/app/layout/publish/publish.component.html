@@ -1,0 +1,86 @@
+<div fxLayout="row" fxLayout.xs="column" fxLayout.sm="column">
+  <div fxLayout="column" fxFlex="100">
+    <mat-toolbar class="color">
+      <span>Publish</span>
+      <span class="lx_fill_remaining_space"></span>
+      <mat-icon matPrefix>search</mat-icon>
+      <mat-form-field color="secondary" class="lx_form lx_full-width">
+        <input type="text" class="search" matInput placeholder="search" color="secondary" [(ngModel)]="queryString">
+      </mat-form-field>
+      <span class="lx_fill_remaining_space"></span>
+      <button mat-mini-fab class="example-fab" color="secondary">
+            <mat-icon>add</mat-icon>
+          </button>
+    </mat-toolbar>
+    <section *ngIf="isLoading && !errorMessage">
+      <div class="spinner">
+        <div class="double-bounce1"></div>
+        <div class="double-bounce2"></div>
+    </div>
+    </section>
+  </div>
+</div>
+<br/>
+<div fxLayout="row" fxLayout.xs="column" fxLayout.sm="column">
+  <div fxLayout="column" fxFlex="100">
+    <div class="module_container">
+       <div class="row">
+        <div class="col-xs-6 col-sm-6 col-mat-4 col-lg-3 card_layout" *ngFor="let movie of totalItems |FilterPipe:queryString:totalItems"> 
+          <mat-card class="cardtype-card" mat-button routerLink="./edit-movie"
+          routerLinkActive="active">
+            <mat-card-header class="card_header">
+              <span class="lx_fill_remaining_space"></span>
+              <mat-card-title>{{movie.movieName}}</mat-card-title>
+            <mat-icon class="lx_header_icon" matTooltip="Edit" mat-button routerLink="./edit-movie"
+               routerLinkActive="active">mode_edit</mat-icon>
+              <mat-icon class="lx_header_icon" matTooltip="Delete!" mat-button >delete</mat-icon>
+            </mat-card-header>
+            <!-- <mat-card-content>
+                <div fxLayout="row" fxLayout.xs="column" fxLayout.sm="column">
+                    <div fxLayout="column" fxFlex="50">
+                      <div class="lx_button_list">
+                        <button mat-raised-button	 class="details-button" color="secondary" (click)="viewDetailsdata(movie)" routerLink="./edit-movie"
+                        routerLinkActive="active">Details</button>
+                      </div>
+                    </div>
+                    <div fxLayout="column" fxFlex="50">
+                        <div class="lx_button_list">
+                            <button mat-raised-button class="delete-button" color="secondary"(click)="delete(movie)">Delete</button>
+                          </div>
+                      </div>
+                  </div>
+            </mat-card-content> -->
+
+          </mat-card>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- <div fxLayout="row" fxLayout.xs="column" fxLayout.sm="column">
+  <div fxLayout="column" fxFlex="100">
+    <footer class="fixed-bottom">
+      <mat-paginator [length]="length" [pageSize]="pageSize" [pageSizeOptions]="pageSizeOptions" (page)="pagenationEvent($event)">
+      </mat-paginator>
+    </footer>
+  </div>
+</div> -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

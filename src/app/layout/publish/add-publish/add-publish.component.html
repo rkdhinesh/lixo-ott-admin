@@ -1,0 +1,332 @@
+<div class="main-content">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="card">
+          <div class="card-header card-header-primary card-header-icon">
+            <div class="card-icon">
+              <i class="material-icons">publish</i>
+            </div>
+            <h4 class="card-title">New Publish</h4>
+          </div>
+          <div class="card-body">
+            <form>
+              <div class="row" *ngIf="!showPopulatePublish">
+                <div class="col-md-3">
+                  <mat-form-field>
+                    <mat-select placeholder="Select Company" [(ngModel)]="selectedCompany" name="company"
+                      (ngModelChange)="onCompanyChange($event)">
+                      <mat-option *ngFor="let company of companyList" [value]="company">
+                        {{company.name}}
+                      </mat-option>
+                    </mat-select>
+                  </mat-form-field>
+
+                </div>
+                <div class="col-md-3">
+                  <mat-form-field>
+                    <mat-select placeholder="Select Venue" [(ngModel)]="selectedVenue" name="venue"
+                      (ngModelChange)="onVenueChange($event)">
+                      <mat-option *ngFor="let venue of venueList" [value]="venue">
+                        {{venue.name}}
+                      </mat-option>
+                    </mat-select>
+                  </mat-form-field>
+                </div>
+                <div class="col-md-3">
+                  <mat-form-field>
+                    <mat-select placeholder="Select Screen" [(ngModel)]="selectedScreen" name="screen"
+                      (ngModelChange)="onScreenChange($event)">
+                      <mat-option *ngFor="let screen of screenList" [value]="screen">
+                        {{screen.name}}
+                      </mat-option>
+                    </mat-select>
+                  </mat-form-field>
+                </div>
+              </div>
+
+              <div class="row" *ngIf="summarySelection && !showPopulatePublish">
+                <div class="col-md-10">
+                  <div class="card">
+
+                    <div class="card-body">
+                      <mat-table #table [dataSource]="classDataSource">
+
+                        <ng-container matColumnDef="className">
+                          <mat-header-cell *matHeaderCellDef> Class Name</mat-header-cell>
+                          <mat-cell *matCellDef="let element"> {{element.className}} </mat-cell>
+                        </ng-container>
+
+                        <ng-container matColumnDef="baseFare">
+                          <mat-header-cell *matHeaderCellDef> Base Fare</mat-header-cell>
+                          <mat-cell *matCellDef="let element"> {{element.baseFare}} </mat-cell>
+                        </ng-container>
+
+                        <ng-container matColumnDef="extraFare">
+                          <mat-header-cell *matHeaderCellDef> Extra Fare </mat-header-cell>
+                          <mat-cell *matCellDef="let element ;let j=index">
+                            <mat-form-field style=" width: 40%;text-align: right;">
+                              <input matInput [(ngModel)]="element.extraFare" name="extraFare_{{j}}">
+                            </mat-form-field>
+                          </mat-cell>
+                        </ng-container>
+
+                        <ng-container matColumnDef="discount">
+                          <mat-header-cell *matHeaderCellDef> Discount </mat-header-cell>
+                          <mat-cell *matCellDef="let element ;let j=index">
+                            <mat-form-field style=" width: 40%;text-align: right;">
+                              <input matInput [(ngModel)]="element.discount" name="discount_{{j}}">
+                            </mat-form-field>
+                          </mat-cell>
+                        </ng-container>
+
+                        <mat-header-row *matHeaderRowDef="classSummaryDisplaycolumns"></mat-header-row>
+                        <mat-row *matRowDef="let row; columns: classSummaryDisplaycolumns;"></mat-row>
+                      </mat-table>
+                    </div>
+                  </div>
+                </div>
+
+
+              </div>
+
+
+              <div class="row" *ngIf="summarySelection && !showPopulatePublish">
+                <div style="overflow-y:auto;" class="col-md-11">
+                  <table>
+                    <thead>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td>
+                          Time
+                        </td>
+                        <td *ngFor="let screen of screenSummaryList;let i = index;">
+                          <mat-form-field>
+                            <input matInput [(ngModel)]="screen.showTime" name="screen_showTime_{{i}}">
+                          </mat-form-field>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td>
+                          Movie
+                        </td>
+                        <td *ngFor="let screen of screenSummaryList;let i = index;">
+                          <mat-form-field>
+                            <mat-select placeholder="Select Movie" [(ngModel)]="screen.selectedMovie"
+                              name="screen_movie_{{i}}">
+                              <mat-option *ngFor="let movie of screen.movieList" [value]="movie">
+                                {{movie.name}}
+                              </mat-option>
+                            </mat-select>
+                          </mat-form-field>
+                        </td>
+                        <td>
+                          <button mat-mini-fab class="example-fab" color="secondary" (click)="addScreenSummary()">
+                            <mat-icon>add</mat-icon>
+                          </button>
+                          <button mat-mini-fab class="example-fab" color="secondary" (click)="removePublishRow()">
+                            <mat-icon>clear</mat-icon>
+                          </button>
+                        </td>
+                        <!-- <td *matCellDef="let data; let i = index" [attr.rowspan]="getRowSpan('action', i)"
+                          [style.display]="getRowSpan('action', i) ? '' : 'none'">
+                          <button mat-mini-fab class="example-fab" color="secondary" (click)="removePublishRow(i)">
+                            <mat-icon>clear</mat-icon>
+                          </button>
+                        </td> -->
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+
+              </div>
+
+              <div class="row" *ngIf="summarySelection && !showPopulatePublish">
+                <div class="col-md-3">
+                  <mat-form-field>
+                    <input matInput name="rromDate" [matDatepicker]="fromDatepicker " (focus)="fromDatepicker.open()"
+                      [(ngModel)]="fromDate" id="datetime" placeholder="From Date" class="form-control" id="fromDate">
+                    <mat-datepicker-toggle matSuffix [for]="fromDatepicker "></mat-datepicker-toggle>
+                    <mat-datepicker #fromDatepicker></mat-datepicker>
+                  </mat-form-field>
+                </div>
+                <div class="col-md-3">
+                  <mat-form-field>
+                    <input matInput name="toDate" [matDatepicker]="toDatepicker" (focus)="toDatepicker.open()"
+                      [(ngModel)]="toDate" id="datetime" placeholder="To Date" class="form-control" id="toDate">
+                    <mat-datepicker-toggle matSuffix [for]="toDatepicker"></mat-datepicker-toggle>
+                    <mat-datepicker #toDatepicker></mat-datepicker>
+                  </mat-form-field>
+                </div>
+              </div>
+              <div class="row" *ngIf="showPopulatePublish && summarySelection">
+                <div class="col-md-12" style="overflow-y:auto;">
+                  <table mat-table [dataSource]="publishDataSource">
+
+                    <ng-container matColumnDef="showDate">
+                      <th class="table_border_style mat-header-row" mat-header-cell *matHeaderCellDef> Show Date </th>
+                      <td class="table_border_style" mat-cell *matCellDef="let data; let i = index"
+                        [attr.rowspan]="getRowSpan('showDate', i)"
+                        [style.display]="getRowSpan('showDate', i) ? '' : 'none'">
+                        {{data.showDate | date: 'dd-MMM-yyyy'}} </td>
+                    </ng-container>
+
+                    <ng-container matColumnDef="showTime">
+                      <th class="table_border_style mat-header-row" mat-header-cell *matHeaderCellDef> Show Time </th>
+                      <td class="table_border_style" mat-cell *matCellDef="let data; let i = index"
+                        [attr.rowspan]="getRowSpan('showTime', i)"
+                        [style.display]="getRowSpan('showTime', i) ? '' : 'none'">
+
+                        <mat-form-field style="width: 60px;">
+                          <input matInput [(ngModel)]="data.showTime" (change)="onShowTimeChange(i)"
+                            name="publish_showTime_{{i}}">
+                        </mat-form-field>
+
+                      </td>
+                    </ng-container>
+
+                    <ng-container matColumnDef="movie">
+                      <th class="table_border_style mat-header-row" mat-header-cell *matHeaderCellDef> Movie </th>
+                      <td class="table_border_style" mat-cell *matCellDef="let data; let i = index"
+                        [attr.rowspan]="getRowSpan('movie', i)" [style.display]="getRowSpan('movie', i) ? '' : 'none'">
+
+
+                        <mat-form-field style="width: 150px;">
+                          <mat-select placeholder="Select Movie" [(ngModel)]="data.selectedMovie"
+                            (ngModelChange)="onMovieChange(i)" name="publish_movie_{{i}}">
+                            <mat-option *ngFor="let movie of data.movieList" [value]="movie">
+                              {{movie.name}}
+                            </mat-option>
+                          </mat-select>
+                        </mat-form-field>
+
+                      </td>
+                    </ng-container>
+
+                    <ng-container matColumnDef="cancelShow">
+                      <th class="table_border_style mat-header-row" mat-header-cell *matHeaderCellDef> Cancel All
+                        <section class="example-section">
+                          <mat-checkbox (change)="checkUncheckAllData($event.checked)">
+                          </mat-checkbox>
+                        </section>
+                      
+                      </th>
+                      <td class="table_border_style" mat-cell *matCellDef="let data; let i = index"
+                        [attr.rowspan]="getRowSpan('cancelShow', i)"
+                        [style.display]="getRowSpan('cancelShow', i) ? '' : 'none'">
+
+                        <section class="example-section">
+                          <mat-checkbox [(ngModel)]="data.cancelShow" (change)="onCancelShowChange(i)"
+                            name="publish_cancelShow_{{i}}"></mat-checkbox>
+                        </section>
+                      </td>
+                    </ng-container>
+
+                    <ng-container matColumnDef="boxofficeonly">
+                      <th class="table_border_style mat-header-row" mat-header-cell *matHeaderCellDef> Box Office Only
+                        <section class="example-section">
+                          <mat-checkbox (change)="checkUncheckAllData1($event.checked)">
+                          </mat-checkbox>
+                        </section>
+                      </th>
+                      <td class="table_border_style" mat-cell *matCellDef="let data; let i = index"
+                        [attr.rowspan]="getRowSpan('boxofficeonly', i)"
+                        [style.display]="getRowSpan('boxofficeonly', i) ? '' : 'none'">
+                        <section class="example-section">
+                          <mat-checkbox [(ngModel)]="data.boxofficeonly" (change)="onboxofficeonlyChange(i)"
+                            name="publish_boxofficeonly_{{i}}"></mat-checkbox>
+                        </section>
+                      </td>
+                    </ng-container>
+                    
+
+                    <ng-container matColumnDef="action">
+                      <th class="table_border_style mat-header-row" mat-header-cell *matHeaderCellDef> Action </th>
+                      <td class="table_border_style" mat-cell *matCellDef="let data; let i = index"
+                        [attr.rowspan]="getRowSpan('action', i)"
+                        [style.display]="getRowSpan('action', i) ? '' : 'none'">
+
+                        <button mat-mini-fab class="example-fab" color="secondary" (click)="removePublishRow1(data)">
+                          <mat-icon>clear</mat-icon>
+                        </button>
+                      </td>
+                    </ng-container>
+
+                    <ng-container matColumnDef="class">
+                      <th class="table_border_style mat-header-row" mat-header-cell *matHeaderCellDef> Class </th>
+                      <td class="table_border_style" mat-cell *matCellDef="let data"> {{data.className}} </td>
+                    </ng-container>
+
+                    <ng-container matColumnDef="baseFare">
+                      <th class="table_border_style mat-header-row" mat-header-cell *matHeaderCellDef> Base Fare </th>
+                      <td class="table_border_style" mat-cell *matCellDef="let data"> {{data.baseFare}} </td>
+                    </ng-container>
+
+                    <ng-container matColumnDef="extraAmount">
+                      <th class="table_border_style mat-header-row" mat-header-cell *matHeaderCellDef> Extra Fare </th>
+                      <td class="table_border_style" mat-cell *matCellDef="let data; let i = index">
+
+                        <mat-form-field style="width: 50px;">
+                          <input matInput [(ngModel)]="data.extraFare" name="publish_extraFare_{{i}}">
+                        </mat-form-field>
+
+                      </td>
+                    </ng-container>
+
+                    <ng-container matColumnDef="discount">
+                      <th class="table_border_style mat-header-row" mat-header-cell *matHeaderCellDef> Discount </th>
+                      <td class="table_border_style" mat-cell *matCellDef="let data; let i = index">
+                        <mat-form-field style="width: 50px;">
+                          <input matInput [(ngModel)]="data.discount" name="publish_discount_{{i}}">
+                        </mat-form-field>
+
+                      </td>
+                    </ng-container>
+
+                    <ng-container matColumnDef="fareTax">
+                      <th class="table_border_style mat-header-row" mat-header-cell *matHeaderCellDef>Fare Tax </th>
+                      <td class="table_border_style" mat-cell *matCellDef="let data"> {{data.fareTax}} </td>
+                    </ng-container>
+                    <ng-container matColumnDef="charge">
+                      <th class="table_border_style mat-header-row" mat-header-cell *matHeaderCellDef>Charge </th>
+                      <td class="table_border_style" mat-cell *matCellDef="let data"> {{data.charge}} </td>
+                    </ng-container>
+
+                    <ng-container matColumnDef="chargeTax">
+                      <th class="table_border_style mat-header-row" mat-header-cell *matHeaderCellDef>Charge Tax</th>
+                      <td class="table_border_style" mat-cell *matCellDef="let data"> {{data.chargeTax}} </td>
+                    </ng-container>
+
+                    <ng-container matColumnDef="totalTax">
+                      <th class="table_border_style mat-header-row" mat-header-cell *matHeaderCellDef>Charge Tax</th>
+                      <td class="table_border_style" mat-cell *matCellDef="let data"> {{data.totalTax}} </td>
+                    </ng-container>
+                    <ng-container matColumnDef="totalAmount">
+                      <th class="table_border_style mat-header-row" mat-header-cell *matHeaderCellDef> Total Fare </th>
+                      <td class="table_border_style" mat-cell *matCellDef="let data"> {{data.totalAmount}}
+                      </td>
+                    </ng-container>
+
+                    <tr mat-header-row *matHeaderRowDef="publishDisplaycolumns"></tr>
+                    <tr mat-row *matRowDef="let row; columns: publishDisplaycolumns;"></tr>
+                  </table>
+                </div>
+
+              </div>
+              <button mat-raised-button (click)="populatePublishData()" *ngIf="summarySelection && !showPopulatePublish"
+                class="btn btn-primary pull-right">Populate</button>
+                <button mat-raised-button (click)="back()" *ngIf="showPopulatePublish && summarySelection"
+                class="btn btn-primary pull-right">Back</button>
+              <button mat-raised-button (click)="addPublishDetails()" *ngIf="showPopulatePublish && summarySelection"
+                class="btn btn-primary pull-right">Save</button>
+             
+
+              <div class="clearfix"></div>
+            </form>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>

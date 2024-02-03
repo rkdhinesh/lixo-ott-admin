@@ -1,0 +1,165 @@
+.lx_body_container {
+    width: 100%;
+    height: auto;
+    overflow: auto;
+    position: fixed;
+}
+
+.edit {
+    float: right;
+    color: blue;
+}
+
+.lx_fill_remaining_space {
+    // This fills the remaining space, by using flexbox. 
+    // Every toolbar row uses a flexbox row layout.
+    flex: 1 1 auto;
+}
+
+.lx_header_icon {
+    padding: 0 20px;
+    outline:0 !important;
+}
+
+.lx_form {
+    min-width: 150px;
+    max-width: 500px;
+    width: 100%;
+    margin-top: 5px;
+}
+
+.lx_full-width {
+    width: 100%;
+}
+
+.module_container {
+    padding: 10px;
+}
+
+.boffer-card {
+    float: left;
+    margin: 5px 5px;
+    color: rgba(0, 0, 0, 0.54);
+}
+
+.lx_fill_remaining_space {
+    flex: 1 1 auto;
+}
+
+.lx_header_icon {
+    cursor: pointer;
+}
+
+.card_layout {
+    margin-bottom: 10px;
+}
+
+footer {
+    position: fixed;
+    height: 50px;
+    bottom: 5px;
+     width: 100%;
+    box-shadow: 3px 0 6px rgba(0, 0, 0, .14);
+}
+
+.lx_cardtype_body {
+    margin: 0;
+    height: 100%;
+    overflow: hidden;
+    background-image: linear-gradient(-45deg, #f5f0f0 25%, transparent 25%, transparent 50%, #ffffff 50%, #bfbfbf 75%, transparent 75%, transparent);
+    background-size: 2px 2px;
+}
+
+.footer-bottom {
+    background-image: linear-gradient(-45deg, #f5f0f0 25%, transparent 25%, transparent 50%, #ffffff 50%, #bfbfbf 75%, transparent 75%, transparent);
+    background-size: 2px 2px;
+}
+
+.cardtype-card {
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+    transition: 0.3s;
+    border-radius: 0px;
+    padding: 8px;
+    outline:0 !important;
+}
+
+.cardtype-card:hover {
+    box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
+}
+
+.card_header {
+    color: #3f51b5;
+}
+
+.mat-toolbar.mat-primary {
+    background: rgba(12, 18, 23, 0.98);
+    color: #009688;
+}
+
+mat-card-content {
+  //  text-align: right;
+    color: #009688;
+}
+
+
+
+.card_header {
+    color: #009688;
+}
+
+.mat-select-value-text {
+    color: #009688;
+}
+
+.block {
+    margin: 5px;
+    box-shadow: 0 0 12px rgba(0, 0, 0, 0.2);
+}
+
+.block-header {
+    width: 100%;
+    height: 50px;
+}
+
+.block-body {
+    padding: 10px;
+}
+
+.details-button {
+    padding: 0 6px 0 6px;
+    margin: 6px 8px 6px 8px;
+    min-width: 88px;
+    border-radius: 3px;
+    font-size: 10px;
+    text-align: center;
+   // text-transform: uppercase;
+    text-decoration:none;
+    border: none;
+    outline: none;
+    color: rgb(15, 115, 230)!important;
+
+  }
+  .delete-button {
+    padding: 0 6px 0 6px;
+    margin: 6px 8px 6px 8px;
+    min-width: 88px;
+    border-radius: 3px;
+    font-size: 10px;
+    text-align: center;
+   // text-transform: uppercase;
+    text-decoration:none;
+    border: none;
+    outline: none;
+    color: rgb(243, 8, 8)!important;
+
+  }
+  .color{
+      background-color: lightgrey;
+  }
+  footer {
+    position: fixed;
+    height: 50px;
+    bottom: 5px;
+    width: 100%;
+    box-shadow: 3px 0 6px rgba(0, 0, 0, .14);
+}

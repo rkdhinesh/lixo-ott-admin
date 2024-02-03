@@ -1,0 +1,212 @@
+<div class="main-content">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-11">
+        <div class="card">
+
+          <div class="card-header card-header-primary card-header-icon">
+            <div class="card-icon">
+              <i class="material-icons">my_location</i>
+            </div>
+            <h4 class="card-title">{{selectedData.venueName}}</h4>
+          </div>
+          <div class="card-body">
+            <div class="row">
+              <div class="col-12 text-right">
+                <a [routerLink]="['/add-screen']" [routerLinkActive]="['router-link-active']"
+                  class="btn btn-sm btn-primary">New Screen</a>
+              </div>
+            </div>
+            <form>
+              <div class="row">
+                <div class="col-md-4">
+
+                  <mat-form-field appearance="outline">
+                    <mat-label>Company Name</mat-label>
+                    <input matInput [(ngModel)]="selectedCompany.name" name="company" placeholder="Company Name"
+                      [disabled]="true" required>
+                  </mat-form-field>
+
+                </div>
+
+                <div class="col-md-4">
+
+                  <mat-form-field appearance="outline">
+                    <mat-label>Venue Category</mat-label>
+                    <input matInput [(ngModel)]="selectedVenueCategoryData.name" name="venuecategory"
+                      placeholder="Venue Category" [disabled]="true" required>
+                  </mat-form-field>
+                </div>
+
+                <div class="col-md-4">
+
+                  <mat-form-field appearance="outline">
+                    <mat-label>Locality</mat-label>
+                    <input matInput [(ngModel)]="selectedLocalityData.name" name="Locality" placeholder="Locality"
+                      [disabled]="true" required>
+                  </mat-form-field>
+
+                </div>
+                <div class="col-md-4">
+                  <mat-form-field appearance="outline">
+                    <mat-label>Address Line1</mat-label>
+                    <input matInput name="addressLine1" [(ngModel)]="selectedData.addressLine1" [disabled]="true"
+                      placeholder="Address Line1">
+                  </mat-form-field>
+                </div>
+                <div class="col-md-4">
+                  <mat-form-field appearance="outline">
+                    <mat-label>Address Line2</mat-label>
+                    <input matInput name="addressLine2" [(ngModel)]="selectedData.addressLine2" [disabled]="true"
+                      placeholder="Address Line2">
+                  </mat-form-field>
+                </div>
+                <div class="col-md-4">
+                  <mat-form-field appearance="outline">
+                    <mat-label>Land Mark</mat-label>
+                    <input matInput name="landMark" [(ngModel)]="selectedData.landMark" placeholder="Land Mark"
+                      [disabled]="true">
+                  </mat-form-field>
+                </div>
+                <div class="col-md-4">
+                  <mat-form-field appearance="outline">
+                    <mat-label>Default Days to Publish</mat-label>
+                    <input matInput name="defaultDaysToPublish" [(ngModel)]="selectedData.defaultDaysToPublish"
+                      [disabled]="true" placeholder="Default Days to Publish" required>
+                  </mat-form-field>
+                </div>
+                <div class="col-md-4">
+                  <mat-form-field appearance="outline">
+                    <mat-label>Latitude</mat-label>
+                    <input matInput name="latitude" [(ngModel)]="selectedData.latitude" placeholder="Latitude"
+                      [disabled]="true">
+                  </mat-form-field>
+                </div>
+                <div class="col-md-4">
+                  <mat-form-field appearance="outline">
+                    <mat-label>Longitude</mat-label>
+                    <input matInput name="longitude" [(ngModel)]="selectedData.longitude" placeholder="Longitude"
+                      [disabled]="true">
+                  </mat-form-field>
+                </div>
+                <div class="col-md-4">
+                  <mat-form-field appearance="outline">
+                    <mat-label>Synopsis</mat-label>
+                    <input matInput name="synopsis" [(ngModel)]="selectedData.synopsis" placeholder="Synopsis"
+                      [disabled]="true">
+                  </mat-form-field>
+                </div>
+                <div class="col-md-4">
+                  <mat-form-field appearance="outline">
+                    <mat-label>Vendor Percentage</mat-label>
+                    <input matInput name="vendorPercentage" placeholder="Vendor Percentage"
+                      [(ngModel)]="selectedData.vendorPercentage" [disabled]="true">
+                  </mat-form-field>
+                </div>
+                <div class="col-md-4">
+                  <mat-form-field appearance="outline">
+                    <mat-label>Account Number</mat-label>
+                    <input matInput name="accountNumber" placeholder="Account Number"
+                      [(ngModel)]="selectedData.accountNumber" [disabled]="true" required>
+                  </mat-form-field>
+                </div>
+
+                <div class="col-md-4">
+                  <section>
+                    <mat-checkbox name="live" class="example-margin" [disabled]="true" [(ngModel)]="selectedData.live">
+                      Enable
+                    </mat-checkbox>
+                  </section>
+                </div>
+
+                <div class="col-md-4">
+                  <section>
+                    <mat-checkbox name="mobileTicketAvailable" required class="example-margin" [disabled]="true"
+                      [(ngModel)]="selectedData.mobileTicketAvailableBoolean">Mobile Ticket Available</mat-checkbox>
+                  </section>
+                </div>
+                <div class="col-md-4">
+                  <section>
+                    <mat-checkbox name="additionalFare3d" required class="example-margin" [disabled]="true"
+                      [(ngModel)]="selectedData.additionalFare3dBoolean">Additional Fare 3D</mat-checkbox>
+                  </section>
+                </div>
+                <div class="col-md-4">
+                  <section>
+                    <mat-checkbox name="foodAndBreverageAvailable" required class="example-margin" [disabled]="true"
+                      [(ngModel)]="selectedData.foodAndBreverageAvailableBoolean">Food And Breverage Available
+                    </mat-checkbox>
+                  </section>
+                </div>
+                <section>
+                  <button
+                    *ngIf="selectedData.venueShowTermsFileId!=0 && uploadVenue == true && uploadedVenueTerms==null"
+                    mat-button (click)="openDialog()">view terms</button>
+                </section>
+              </div>
+
+              <div class="row">
+                <div class="col-md-10">
+                  <div class="card">
+                    <div class="card-header card-header-primary card-header-icon">
+                      <div class="card-icon">
+                        <i class="material-icons">theaters</i>
+                      </div>
+                      <h4 class="card-title">Screens</h4>
+                    </div>
+                    <div class="card-body">
+                      <div class="tab-content">
+                        <div class="tab-pane active" id="profile">
+
+                          <mat-table [dataSource]="dataSource" matSort
+                            class="table table-striped table-no-bordered table-hover dataTable no-footer dtr-inline">
+
+                            <ng-container matColumnDef="screen">
+                              <mat-header-cell *matHeaderCellDef mat-sort-header> Name
+                              </mat-header-cell>
+                              <mat-cell *matCellDef="let row" data-label="Name">
+                                {{row.screenName}}
+                              </mat-cell>
+                            </ng-container>
+
+                            <ng-container matColumnDef="action">
+                              <mat-header-cell *matHeaderCellDef> Action </mat-header-cell>
+                              <mat-cell *matCellDef="let row" data-label="action" class="td-actions text-right">
+                                <button type="button" rel="tooltip" title="" class="btn btn-primary btn-link btn-sm"
+                                  style="background: none !important" (click)="seatLayoutNavigation(row)"
+                                  data-original-title="View Task" aria-describedby="tooltip275129">
+                                  <i class="material-icons">info_outline</i>
+                                </button>
+                                <button type="button" rel="tooltip" title="" class="btn btn-danger btn-link btn-sm"
+                                  style="background: none !important;color: #f44336" (click)="delete(row)"
+                                  data-original-title="Remove">
+                                  <i class="material-icons">close</i>
+                                </button>
+                              </mat-cell>
+                            </ng-container>
+
+                            <mat-header-row *matHeaderRowDef="displayedColumns">
+                            </mat-header-row>
+                            <mat-row *matRowDef="let row; columns: displayedColumns;">
+                            </mat-row>
+                          </mat-table>
+
+                          <mat-paginator [pageSizeOptions]="[25, 50, 100]" showFirstLastButtons>
+                          </mat-paginator>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <button mat-raised-button class="btn btn-primary pull-right" [routerLink]="['/venue']"
+                [routerLinkActive]="['router-link-active']">Cancel</button>
+              <div class="clearfix"></div>
+            </form>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>

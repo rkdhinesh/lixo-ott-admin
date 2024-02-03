@@ -1,0 +1,75 @@
+<div class="main-content">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="card">
+          <div class="card-header card-header-primary card-header-icon">
+            <div class="card-icon">
+              <i class="material-icons">list</i>
+            </div>
+            <h4 class="card-title">Genres</h4>
+          </div>
+          <div class="card-body">
+            <div class="row" *ngIf="operationAccessMap.get('Genre-Create')">
+              <div class="col-12 text-right">
+                <a [routerLink]="['/add-genre']" [routerLinkActive]="['router-link-active']"
+                  class="btn btn-sm btn-primary">New Genre</a>
+              </div>
+            </div>
+            <mat-table [dataSource]="dataSource" matSort
+              class="table table-striped table-no-bordered table-hover dataTable no-footer dtr-inline">
+              <!--Genre Name column-->
+              <ng-container matColumnDef="genreName" style="width:10%">
+                <mat-header-cell *matHeaderCellDef mat-sort-header> Genre
+                </mat-header-cell>
+                <mat-cell *matCellDef="let row" data-label="Genre"> {{row.genreName}}
+                </mat-cell>
+              </ng-container>
+              <!--Description column-->
+              <ng-container matColumnDef="description" style="width:80%">
+                <mat-header-cell *matHeaderCellDef mat-sort-header cl> Description </mat-header-cell>
+                <mat-cell *matCellDef="let row" data-label="Description"> {{row.description}} </mat-cell>
+              </ng-container>
+              <!--Action column-->
+              <ng-container matColumnDef="action">
+                <mat-header-cell *matHeaderCellDef style="width:10%"> Action </mat-header-cell>
+                <mat-cell *matCellDef="let row" data-label="action" class="td-actions text-right">
+                  <!--Edit Button-->
+                  <button type="button" rel="tooltip" title="" class="btn btn-primary btn-link btn-sm"
+                    style="background: none !important" (click)="editdata(row)" [routerLink]="['./edit-genre']"
+                    [routerLinkActive]="['router-link-active']" data-original-title="Edit Task"
+                    aria-describedby="tooltip275129" *ngIf="operationAccessMap.get('Genre-Edit')">
+                    <i class="material-icons">edit</i>
+                  </button>
+                  <!-- *ngIf="operationAccessMap.get('Genre-Edit')" -->
+                  <!--Delete Button-->
+                  <button type="button" rel="tooltip" title="" class="btn btn-danger btn-link btn-sm"
+                    (click)="delete(row)" *ngIf="operationAccessMap.get('Genre-Delete')"
+                    style="background: none !important;color: #f44336" data-original-title="Remove">
+                    <i class="material-icons">close</i>
+                  </button>
+                </mat-cell>
+              </ng-container>
+              <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+              <mat-row *matRowDef="let row; columns: displayedColumns;">
+              </mat-row>
+            </mat-table>
+            <!--Loading Spinner div-->
+            <div *ngIf="isLoading && !noContent && !isContent" class="d-flex justify-content-center">
+              <div class="spinner-container">
+                <div class="spinner-border text-success" role="status">
+                </div>
+                <h4>Loading...</h4>
+              </div>
+            </div>
+            <!--No Content div-->
+            <div *ngIf="noContent" class="d-flex justify-content-center">
+              <h4>There isn't a genre available. Consider adding a new one.</h4>
+            </div>
+            <mat-paginator [pageSizeOptions]="[25, 50, 100]" showFirstLastButtons></mat-paginator>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

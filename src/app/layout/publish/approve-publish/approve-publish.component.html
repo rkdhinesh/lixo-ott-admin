@@ -1,0 +1,176 @@
+<!-- <h1 mat-dialog-title>Delete</h1> -->
+<form>
+  <ng-container>
+      <div style="width:300px">
+
+    <table >
+      <th>Show Date</th>
+      <th>Booking Opening Date</th>
+      <th>Show Time</th>
+      <th>Movie</th>
+      <th>Class</th>
+      <th>Base Fare</th>
+      <th>Extra Amount</th>
+      <th>Discount</th>
+      <th>Taxes</th>
+      <th>Taxes Total Fare(Including Taxes)</th>
+      <tr *ngFor="let date of selectedData.showsPublished ;let k=index">
+        <td>
+            <mat-form-field>
+                <input matInput name="showDate{{k}}" [(ngModel)]="date.showDate" [matDatepicker]="showDateDatepicker"
+                  (focus)="showDateDatepicker.open()" id="showdate" disabled>
+                <mat-datepicker-toggle matSuffix [for]="showDateDatepicker"></mat-datepicker-toggle>
+                <mat-datepicker #showDateDatepicker></mat-datepicker>
+              </mat-form-field>
+        </td>
+        <td>
+          <mat-form-field>
+            <input matInput name="BookingDate_{{k}}" [(ngModel)]="date.bookingOpeningDate" [matDatepicker]="publishBookingDatepicker"
+              (focus)="publishBookingDatepicker.open()" id="datetime" disabled>
+            <mat-datepicker-toggle matSuffix [for]="publishBookingDatepicker"></mat-datepicker-toggle>
+            <mat-datepicker #publishBookingDatepicker></mat-datepicker>
+          </mat-form-field>
+        </td>
+        <td> {{date.showTime}}</td>
+        <td>
+          <mat-form-field>
+            <input [readonly]="true" matInput name="movi_{{k}}" class="Drop-down" [(ngModel)]="date.selectMovie.name">
+          </mat-form-field>
+
+        </td>
+        <td>
+          <tr *ngFor="let da of date.classesPublished;let j=index ">
+            <input [readonly]="true" matInput name="clas_{{k}}_{{j}}" [(ngModel)]="da.className">
+          </tr>
+        </td>
+        <td>
+          <tr *ngFor="let da of date.classesPublished;let j=index ">
+            <input [readonly]="true" matInput name="baseFare_{k}_{{j}}" [(ngModel)]="da.baseFare">
+          </tr>
+        </td>
+        <td>
+          <tr *ngFor="let da of date.classesPublished;let j=index ">
+            <input [readonly]="true" matInput name="extraFare_{k}_{{j}}" [(ngModel)]="da.extraFare">
+          </tr>
+        </td>
+        <td>
+          <tr *ngFor="let da of date.classesPublished;let j=index ">
+            <input [readonly]="true" matInput name="discount_{k}_{{j}}" [(ngModel)]="da.discount">
+          </tr>
+        </td>
+        <td>
+          <tr *ngFor="let da of date.classesPublished;let j=index ">
+            <input [readonly]="true" matInput name="fareId_{k}_{{j}}" [(ngModel)]="da.fareId">
+          </tr>
+        </td>
+      </tr>
+    </table>
+  </div>
+
+  </ng-container>
+
+
+</form>
+
+<!-- <div class="example-container mat-elevation-z8">
+<mat-table #table [dataSource]="dataSource">
+
+  <ng-container matColumnDef="bookingOpeningDate">
+    <mat-header-cell *matHeaderCellDef> bookingOpeningDate </mat-header-cell>
+    <mat-cell *matCellDef="let element">
+        <mat-form-field>
+            <input matInput name="BookingDate_{{k}}" [(ngModel)]="element.bookingOpeningDate" [matDatepicker]="publishBookingDatepicker"
+              (focus)="publishBookingDatepicker.open()" id="datetime" class="form-control" id="from">
+            <mat-datepicker-toggle matSuffix [for]="publishBookingDatepicker"></mat-datepicker-toggle>
+            <mat-datepicker #publishBookingDatepicker></mat-datepicker>
+          </mat-form-field>
+</mat-cell>
+  </ng-container> -->
+
+
+<!-- Name Column -->
+<!-- <ng-container matColumnDef="showDate">
+    <mat-header-cell *matHeaderCellDef> showDate </mat-header-cell>
+    <mat-cell *matCellDef="let element"> {{element.showDate}} </mat-cell>
+  </ng-container> -->
+
+<!-- Weight Column -->
+<!-- <ng-container matColumnDef="showTime">
+    <mat-header-cell *matHeaderCellDef> showTime </mat-header-cell>
+    <mat-cell *matCellDef="let element"> {{element.showTime}} </mat-cell>
+  </ng-container>
+
+  <ng-container matColumnDef="movie">
+    <mat-header-cell *matHeaderCellDef> movie </mat-header-cell>
+    <mat-cell *matCellDef="let element">  
+      <mat-form-field>
+        <input type="text" name="movi_{{k}}" class="Drop-down" [(ngModel)]="element.selectMovie" aria-label="Number" matInput [formControl]="movieControl"
+          [matAutocomplete]="autoMovieComplete">{{k}}
+        <mat-autocomplete #autoMovieComplete="matAutocomplete" [displayWith]="displayFn">
+          <mat-option *ngFor="let movie of movieResult;" [value]="movie">
+            {{movie.name}}
+          </mat-option>
+        </mat-autocomplete>
+      </mat-form-field>
+    </mat-cell>
+  </ng-container> -->
+
+<!-- <ng-container matColumnDef="className">
+    <mat-header-cell *matHeaderCellDef> class </mat-header-cell>
+    <mat-cell *matCellDef="let element">
+        <tr *ngFor="let ele of element.classesPublished;let j=index ">
+            <input matInput name="clas1" [(ngModel)]="ele.className">
+          </tr> </mat-cell>
+  </ng-container>
+
+  <ng-container matColumnDef="baseFare">
+    <mat-header-cell *matHeaderCellDef> BaseFare </mat-header-cell>
+    <mat-cell *matCellDef="let element"> -->
+<!-- <tr *ngFor="let ele of element.classesPublished;let j=index ">
+            <input matInput name="clas1" [(ngModel)]="ele.baseFare">
+          </tr>
+      </mat-cell>
+  </ng-container>
+
+  <ng-container matColumnDef="extraFare">
+    <mat-header-cell *matHeaderCellDef> ExtraFare </mat-header-cell>
+    <mat-cell *matCellDef="let element">
+        <tr *ngFor="let ele of element.classesPublished;let j=index ">
+            <input matInput name="clas2" [(ngModel)]="ele.extraFare">
+          </tr>  
+    </mat-cell>
+  </ng-container> -->
+
+<!-- <ng-container matColumnDef="discount">
+    <mat-header-cell *matHeaderCellDef> Discount </mat-header-cell>
+    <mat-cell *matCellDef="let element"> 
+        <tr *ngFor="let ele of element.classesPublished;let j=index ">
+            <input matInput name="clas3" [(ngModel)]="ele.discount">
+          </tr>
+
+    </mat-cell>
+  </ng-container> -->
+
+<!-- <ng-container matColumnDef="taxes">
+    <mat-header-cell *matHeaderCellDef> Taxes </mat-header-cell>
+    <mat-cell *matCellDef="let element"> {{element.taxes}} </mat-cell>
+  </ng-container>
+
+  <ng-container matColumnDef="totalFare">
+    <mat-header-cell *matHeaderCellDef> TotalFare </mat-header-cell>
+    <mat-cell *matCellDef="let element"> {{element.totalFare}} </mat-cell>
+  </ng-container> -->
+
+<!-- <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+  <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+</mat-table>
+</div> -->
+
+
+
+<div>
+<div class="lx_button_list dialog-full-width">
+  <button mat-raised-button class="button" (click)="saveDetail()">Save</button>
+  <button mat-raised-button color="secondary" [routerLink]="['/add-publish']" [routerLinkActive]="['router-link-active']">Cancel</button>
+</div>
+</div>

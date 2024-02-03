@@ -1,0 +1,71 @@
+<div class="main-content">
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-md-11">
+          <div class="card">
+  
+            <div class="card-header card-header-primary card-header-icon">
+              <div class="card-icon">
+                <i class="material-icons">location_on</i>
+              </div>
+              <h4 class="card-title">View City</h4>
+            </div>
+            <div class="card-body">
+              <form>
+                <div class="row">
+                  <div class="col-md-4">
+                    <mat-form-field appearance="outline">
+                      <mat-label>City Name</mat-label>
+                      <input matInput [(ngModel)]="selectedData.city" name="cityname"
+                        placeholder="City Name" [disabled]="true" required>
+                    </mat-form-field>
+                  </div>
+                  <div class="col-md-4">
+                    <mat-form-field appearance="outline">
+                      <mat-label>State</mat-label>
+                      <input matInput [(ngModel)]="selectedData.state" name="state" placeholder="State" [disabled]="true" required>
+                    </mat-form-field>
+                  </div>
+  
+                  <div class="col-md-4">
+                    <mat-form-field appearance="outline">
+                      <mat-label>Country</mat-label>
+                      <input matInput [(ngModel)]="selectedData.country" name="country" placeholder="Country" [disabled]="true" required>
+                    </mat-form-field>
+                  </div>
+  
+                  <div class="col-md-4">
+                    <mat-form-field appearance="outline">
+                      <mat-label>Zone</mat-label>
+                      <input matInput [(ngModel)]="zoneName" name="Zone" placeholder="Zone" [disabled]="true" required>
+                    </mat-form-field>
+                  </div>
+  
+                  <div class="col-md-4">
+                    <mat-form-field appearance="outline">
+                      <mat-label>Image Url</mat-label>
+                      <input matInput [(ngModel)]="selectedData.image_icon" name="image_icon" placeholder="Image Url" [disabled]="true" required>
+                    </mat-form-field>
+                  </div>
+                  
+                  <div class="col-md-4">
+                    <label></label>
+                    <section>
+                      <mat-checkbox name="popular_city" [checked]="popular" [(ngModel)]="selectedData.popular_city"
+                      [disabled]="true">PopularCity</mat-checkbox>
+                    </section>
+                  </div>    
+
+                </div>
+  
+               
+                <button mat-raised-button class="btn btn-primary pull-right" [routerLink]="['/city']"
+                  [routerLinkActive]="['router-link-active']">Cancel</button>
+                <div class="clearfix"></div>
+              </form>
+            </div>
+          </div>
+        </div>
+  
+      </div>
+    </div>

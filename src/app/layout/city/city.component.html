@@ -1,0 +1,136 @@
+<div class="main-content">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="card">
+          <div class="card-header card-header-primary card-header-icon">
+            <div class="card-icon">
+              <i class="material-icons">location_city</i>
+            </div>
+            <h4 class="card-title">Cities</h4>
+          </div>
+          <div class="card-body">
+            <table style="width: 100%;">
+              <tr>
+                <td>
+                  <!-- Search input field -->
+                  <div class="input-block">
+                    <mat-form-field style="overflow: hidden;">
+                    <input matInput (keyup)="applyFilter($event.target.value)" required spellcheck="false" placeholder="" onfocus="this.placeholder='Search'" onblur="this.placeholder=''">           
+                    <span class="placeholder">Search City</span>
+                    </mat-form-field>  
+                    </div>
+                </td>
+                <td>
+                  <!-- Add City Button -->
+                  <div class="row" *ngIf="operationAccessMap.get('City-Create')">
+                    <div class="col-12 text-right">
+                      <a [routerLink]="['./add-city']" [routerLinkActive]="['router-link-active']"
+                        class="btn btn-sm btn-primary" style="float: right;">Add City</a>
+                    </div>
+                  </div>
+                </td>
+              </tr>
+  </table>
+
+            <!-- City Table -->
+            <mat-table
+              [dataSource]="dataSource"
+              matSort
+              class="table table-striped table-no-bordered table-hover dataTable no-footer dtr-inline"
+            >
+              <!-- City Column -->
+              <ng-container matColumnDef="city">
+                <mat-header-cell *matHeaderCellDef mat-sort-header
+                  >City Name</mat-header-cell
+                >
+                <mat-cell *matCellDef="let row">{{ row.city }}</mat-cell>
+              </ng-container>
+              <ng-container matColumnDef="zone">
+                <mat-header-cell *matHeaderCellDef mat-sort-header>Zone Name</mat-header-cell>
+                <mat-cell *matCellDef="let row" >{{ row.zone }}</mat-cell>
+              </ng-container>
+              
+
+              <ng-container matColumnDef="state">
+                <mat-header-cell *matHeaderCellDef mat-sort-header
+                  >State Name</mat-header-cell
+                >
+                <mat-cell *matCellDef="let row">{{ row.state }}</mat-cell>
+              </ng-container>
+
+              <!-- Country Column -->
+              <ng-container matColumnDef="country">
+                <mat-header-cell *matHeaderCellDef mat-sort-header
+                  >Country Name</mat-header-cell
+                >
+                <mat-cell *matCellDef="let row">{{ row.country }}</mat-cell>
+              </ng-container>
+
+              <!-- Action Column -->
+              <ng-container matColumnDef="action">
+                <mat-header-cell *matHeaderCellDef>Action</mat-header-cell>
+                <mat-cell *matCellDef="let row" class="td-actions text-right">
+                  <!-- View Button -->
+                  <button
+                    type="button"
+                    rel="tooltip"
+                    title="View"
+                    class="btn btn-primary btn-link btn-sm"
+                    style="background: none !important"
+                    (click)="editdata(row)"
+                    *ngIf="operationAccessMap.get('City-View')"
+                    [routerLink]="['./view-city']"
+                    [routerLinkActive]="['router-link-active']"
+                  >
+                    <i class="material-icons">info_outline</i>
+                  </button>
+                  <!-- Edit Button -->
+                  <button
+                    type="button"
+                    rel="tooltip"
+                    title="Edit"
+                    class="btn btn-primary btn-link btn-sm"
+                    style="background: none !important"
+                    (click)="editdata(row)"
+                    *ngIf="operationAccessMap.get('City-Edit')"
+                    [routerLink]="['./edit-city']"
+                    [routerLinkActive]="['router-link-active']"
+                  >
+                    <i class="material-icons">edit</i>
+                  </button>
+                  <!-- Delete Button -->
+                  <button
+                    type="button"
+                    rel="tooltip"
+                    title="Remove"
+                    class="btn btn-danger btn-link btn-sm"
+                    style="background: none !important"
+                    (click)="delete(row)"
+                    *ngIf="operationAccessMap.get('City-Delete')"
+                  >
+                    <i class="material-icons" style="color: #f44336">close</i>
+                  </button>
+                </mat-cell>
+              </ng-container>
+
+              <!-- Header and Row Definitions -->
+              <mat-header-row
+                *matHeaderRowDef="displayedColumns"
+              ></mat-header-row>
+              <mat-row
+                *matRowDef="let row; columns: displayedColumns"
+              ></mat-row>
+            </mat-table>
+
+            <!-- Pagination -->
+            <mat-paginator
+              [pageSizeOptions]="[ 25]"
+              showFirstLastButtons
+            ></mat-paginator>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

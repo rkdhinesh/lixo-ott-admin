@@ -1,0 +1,40 @@
+<div class="main-content">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-11">
+        <div class="card">
+          <div class="card-header card-header-primary card-header-icon">
+            <div class="card-icon">
+              <i class="material-icons">category</i>
+            </div>
+            <h4 class="card-title">New Venue Catagories</h4>
+          </div>
+          <div class="card-body">
+            <form>
+              <div class="row">
+                <div class="col-md-4">
+                  <mat-form-field appearance="outline">
+                      <mat-label>Venue Category Name</mat-label>
+                    <input matInput [(ngModel)]="selectedData.venueCategoryName" name="venueCategoryName"
+                      placeholder="Venue Category Name" required>
+                  </mat-form-field>
+                </div>
+                <div class="col-md-6">
+                  <mat-form-field appearance="outline">
+                      <mat-label>Synopsis</mat-label>
+                    <input matInput [(ngModel)]="selectedData.synopsis" name="synopsis" placeholder="Synopsis">
+                  </mat-form-field>
+                </div>
+              </div>
+              <button mat-raised-button class="btn btn-primary pull-right" [routerLink]="['/venue-category']"
+              [routerLinkActive]="['router-link-active']">Cancel</button>
+              <button mat-raised-button (click)="saveDetail()" class="btn btn-primary pull-right">Save</button>
+              
+              <div class="clearfix"></div>
+            </form>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>

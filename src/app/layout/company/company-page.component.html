@@ -1,0 +1,26 @@
+<div class="main-content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header card-header-primary card-header-icon">
+                        <div class="card-icon">
+                            <i class="material-icons">work</i>
+                        </div>
+                        <h4 class="card-title">Companies</h4>
+                    </div>
+                    <div class="card-body">
+                        <div class="row" *ngIf="lixoDataTableModel.createFlag">
+                            <div class="col-12 text-right">
+                                <a [routerLink]="['/add-company']" [routerLinkActive]="['router-link-active']" class="btn btn-sm btn-primary">New Company</a>
+                            </div>
+                        </div>
+
+                        <app-lixo-data-table [tableData]="results" [columnHeader]="displayedColumns" *ngIf="results.length" [lixoDataTableModel]="lixoDataTableModel" (itemSelectedEmitter)='deleteDetail($event)'></app-lixo-data-table>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

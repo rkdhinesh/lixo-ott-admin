@@ -1,0 +1,40 @@
+// .lx_button_list {
+//     display: flex;
+//     align-items: center;
+//     justify-content: space-around;
+//     color: #607D8B;
+//     width: 200px;
+//     float: left;
+//     padding: 10px;
+// }
+// .button {
+//     background-color: #1abc9c;
+//     color: white;
+// }
+    
+// // .dialog-full-width{
+// //     margin-left: 30px;
+// // }
+// table, th, td {
+//     border: 1px solid black;
+//   }
+table {  
+    border-collapse: collapse;border: 0.5px solid gray;
+}
+th, td {
+    border: 0.5px solid gray;
+    padding: 10px !important;
+}
+.unapproved {
+    font-size: 20px;
+  text-align: center; /* Center-align the content horizontally */
+  vertical-align: top; /* Align the content to the top */
+  margin-left: 600px;
+    /* Other styles as needed */
+  }
+ 
+/* Hide underline for "Show Time" mat-form-field */
+::ng-deep .mat-form-field.show-time-mat-form-field .mat-form-field-underline {
+  display: none !important;
+}
+

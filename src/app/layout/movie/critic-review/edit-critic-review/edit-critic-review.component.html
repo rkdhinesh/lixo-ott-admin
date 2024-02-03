@@ -1,0 +1,33 @@
+<p>
+  Edit Critic Review
+</p>
+
+<form>
+  <mat-form-field class="dialog-full-width">
+    <input matInput [(ngModel)]="selectedData.criticName" name="criticName" placeholder="Critic Name" required>
+  </mat-form-field>
+
+  <mat-form-field class="dialog-full-width">
+    <input matInput [(ngModel)]="selectedData.title" name="title" placeholder="Title" required>
+  </mat-form-field>
+
+  <mat-label>Description</mat-label>
+  <textarea matInput rows="4" cols="50" #description maxlength="5000" [(ngModel)]="selectedData.comments"
+    name="description" placeholder="Description"></textarea>
+  <div style="text-align: right">
+    <span>characters left {{description.value.length}}/5000 </span>
+  </div>
+
+
+  <mat-form-field class="dialog-full-width">
+    <input matInput [(ngModel)]="selectedData.rating" type="number" maxlength="2" name="rating" placeholder="Rating"
+      required>
+  </mat-form-field>
+
+  <div mat-dialog-actions>
+    <button mat-raised-button class="btn btn-primary pull-right" (click)="onNoClick()">Cancel</button>
+    <button mat-raised-button class="btn btn-primary pull-right" [mat-dialog-close] cdkFocusInitial
+      (click)="save()">Save</button>
+  </div>
+
+</form>

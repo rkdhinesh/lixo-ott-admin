@@ -1,0 +1,104 @@
+<div class="main-content">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="card">
+          <div class="card-header card-header-primary card-header-icon">
+            <div class="card-icon">
+              <i class="material-icons">monetization_on</i>
+            </div>
+            <h4 class="card-title">Charges</h4>
+          </div>
+          <div class="card-body">
+            <div class="row" *ngIf="operationAccessMap.get('Charge-Create')">
+              <div class="col-12 text-right">
+                <a [routerLink]="['/add-charge']" [routerLinkActive]="['router-link-active']"
+                  class="btn btn-sm btn-primary">New Charge</a>
+              </div>
+            </div>
+
+            <mat-table [dataSource]="dataSource" matSort
+              class="table table-striped table-no-bordered table-hover dataTable no-footer dtr-inline">
+
+              <ng-container matColumnDef="chargeName">
+                <mat-header-cell *matHeaderCellDef mat-sort-header> Charge
+                </mat-header-cell>
+                <mat-cell *matCellDef="let row" data-label="Charge"> {{row.chargeName}}
+                </mat-cell>
+              </ng-container>
+
+              <ng-container matColumnDef="chargeAmount">
+                <mat-header-cell *matHeaderCellDef mat-sort-header> ChargeAmount
+                </mat-header-cell>
+                <mat-cell *matCellDef="let row" data-label="Charge"> {{row.chargeAmount}}
+                </mat-cell>
+              </ng-container>
+              <ng-container matColumnDef="gateWayPercentage">
+                <mat-header-cell *matHeaderCellDef mat-sort-header> Gateway % </mat-header-cell>
+                <mat-cell *matCellDef="let row" data-label="Charge"> {{row.gateWayPercentage}} </mat-cell>
+              </ng-container>
+
+              <ng-container matColumnDef="vendorPercentage">
+                <mat-header-cell *matHeaderCellDef mat-sort-header> Vendor %
+                </mat-header-cell>
+                <mat-cell *matCellDef="let row" data-label="Vendor %"> {{row.vendorPercentage}}
+                </mat-cell>
+              </ng-container>
+
+              <ng-container matColumnDef="tax">
+                <mat-header-cell *matHeaderCellDef mat-sort-header> Taxes
+                </mat-header-cell>
+                <mat-cell *matCellDef="let row" data-label="Taxes">
+
+                  <div *ngFor="let tax of row.tax let i=index; let l=count">
+                    {{tax.taxName}}
+                    <ng-container *ngIf="(l-1) != i">&nbsp;,&nbsp;</ng-container>
+
+                  </div>
+
+                </mat-cell>
+              </ng-container>
+
+              <ng-container matColumnDef="action">
+                <mat-header-cell *matHeaderCellDef> Action </mat-header-cell>
+                <mat-cell *matCellDef="let row" data-label="action" class="td-actions text-right">
+
+                  <button type="button" rel="tooltip" title="" class="btn btn-primary btn-link btn-sm"
+                    style="background: none !important" (click)="editdata(row)"
+                    *ngIf="operationAccessMap.get('Charge-View')" [routerLink]="['./view-charge']"
+                    [routerLinkActive]="['router-link-active']" data-original-title="View Task"
+                    aria-describedby="tooltip275129">
+                    <i class="material-icons">info_outline</i>
+                  </button>
+
+                  <button type="button" rel="tooltip" title="" class="btn btn-primary btn-link btn-sm"
+                    style="background: none !important" (click)="editdata(row)"
+                    *ngIf="operationAccessMap.get('Charge-Edit')" [routerLink]="['./edit-charge']"
+                    [routerLinkActive]="['router-link-active']" data-original-title="Edit Task"
+                    aria-describedby="tooltip275129">
+                    <i class="material-icons">edit</i>
+                  </button>
+
+                  <button type="button" rel="tooltip" title="" class="btn btn-danger btn-link btn-sm"
+                    *ngIf="operationAccessMap.get('Charge-delete')" (click)="delete(row)"
+                    style="background: none !important;color: #f44336" data-original-title="Remove">
+                    <i class="material-icons">close</i>
+                  </button>
+
+                </mat-cell>
+              </ng-container>
+
+              <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+              <mat-row *matRowDef="let row; columns: displayedColumns;">
+              </mat-row>
+            </mat-table>
+
+            <mat-paginator [pageSizeOptions]="[25, 50, 100]" showFirstLastButtons></mat-paginator>
+
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,54 @@
+<div class="main-content">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-11">
+        <div class="card">
+          <div class="card-header card-header-primary card-header-icon">
+            <div class="card-icon">
+              <i class="material-icons">attach_money</i>
+            </div>
+            <h4 class="card-title">View Fare</h4>
+          </div>
+          <div class="card-body">
+            <form>
+              <div class="row">
+                <!--Fare Id Input-->
+                <div class="col-md-4">
+                  <mat-form-field class="dialog-full-width">
+                    <input matInput [(ngModel)]="selectedData.fareId" name="fareId" placeholder="Fare Id"
+                      [readonly]="true" [matTooltip]="'This field is Read-only'" matTooltipPosition="below" required>
+                  </mat-form-field>
+                </div>
+                <!--Amount Input-->
+                <div class="col-md-4">
+                  <mat-form-field class="dialog-full-width">
+                    <input matInput [(ngModel)]="selectedData.amount" name="amount" placeholder="Amount"
+                      [readonly]="true" [matTooltip]="'This field is Read-only'" matTooltipPosition="below" required>
+                  </mat-form-field>
+                </div>
+              </div>
+              <div class="row">
+                <!--Taxes Input-->
+                <div class="col-md-4">
+                  <mat-form-field class="dialog-full-width">
+                    <input matInput [(ngModel)]="selectedData.tax" name="taxes" placeholder="Taxes" [readonly]="true"
+                      [matTooltip]="'This field is Read-only'" matTooltipPosition="below" required>
+                  </mat-form-field>
+                </div>
+                <!--Total Amount Input-->
+                <div class="col-md-4">
+                  <mat-form-field class="dialog-full-width">
+                    <input matInput [(ngModel)]="selectedData.totalAmount" name="totalAmount" placeholder="Total Amount"
+                      [readonly]="true" [matTooltip]="'This field is Read-only'" matTooltipPosition="below" required>
+                  </mat-form-field>
+                </div>
+              </div>
+              <button mat-raised-button class="btn btn-primary pull-right" [routerLink]="['/fare']"
+                [routerLinkActive]="['router-link-active']">Cancel</button>
+              <div class="clearfix"></div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>

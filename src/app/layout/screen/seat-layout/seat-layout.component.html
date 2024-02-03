@@ -1,0 +1,164 @@
+<div class="main-content">
+
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+
+                    <div class="card-header card-header-primary card-header-icon">
+                        <div class="card-icon">
+                            <i class="material-icons">theaters</i>
+                        </div>
+                        <h4 class="card-title">{{selectedData.screenName}}</h4>
+                    </div>
+
+                    <div class="card-body">
+
+
+                        <div fxLayout="column" *ngIf="isSeatLayoutPreviewScreen">
+                            <div style="margin: 0 auto ">
+                                <div class="container">
+                                    <div class="screendisplay">
+
+                                    </div>
+                                    <div class="screentext ">-----------------SCREEN-----------------</div>
+                                </div>
+                                <div *ngFor="let class of selectedData.classes;let i = index;" style="margin: 10px;">
+                                    <div>
+                                        <div style="margin-bottom: 15px;border-bottom: 1px solid #d82424;">
+                                            <label>{{class.className}}</label>
+                                            -
+                                            <label>{{class.fareAmount}}</label>
+                                        </div>
+                                        <table cellspacing="0" cellpadding="0">
+                                            <tbody>
+                                                <tr *ngFor="let row of class.rowRefList">
+                                                    <td style="width: 30px; ">
+                                                        {{row.tableSequenceName}}
+                                                    </td>
+                                                    <td *ngFor="let column of class.columnsList">
+                                                        <div *ngFor="let seat of class.seats">
+                                                            <div
+                                                                *ngIf="seat.coOrdinateX == row.tableSequenceId
+                                                                                                        && seat.coOrdinateY == column.tableSequenceId">
+                                                                <div *ngIf="seat.seat; then seatTrue else seatFalse">
+                                                                </div>
+                                                                <ng-template #seatTrue>
+                                                                    <div class="seat" style="cursor: pointer;"
+                                                                        *ngIf="((seat.bookingStatus =='AVAILABLE') && seat.seatNumber) || 
+                                                                    (seat.bookingStatus =='BOXOFFICE' && seat.seatNumber) || (seat.bookingStatus =='BOXOFFICE_HIDDEN' &&seat.seatNumber)"
+                                                                        (click)="seatSelect(seat)"
+                                                                        [ngClass]="seat.selectedstatus_ui == 0 || seat.selectedstatus_ui =='' || 
+                                                                    seat.selectedstatus_ui == null? 'available-seat': 'selected-seat'"
+                                                                        id="seatNumber_true_{{class.classId}}_{{seat.coOrdinateX}}_{{seat.coOrdinateY}}_{{seat.seatNumber}}">
+                                                                        {{seat.seatNumber}}
+                                                                    </div>
+                                                                    <div class="seat "
+                                                                        *ngIf="(seat.bookingStatus =='AVAILABLE' &&!seat.seatNumber) || (seat.bookingStatus =='BOXOFFICE' &&!seat.seatNumber) || (seat.bookingStatus =='BOXOFFICE_HIDDEN' &&!seat.seatNumber)"
+                                                                        style="visibility: hidden;">
+                                                                        {{seat.seatNumber}}
+                                                                    </div>
+                                                                    <div class="seat" style="cursor: pointer;"
+                                                                        (click)="seatSelect(seat)"
+                                                                        *ngIf="(seat.bookingStatus =='LOCKED' && seat.seatNumber)"
+                                                                        [ngClass]="seat.selectedstatus_ui == 0 || seat.selectedstatus_ui =='' || 
+                                                                        seat.selectedstatus_ui == null? 'locked': 'selected-seat'"
+                                                                        id="seatNumber_true_{{class.classId}}_{{seat.coOrdinateX}}_{{seat.coOrdinateY}}_{{seat.seatNumber}}">
+                                                                        {{seat.seatNumber}}
+                                                                    </div>
+
+                                                                    <div class="seat " style="cursor: pointer;"
+                                                                        (click)="seatSelect(seat)"
+                                                                        *ngIf="(seat.bookingStatus =='DEFAULT_BLOCKED'&& seat.seatNumber)"
+                                                                        [ngClass]="seat.selectedstatus_ui == 0 || seat.selectedstatus_ui =='' || 
+                                                                        seat.selectedstatus_ui == null? 'default-blocked': 'selected-seat'"
+                                                                        id="seatNumber_true_{{class.classId}}_{{seat.coOrdinateX}}_{{seat.coOrdinateY}}_{{seat.seatNumber}}">
+                                                                        {{seat.seatNumber}}
+                                                                    </div>
+                                                                    <div class="seat " style="cursor: pointer;"
+                                                                        (click)="seatSelect(seat)"
+                                                                        *ngIf="(seat.bookingStatus =='SOCIAL DISTANCE'&& seat.seatNumber)"
+                                                                        [ngClass]="seat.selectedstatus_ui == 0 || seat.selectedstatus_ui =='' || 
+                                                                        seat.selectedstatus_ui == null? 'social-distance': 'selected-seat'"
+                                                                        id="seatNumber_true_{{class.classId}}_{{seat.coOrdinateX}}_{{seat.coOrdinateY}}_{{seat.seatNumber}}">
+                                                                        {{seat.seatNumber}}
+                                                                    </div>
+                                                                </ng-template>
+                                                                <ng-template #seatFalse>
+                                                                    <div class="seat" style="visibility: hidden;"
+                                                                        *ngIf="(seat.bookingStatus =='AVAILABLE' &&!seat.seatNumber) || (seat.bookingStatus =='BOXOFFICE' &&!seat.seatNumber) || (seat.bookingStatus =='BOXOFFICE_HIDDEN' &&!seat.seatNumber)"
+                                                                        id="seatNumber_false_{{class.classId}}_{{seat.coOrdinateX}}_{{seat.coOrdinateY}}_{{seat.seatNumber}}">
+                                                                        {{seat.seatNumber}}
+                                                                    </div>
+                                                                </ng-template>
+                                                            </div>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                                <div>
+                                    <mat-radio-group aria-label="Select a Booking Status option"
+                                        [(ngModel)]="seatOption">
+                                        <mat-radio-button *ngFor="let status of selectedSeatStatus" [value]="status"
+                                            (change)="radioChange($event)">
+                                            {{status}}
+                                        </mat-radio-button>
+                                    </mat-radio-group>
+                                    <button mat-raised-button class="btn btn-primary pull-right" style="position: relative;
+                                    top: 28px;
+                                    left: 1px;" [routerLink]="['/venue']"
+                                        [routerLinkActive]="['router-link-active']">Cancel</button>
+                                    <button mat-raised-button class="btn btn-primary pull-right" style="position: relative;
+                                    top: 28px;
+                                    right: 11px;" [routerLink]="['/view-venue']"
+                                        [routerLinkActive]="['router-link-active']">Back</button>
+
+                                    <button mat-raised-button class="btn btn-primary pull-right" style="position: relative;
+                                    top: 28px; 
+                                    right: 24px;" (click)="seatStatusUpdate()">Update</button>
+                                </div>
+                                <div>
+                                    <div>
+                                        <div class="seat-status social-distance">
+                                        </div>
+                                        Social Distance
+                                    </div>
+                                    <div>
+                                        <div class="seat-status locked">
+                                        </div>
+                                        Locked
+                                    </div>
+                                    <div>
+                                        <div class="seat-status default-blocked">
+                                        </div>
+                                        Default Blocked
+                                    </div>
+                                </div>
+                                <div>
+
+                                    <div style="position: relative;
+                                    left: 174px;
+                                    bottom: 68px;">
+                                        <div class="seat-status available-seat">
+                                        </div>
+                                        Available
+                                    </div>
+                                    <div style="position: relative;
+                                    left: 174px;
+                                    bottom: 62px;">
+                                        <div class="seat-status selected-seat">
+                                        </div>
+                                        Selected Seat
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>

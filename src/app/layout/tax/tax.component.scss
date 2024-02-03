@@ -1,0 +1,22 @@
+::ng-deep .success-tax-snackbar {
+  color: black !important;
+  background-color: white !important;
+  display: flex !important;
+  text-align: center !important;
+  min-width: 100px !important;
+  }
+
+  ::ng-deep .success-tax-snackbar::after{      
+    font-family: "FontAwesome" !important;
+    content: "\f00c" !important;
+    color: green !important;
+    display: inline-block !important;
+    margin-left: 15px !important;
+  }
+
+  .spinner-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 20px; /* Adjust as needed */
+  }

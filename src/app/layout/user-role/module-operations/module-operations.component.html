@@ -1,0 +1,79 @@
+<div class="main-content">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="card">
+          <div class="card-header card-header-primary card-header-icon">
+            <div class="card-icon">
+              <i class="material-icons">view_module</i>
+            </div>
+            <h4 class="card-title">Modules</h4>
+          </div>
+          <div class="card-body">
+            <div class="row">
+              <div class="col-12 text-right">
+                <a *ngIf="addOperationButton" [routerLink]="['/add-module-operations']"
+                  [routerLinkActive]="['router-link-active']" class="btn btn-sm btn-primary">New Module</a>
+              </div>
+            </div>
+
+            <br />
+
+            <mat-accordion>
+              <mat-expansion-panel *ngFor="let module of modules">
+                <mat-expansion-panel-header>
+                  {{module.moduleName}}
+                </mat-expansion-panel-header>
+
+                <mat-table [dataSource]="module.dataSource" matSort
+                  class="table table-striped table-no-bordered table-hover dataTable no-footer dtr-inline">
+
+                  <ng-container matColumnDef="name">
+                    <mat-header-cell *matHeaderCellDef> Name
+                    </mat-header-cell>
+                    <mat-cell *matCellDef="let row" data-label="Name"> {{row.subModuleName}}
+                    </mat-cell>
+                  </ng-container>
+
+
+                  <ng-container matColumnDef="desc">
+                    <mat-header-cell *matHeaderCellDef> Description </mat-header-cell>
+                    <mat-cell *matCellDef="let row" data-label="City"> {{row.subModuleDescription}} </mat-cell>
+                  </ng-container>
+
+                  <ng-container matColumnDef="operations">
+                    <mat-header-cell *matHeaderCellDef> Operations
+                    </mat-header-cell>
+                    <mat-cell *matCellDef="let row" data-label="Operations">
+
+                      <div *ngFor="let operation of row.operations">
+                        {{operation.operationName}} -
+                      </div>
+
+                    </mat-cell>
+                  </ng-container>
+
+                  <mat-header-row *matHeaderRowDef="module.displayedColumns"></mat-header-row>
+                  <mat-row *matRowDef="let row; columns: module.displayedColumns;">
+                  </mat-row>
+                </mat-table>
+
+                <mat-paginator [pageSizeOptions]="[25, 50, 100]" showFirstLastButtons></mat-paginator>
+
+                <mat-action-row>
+                  <mat-icon class="material-icons" mat-button (click)="editdata(row)"
+                    routerLink="./edit-module-operations" routerLinkActive="active">
+                    mode_edit</mat-icon>
+                </mat-action-row>
+
+              </mat-expansion-panel>
+
+            </mat-accordion>
+
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

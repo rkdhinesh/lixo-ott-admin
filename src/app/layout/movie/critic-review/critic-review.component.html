@@ -1,0 +1,38 @@
+<p>
+  Add Critic Review
+</p>
+<form>
+
+  <mat-form-field class="dialog-full-width">
+    <mat-label>Critic Name</mat-label>
+    <input matInput [(ngModel)]="selectedData.criticName" name="criticName" placeholder="Critic Name" required>
+  </mat-form-field>
+
+  <mat-form-field class="dialog-full-width">
+    <mat-label>Title</mat-label>
+    <input matInput [(ngModel)]="selectedData.title" name="title" placeholder="Title" required>
+  </mat-form-field>
+
+  <mat-form-field>
+    <mat-label>Description</mat-label>
+    <textarea matInput rows="4" cols="50" #description maxlength="5000" [(ngModel)]="selectedData.comments"
+      name="description" placeholder="Description"></textarea>
+    <div style="text-align: right">
+      <span>characters left {{description.value.length}}/5000 </span>
+    </div>
+  </mat-form-field>
+
+  <mat-form-field class="dialog-full-width">
+    <mat-label>Rating</mat-label>
+    <input matInput  [(ngModel)]="selectedData.rating" type="number"  max="10" min="1"  name="rating" placeholder="Rating"
+    (click)="selected = selectedData.rating" 
+    onKeyPress="if(this.value.length==2) return false;"required>
+  </mat-form-field>
+
+  <div mat-dialog-actions>
+    <button mat-raised-button class="btn btn-primary pull-right" (click)="onNoClick()">Cancel</button>
+    <button mat-raised-button class="btn btn-primary pull-right" [mat-dialog-close] cdkFocusInitial
+      (click)="addCriticReview()">Add</button>
+  </div>
+
+</form>

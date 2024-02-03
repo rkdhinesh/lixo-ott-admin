@@ -1,0 +1,16 @@
+/** Need to add common css here**/
+
+.radio-group {
+  display: flex;
+  flex-direction: row;
+}
+
+.error {
+  background-color: rgb(95, 18, 18);
+  color: white;    
+}
+
+.error button {
+  background-color:rgb(85, 33, 14);
+  color: white;
+}

@@ -1,0 +1,29 @@
+import { NgModule } from '@angular/core';
+import { CommonModule } from '@angular/common';
+
+import { ViewPublishRoutingModule } from './view-publish-routing.module';
+import { ViewPublishComponent } from './view-publish.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { PageHeaderModule } from '../../../shared';
+import { MaterialModule } from '../../../shared/components/MaterialModule';
+import { RouterModule } from '@angular/router';
+import { FlexLayoutModule } from '@angular/flex-layout';
+import { DatePickerModule } from '../../../shared/modules/date-picker/date-picker.module';
+import { TempDataService } from '../../../shared/temp-dataStore';
+
+@NgModule({
+  imports: [
+    CommonModule,
+    ViewPublishRoutingModule,
+    FormsModule,
+    ReactiveFormsModule,
+    PageHeaderModule,
+    MaterialModule,
+    RouterModule,
+    FlexLayoutModule,
+    DatePickerModule 
+  ],
+  providers: [TempDataService],
+  declarations: [ViewPublishComponent]
+})
+export class ViewPublishModule { }

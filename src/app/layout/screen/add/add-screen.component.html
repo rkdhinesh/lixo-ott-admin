@@ -1,0 +1,328 @@
+<div class="main-content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+
+                    <div class="card-header card-header-primary card-header-icon">
+                        <div class="card-icon">
+                            <i class="material-icons">theaters</i>
+                        </div>
+                        <h4 class="card-title">New Screen</h4>
+                    </div>
+                    <div class="card-body">
+                        <form #screenForm="ngForm">
+                            <div class="row" *ngIf="isScreenPage">
+                                <div class="col-md-4">
+                                    <mat-form-field>
+                                        <input matInput name="screenName" [(ngModel)]="selectedData.screenName"
+                                            placeholder="Screen Name">
+                                    </mat-form-field>
+                                </div>
+                                <div class="col-md-4">
+                                    <mat-form-field>
+                                        <input matInput name="dimension" [(ngModel)]="selectedData.dimension"
+                                            placeholder="Dimension">
+                                    </mat-form-field>
+                                </div>
+                                <div class="col-md-4">
+                                    <mat-form-field>
+                                        <input matInput name="synopsis" [(ngModel)]="selectedData.synopsis"
+                                            placeholder="Synopsis">
+                                    </mat-form-field>
+                                </div>
+                            </div>
+                            <div class="row" *ngIf="isScreenPage">
+                                <div class="col-md-4">
+                                    <mat-form-field>
+                                        <input matInput (keypress)="numberOnly($event)" type="text" name="classCount"
+                                            [(ngModel)]="selectedData.classCount" placeholder="Classes">
+                                    </mat-form-field>
+                                </div>
+                                <div class="col-md-4">
+                                    <mat-form-field>
+                                        <input matInput name="rowCount" [(ngModel)]="selectedData.rowCount"
+                                            placeholder="Rows Count">
+                                    </mat-form-field>
+                                </div>
+                                <div class="col-md-4">
+                                    <mat-form-field>
+                                        <mat-label>Type</mat-label>
+                                        <mat-select [formControl]="rowTypeFormControl"
+                                            [(ngModel)]="selectedData.rowType">
+                                            <mat-option *ngFor="let type of rowTypes" [value]="type.value">
+                                                {{ type.viewValue }}</mat-option>
+                                        </mat-select>
+                                    </mat-form-field>
+                                </div>
+                            </div>
+
+                            <div class="row" *ngIf="isScreenPage">
+                                <div class="col-md-4">
+                                    <mat-form-field>
+                                        <mat-label>Row Order</mat-label>
+                                        <mat-select [formControl]="rowOrderFormControl"
+                                            [(ngModel)]="selectedData.rowOrder">
+                                            <mat-option *ngFor="let rowOrder of rowOrders" [value]="rowOrder.value">
+                                                {{ rowOrder.viewValue }}</mat-option>
+                                        </mat-select>
+                                    </mat-form-field>
+                                </div>
+                                <div class="col-md-4">
+                                    <mat-form-field>
+                                        <input matInput name="columnCount" [(ngModel)]="selectedData.columnCount"
+                                            placeholder="Columns Count">
+                                    </mat-form-field>
+                                </div>
+                                <div class="col-md-4">
+                                    <mat-form-field>
+                                        <mat-label>Column Order</mat-label>
+                                        <mat-select [formControl]="columnOrderFormControl"
+                                            [(ngModel)]="selectedData.columnOrder">
+                                            <mat-option *ngFor="let columnOrder of coloumnOrders"
+                                                [value]="columnOrder.value">
+                                                {{ columnOrder.viewValue }}</mat-option>
+                                        </mat-select>
+                                    </mat-form-field>
+                                </div>
+                            </div>
+                            <div class="row" *ngIf="isScreenPage">
+                                <div class="col-md-4">
+                                    <mat-form-field>
+                                        <mat-label>Experiences</mat-label>
+                                        <mat-select [formControl]="rowTypeFormControl" [(ngModel)]="selectedExperience">
+                                            <mat-option *ngFor="let type of experienceList" [value]="type.id">
+                                                {{ type.name }}</mat-option>
+                                        </mat-select>
+                                    </mat-form-field>
+                                </div>
+                                <div class="col-md-8">
+                                    <mat-form-field class="demo-chip-list">
+                                        <mat-chip-list #chipList>
+                                            <mat-chip *ngFor="let showTime of showTimes" [selectable]="selectable"
+                                                [removable]="removable" (removed)="remove(showTime)">
+                                                {{showTime}}
+                                                <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
+                                            </mat-chip>
+                                            <input placeholder="Default Shows" #showTimeInput
+                                                [formControl]="showFormControl" [matAutocomplete]="auto"
+                                                [matChipInputFor]="chipList"
+                                                [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+                                                [matChipInputAddOnBlur]="addOnBlur"
+                                                (matChipInputTokenEnd)="add($event)" />
+
+                                        </mat-chip-list>
+                                        <mat-autocomplete #auto="matAutocomplete" (optionSelected)="selected($event)">
+                                            <mat-option *ngFor="let showTime of filteredShows | async"
+                                                [value]="showTime">
+                                                {{ showTime }}
+                                            </mat-option>
+                                        </mat-autocomplete>
+                                    </mat-form-field>
+                                </div>
+                            </div>
+
+                            <button mat-raised-button (click)="saveScreen()" *ngIf="isScreenPage"
+                                class="btn btn-primary pull-right">Generate</button>
+                            <button mat-raised-button class="btn btn-primary pull-right" [routerLink]="['/venue']"
+                                *ngIf="isScreenPage" [routerLinkActive]="['router-link-active']">Cancel</button>
+                            <div class="clearfix"></div>
+
+                            <button mat-raised-button (click)="saveClassesAndSeatLayoutTemplate()"
+                                *ngIf="isSeatLayoutPreviewScreen" class="btn btn-primary pull-right">Save</button>
+                            <button mat-raised-button (click)="preview()" *ngIf="isSeatLayoutScreen"
+                                class="btn btn-primary pull-right" [disabled]="screenForm.invalid">Preview</button>
+                            <button mat-raised-button (click)="back()" *ngIf="isSeatLayoutPreviewScreen"
+                                class="btn btn-primary pull-right">Back</button>
+
+                            <div *ngIf="isSeatLayoutScreen">
+                                <div class="screendisplay">
+                                </div>
+                                <div class="screentext">-----------------SCREEN-----------------</div>
+                                <div *ngFor="let class of selectedData.classes;let i = index;">
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            <mat-form-field>
+                                                <mat-label>Class Name</mat-label>
+                                                <input matInput name="className_{{class.className}}"
+                                                    [(ngModel)]="class.className" placeholder="class Name">
+                                            </mat-form-field>
+                                        </div>
+                                        <div class="col-md-4">
+
+                                            <mat-form-field>
+                                                <mat-select placeholder="Select Fare" [(ngModel)]="class.selectedFare"
+                                                    name="fare_{{i}}_{{class.className}}_selectedFare"
+                                                    (ngModelChange)="onFareChange(class,i)" required>
+                                                    <mat-option *ngFor="let fare of class.fareList" [value]="fare">
+                                                        {{fare.name}}
+                                                    </mat-option>
+                                                </mat-select>
+                                            </mat-form-field>
+
+                                        </div>
+                                        <div class="col-md-4">
+                                            <mat-form-field>
+                                                <mat-label>Synopsis</mat-label>
+                                                <input matInput name="synopsis_{{class.synopsis}}"
+                                                    [(ngModel)]="class.synopsis" placeholder="Synopsis">
+                                            </mat-form-field>
+                                        </div>
+
+
+                                    </div>
+                                    <div>
+
+                                        <table>
+                                            <thead>
+
+                                                <tr>
+                                                    <td></td>
+                                                    <td *ngFor="let column of class.columnsList">
+                                                        <input [(ngModel)]="column.tableSequenceName" class="seat"
+                                                            type="text" matInput name="column.columnReference"
+                                                            (change)="onNumberChange(column,i)" />
+                                                        <section>
+                                                            <mat-checkbox
+                                                                name="column_{{i}}_{{class.classId}}_{{column.tableSequenceId}}_{{column.checkBoxSelection}}"
+                                                                class="example-margin"
+                                                                [(ngModel)]="column.checkBoxSelection"
+                                                                (change)="onColumnSelectAllChange(column,class)">
+                                                            </mat-checkbox>
+                                                        </section>
+
+                                                    </td>
+
+                                                    <td>
+                                                        <button mat-mini-fab class="example-fab" color="secondary"
+                                                            (click)="addColumnForClass(class,i)">
+                                                            <mat-icon>add</mat-icon>
+                                                        </button>
+
+                                                    </td>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr *ngFor="let row of class.rowRefList">
+                                                    <td>
+                                                        <br>
+                                                        <input [(ngModel)]="row.tableSequenceName" class="seat"
+                                                            type="text" matInput name="row.tableSequenceName"
+                                                            (change)="onLabelChange(row,i)" />
+                                                        <section>
+                                                            <mat-checkbox
+                                                                name="row_{{i}}_{{class.classId}}_{{row.tableSequenceId}}_{{row.checkBoxSelection}}"
+                                                                class="example-margin"
+                                                                [(ngModel)]="row.checkBoxSelection"
+                                                                (change)="onRowChange(row,class,i)">
+                                                            </mat-checkbox>
+                                                        </section>
+                                                    </td>
+
+                                                    <td *ngFor="let column of class.columnsList">
+                                                        <span *ngFor="let seat of class.seats">
+                                                            <span
+                                                                *ngIf="seat.coOrdinateX == row.tableSequenceId
+                                                                                                    && seat.coOrdinateY == column.tableSequenceId">
+                                                                <mat-checkbox
+                                                                    name="seat_{{i}}_{{class.classId}}_{{seat.coOrdinateX}}_{{seat.coOrdinateY}}_{{seat.seat}}"
+                                                                    class="seat" [(ngModel)]="seat.seat"
+                                                                    (change)="onColumnChange(class,seat.coOrdinateX,seat.coOrdinateY,seat.seat)">
+                                                                </mat-checkbox>
+
+                                                                <input matInput class="seat_input"
+                                                                    name="seatNumber_rowReference_{{i}}_{{class.classId}}_{{seat.coOrdinateX}}_{{seat.coOrdinateY}}_{{seat.rowReference}}"
+                                                                    [(ngModel)]="seat.rowReference"
+                                                                    disabled="{{seat.inputDisabled}}">
+
+                                                                <input matInput class="seat_input"
+                                                                    name="seatNumber_columnReference_{{i}}_{{class.classId}}_{{seat.coOrdinateX}}_{{seat.coOrdinateY}}_{{seat.columnReference}}"
+                                                                    [(ngModel)]="seat.columnReference"
+                                                                    disabled="{{seat.inputDisabled}}"
+                                                                    (change)="onColumnSeatNumberColumnReferenceChange(column,class,seat.coOrdinateX,seat.coOrdinateY,seat.columnReference)">
+                                                            </span>
+                                                        </span>
+                                                    </td>
+                                                </tr>
+
+                                            </tbody>
+                                            <tfoot>
+                                                <tr>
+                                                    <td>
+                                                        <button mat-mini-fab class="example-fab" color="secondary"
+                                                            (click)="addRowForClass(class,i)">
+                                                            <mat-icon>add</mat-icon>
+                                                        </button>
+
+                                                    </td>
+                                                </tr>
+                                            </tfoot>
+                                        </table>
+                                    </div>
+
+                                </div>
+                            </div>
+
+
+                            <div fxLayout="column" *ngIf="isSeatLayoutPreviewScreen"
+                                style="overflow-y: auto;height: 460px;">
+
+                                <div style="margin: 0 auto ">
+                                    <div *ngFor="let class of selectedData.classes;let i = index;"
+                                        style="margin: 10px;">
+                                        <div>
+                                            <div style="margin-bottom: 15px;border-bottom: 1px solid #d82424;">
+                                                <label>{{class.className}}</label>
+                                                -
+                                                <label>{{class.fareAmount}}</label>
+                                            </div>
+                                            <table cellspacing="0" cellpadding="0">
+                                                <tbody>
+                                                    <tr *ngFor="let row of class.rowRefList">
+                                                        <td style="width: 30px; ">
+                                                            {{row.tableSequenceName}}
+                                                        </td>
+                                                        <td *ngFor="let column of class.columnsList">
+                                                            <div *ngFor="let seat of class.seats">
+                                                                <div
+                                                                    *ngIf="seat.coOrdinateX == row.tableSequenceId
+                                                                                                        && seat.coOrdinateY == column.tableSequenceId">
+                                                                    <div
+                                                                        *ngIf="seat.seat; then seatTrue else seatFalse">
+                                                                    </div>
+
+                                                                    <ng-template #seatTrue>
+                                                                        <div class="seat"
+                                                                            id="seatNumber_true_{{class.classId}}_{{seat.coOrdinateX}}_{{seat.coOrdinateY}}_{{seat.seatNumber}}">
+                                                                            {{seat.seatNumber}}
+                                                                        </div>
+                                                                    </ng-template>
+                                                                    <ng-template #seatFalse>
+                                                                        <div class="seat" style="visibility: hidden;"
+                                                                            id="seatNumber_false_{{class.classId}}_{{seat.coOrdinateX}}_{{seat.coOrdinateY}}_{{seat.seatNumber}}">
+                                                                            {{seat.seatNumber}}
+                                                                        </div>
+                                                                    </ng-template>
+
+                                                                </div>
+                                                            </div>
+                                                        </td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <button mat-raised-button (click)="saveClassesAndSeatLayoutTemplate()"
+                                *ngIf="isSeatLayoutPreviewScreen" class="btn btn-primary pull-right">Save</button>
+                            <button mat-raised-button (click)="preview()" *ngIf="isSeatLayoutScreen"
+                                class="btn btn-primary pull-right" [disabled]="screenForm.invalid">Preview</button>
+                            <button mat-raised-button (click)="back()" *ngIf="isSeatLayoutPreviewScreen"
+                                class="btn btn-primary pull-right">Back</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>

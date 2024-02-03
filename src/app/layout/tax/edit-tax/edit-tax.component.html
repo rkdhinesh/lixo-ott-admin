@@ -1,0 +1,66 @@
+<div class="main-content">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-11">
+        <div class="card">
+          <div class="card-header card-header-primary card-header-icon">
+            <div class="card-icon">
+              <i class="material-icons">toll</i>
+            </div>
+            <h4 class="card-title">Edit Tax</h4>
+          </div>
+          <div class="card-body">
+            <form [formGroup]="editTaxForm">
+              <div class="row">
+                <!--Tax Name Input-->
+                <div class="col-md-4">
+                  <mat-form-field class="dialog-full-width">
+                    <input matInput formControlName="taxName" name="taxName" placeholder="Tax Name" required>
+                    <!--Tax Name error handling-->
+                    <mat-error *ngIf="editTaxForm.get('taxName')?.hasError('required')">
+                      Tax Name is required
+                    </mat-error>
+                    <mat-error *ngIf="editTaxForm.get('taxName')?.hasError('pattern')">
+                      The Tax name cannot contain a number
+                    </mat-error>
+                  </mat-form-field>
+                </div>
+                <!--Tax Description Input-->
+                <div class="col-md-4">
+                  <mat-form-field class="dialog-full-width">
+                    <input matInput formControlName="taxDescription" name="taxDescription" placeholder="Tax Description"
+                      required>
+                    <!--Tax Description error handling-->
+                    <mat-error *ngIf="editTaxForm.get('taxDescription')?.hasError('required')">
+                      Tax Description is required
+                    </mat-error>
+                  </mat-form-field>
+                </div>
+                <!--Tax Percentage Input-->
+                <div class="col-md-4">
+                  <mat-form-field class="dialog-full-width">
+                    <input matInput formControlName="taxPercentage" name="taxPercentage" placeholder="Tax Percentage"
+                      required>
+                    <!--Tax Percentage error handling-->
+                    <mat-error *ngIf="editTaxForm.get('taxPercentage')?.hasError('required')">
+                      Tax Percentage is required
+                    </mat-error>
+                    <mat-error *ngIf="editTaxForm.get('taxPercentage')?.hasError('pattern')">
+                      The Tax Percentage must be a number > 0
+                    </mat-error>
+                  </mat-form-field>
+                </div>
+              </div>
+              <button mat-raised-button class="btn btn-primary pull-right" [routerLink]="['/tax']"
+                [routerLinkActive]="['router-link-active']">Cancel</button>
+              <button mat-raised-button (click)="saveDetail()" class="btn btn-primary pull-right"
+                [disabled]="!editTaxForm.valid">Save</button>
+
+              <div class="clearfix"></div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

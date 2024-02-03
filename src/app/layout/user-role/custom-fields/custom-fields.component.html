@@ -1,0 +1,20 @@
+<div style="margin-top: 10px;">
+  <nav mat-tab-nav-bar>
+    <a mat-tab-link [routerLink]="['/all-users']" [routerLinkActive]="['router-link-active']">{{ 'All Users' }}</a>
+    <a mat-tab-link [routerLink]="['/roles']" [routerLinkActive]="['router-link-active']">{{ 'Roles' }}</a>
+    <a class="active" mat-tab-link [routerLink]="['/custom-fields']" [routerLinkActive]="['router-link-active']">{{ 'Custom Fields' }}</a>
+    <div class="tb-btn">
+      <button class="btn">New Custom Field</button>
+    </div>
+  </nav>
+</div>
+
+<div>
+    <table style="width: 50%">
+      <thead>
+        <th>#</th>
+        <th>Label Name</th>
+        <th>Data Type</th>
+      </thead>
+    </table>
+    </div>

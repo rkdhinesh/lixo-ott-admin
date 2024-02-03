@@ -1,0 +1,69 @@
+<div class="main-content">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-11">
+        <div class="card">
+
+          <div class="card-header card-header-primary card-header-icon">
+            <div class="card-icon">
+              <i class="material-icons">location_on</i>
+            </div>
+            <h4 class="card-title">New Locality</h4>
+          </div>
+          <div class="card-body">
+            <form>
+              <div class="row">
+                <div class="col-md-4">
+                  <mat-form-field appearance="outline">
+                    <mat-label>Locality Name</mat-label>
+                    <input matInput [(ngModel)]="selectedData.locality_name" name="locality_name"
+                      placeholder="Locality Name" required>
+                  </mat-form-field>
+                </div>
+                <div class="col-md-4">
+                  <mat-form-field appearance="outline">
+                    <mat-label>City</mat-label>
+                    <input type="text" placeholder="City" matInput [formControl]="cityFormControl"
+                      [(ngModel)]="selectedCityData" [matAutocomplete]="cityAuto" required>
+                    <mat-autocomplete #cityAuto="matAutocomplete" [displayWith]="displayFn">
+                      <mat-option *ngFor="let option of filteredCitys | async" (focusout)="onSelect(option.code)"
+                        [value]="option">
+                        {{ option.name }}
+                      </mat-option>
+                    </mat-autocomplete>
+                  </mat-form-field>
+                </div>
+                
+
+                <div class="col-md-4">
+                  <mat-form-field appearance="outline">
+                    <mat-label>Pincode</mat-label>
+                    <input matInput name="pinCode" [(ngModel)]="selectedData.pin_code" placeholder="Pincode" required
+                      maxlength="6" pattern="[0-9]{6}" #pinCode="ngModel">
+                    <mat-error *ngIf="pinCode.errors?.pattern">
+                      Enter valid Pincode
+                    </mat-error>
+                  </mat-form-field>
+                </div>
+
+                <div class="col-md-4">
+                  <mat-form-field appearance="outline">
+                    <mat-label>LandMark</mat-label>
+                    <input matInput [(ngModel)]="selectedData.land_mark" name="landMark" placeholder="landMark" >
+                  </mat-form-field>
+                </div>              
+                              
+
+              </div>
+              <button mat-raised-button class="btn btn-primary pull-right" [routerLink]="['/locality']"
+              [routerLinkActive]="['router-link-active']">Cancel</button>
+              <button mat-raised-button (click)="saveDetail()" class="btn btn-primary pull-right">Save</button>
+             
+              <div class="clearfix"></div>
+            </form>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>

@@ -1,0 +1,291 @@
+<mat-toolbar>
+  <span class="dialog-full-width">New Role</span>
+</mat-toolbar><br>
+<div class="column content-column">
+  <div class="form-horizontal">
+    <div tabindex="-1" id="ember3813" class="no-outline ember-view">
+    </div>
+    <div class="form-group">
+      <label class="col-md-2 control-label required">Role Name</label>
+      <div class="col-md-5">
+        <input type="text" autofocus="" id="ember3814" class="form-control ember-text-field ember-view">
+      </div>
+    </div>
+    <div class="form-group">
+      <label class="col-md-2 control-label">Description</label>
+      <div class="col-md-5">
+        <textarea rows="3" placeholder="Max 500 characters" id="ember3815" class="form-control ember-text-area ember-view"></textarea>
+      </div>
+    </div>
+  </div>
+  <div id="ember3960" class="ember-view">
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <div class="panel-title"> Locality </div>
+      </div>
+      <table class="table table-bordered role-table">
+        <colgroup>
+          <col>
+          <col style="background: #f5f5f5;">
+        </colgroup>
+        <thead>
+          <tr>
+            <td style="min-width:220px;"></td>
+            <td class="permission">Full Access</td>
+            <td class="permission text-capitalize">view</td>
+            <td class="permission">Add</td>
+            <td class="permission">Edit</td>
+            <td class="permission">Delete</td>
+            <!---->
+            <!---->
+            <td style="width: 100%;"></td>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Locality</td>
+            <!-- <td class="permission"><input type="checkbox" id="ember3963" class="ember-checkbox ember-view"></td>
+            <td class="permission"><input type="checkbox" id="ember3964" class="ember-checkbox ember-view"></td>
+            <td class="permission"><input type="checkbox" id="ember3965" class="ember-checkbox ember-view"></td>
+            <td class="permission"> <input type="checkbox" id="ember3966" class="ember-checkbox ember-view"> </td>
+            <td class="permission"><input type="checkbox" id="ember3967" class="ember-checkbox ember-view"></td> -->
+            <td> <input type="checkbox"  [(ngModel)]="selectedAll" (change)="selectAll();" />
+            </td>
+            <td *ngFor="let n of names;let i=index">
+              <input type="checkbox"  [(ngModel)]="n.selected" (change)="checkIfAllSelected();">
+            </td>
+            <!---->
+            <!---->
+            <td>
+              <div class="popovercontainer"><a data-ember-action="" data-ember-action-3968="3968">More Permissions</a>
+                <!---->
+              </div>
+            </td>
+          </tr>
+          <!---->
+          <!---->
+          <!---->
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div id="ember3960" class="ember-view">
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <div class="panel-title"> Movie </div>
+      </div>
+      <table class="table table-bordered role-table">
+        <colgroup>
+          <col>
+          <col style="background: #f5f5f5;">
+        </colgroup>
+        <thead>
+          <tr>
+            <td style="min-width:220px;"></td>
+            <td class="permission">Full Access</td>
+            <td class="permission text-capitalize">view</td>
+            <td class="permission">Add</td>
+            <td class="permission">Edit</td>
+            <td class="permission">Delete</td>
+            <!---->
+            <!---->
+            <td style="width: 100%;"></td>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Movie</td>
+            <!-- <td class="permission"><input type="checkbox" id="ember3963" class="ember-checkbox ember-view"></td>
+            <td class="permission"><input type="checkbox" id="ember3964" class="ember-checkbox ember-view"></td>
+            <td class="permission"><input type="checkbox" id="ember3965" class="ember-checkbox ember-view"></td>
+            <td class="permission"> <input type="checkbox" id="ember3966" class="ember-checkbox ember-view"> </td>
+            <td class="permission"><input type="checkbox" id="ember3967" class="ember-checkbox ember-view"></td> -->
+            <td> <input type="checkbox"  [(ngModel)]="selectedAll" (change)="selectAll();" />
+            </td>
+            <td *ngFor="let n of names;let i=index">
+              <input type="checkbox"  [(ngModel)]="n.selected" (change)="checkIfAllSelected();">
+            </td>
+            <!---->
+            <!---->
+            <td>
+              <div class="popovercontainer"><a>More Permissions</a>
+                <!---->
+              </div>
+            </td>
+          </tr>
+          <!---->
+          <!---->
+          <!---->
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div id="ember3960" class="ember-view">
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <div class="panel-title"> Company </div>
+      </div>
+      <table class="table table-bordered role-table">
+        <colgroup>
+          <col>
+          <col style="background: #f5f5f5;">
+        </colgroup>
+        <thead>
+          <tr>
+            <td style="min-width:220px;"></td>
+            <td class="permission">Full Access</td>
+            <td class="permission text-capitalize">view</td>
+            <td class="permission">Add</td>
+            <td class="permission">Edit</td>
+            <td class="permission">Delete</td>
+            <!---->
+            <!---->
+            <td style="width: 100%;"></td>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Company</td>
+            <!-- <td class="permission"><input type="checkbox" id="ember3963" class="ember-checkbox ember-view"></td>
+              <td class="permission"><input type="checkbox" id="ember3964" class="ember-checkbox ember-view"></td>
+              <td class="permission"><input type="checkbox" id="ember3965" class="ember-checkbox ember-view"></td>
+              <td class="permission"> <input type="checkbox" id="ember3966" class="ember-checkbox ember-view"> </td>
+              <td class="permission"><input type="checkbox" id="ember3967" class="ember-checkbox ember-view"></td> -->
+            <td> <input type="checkbox" [(ngModel)]="selectedAll" (change)="selectAll();" />
+            </td>
+            <td *ngFor="let n of names">
+              <input type="checkbox" [(ngModel)]="n.selected" (change)="checkIfAllSelected();">
+            </td>
+            <!---->
+            <!---->
+            <td>
+              <div class="popovercontainer"><a>More Permissions</a>
+                <!---->
+              </div>
+            </td>
+          </tr>
+          <!---->
+          <!---->
+          <!---->
+        </tbody>
+      </table>
+    </div>
+  </div>
+  <!-- </div> -->
+  <div id="ember3960" class="ember-view">
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <div class="panel-title"> Venue </div>
+      </div>
+      <table class="table table-bordered role-table">
+        <colgroup>
+          <col>
+          <col style="background: #f5f5f5;">
+        </colgroup>
+        <thead>
+          <tr>
+            <td style="min-width:220px;"></td>
+            <td class="permission">Full Access</td>
+            <td class="permission text-capitalize">view</td>
+            <td class="permission">Add</td>
+            <td class="permission">Edit</td>
+            <td class="permission">Delete</td>
+            <!---->
+            <!---->
+            <td style="width: 100%;"></td>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Venue</td>
+            <!-- <td class="permission"><input type="checkbox" id="ember3963" class="ember-checkbox ember-view"></td>
+            <td class="permission"><input type="checkbox" id="ember3964" class="ember-checkbox ember-view"></td>
+            <td class="permission"><input type="checkbox" id="ember3965" class="ember-checkbox ember-view"></td>
+            <td class="permission"> <input type="checkbox" id="ember3966" class="ember-checkbox ember-view"> </td>
+            <td class="permission"><input type="checkbox" id="ember3967" class="ember-checkbox ember-view"></td> -->
+            <td> <input type="checkbox" [(ngModel)]="selectedAll" (change)="selectAll();" />
+            </td>
+            <td *ngFor="let n of names">
+              <input type="checkbox" [(ngModel)]="n.selected" (change)="checkIfAllSelected();">
+            </td>
+            <!---->
+            <!---->
+            <td>
+              <div class="popovercontainer"><a>More Permissions</a>
+                <!---->
+              </div>
+            </td>
+          </tr>
+          <!---->
+          <!---->
+          <!---->
+        </tbody>
+      </table>
+    </div>
+  </div>
+  <div id="ember3960" class="ember-view">
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <div class="panel-title"> Screen </div>
+      </div>
+      <table class="table table-bordered role-table">
+        <colgroup>
+          <col>
+          <col style="background: #f5f5f5;">
+        </colgroup>
+        <thead>
+          <tr>
+            <td style="min-width:220px;"></td>
+            <td class="permission">Full Access</td>
+            <td class="permission text-capitalize">view</td>
+            <td class="permission">Add</td>
+            <td class="permission">Edit</td>
+            <td class="permission">Delete</td>
+            <!---->
+            <!---->
+            <td style="width: 100%;"></td>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Screen</td>
+            <!-- <td class="permission"><input type="checkbox" id="ember3963" class="ember-checkbox ember-view"></td>
+              <td class="permission"><input type="checkbox" id="ember3964" class="ember-checkbox ember-view"></td>
+              <td class="permission"><input type="checkbox" id="ember3965" class="ember-checkbox ember-view"></td>
+              <td class="permission"> <input type="checkbox" id="ember3966" class="ember-checkbox ember-view"> </td>
+              <td class="permission"><input type="checkbox" id="ember3967" class="ember-checkbox ember-view"></td> -->
+            <td> <input type="checkbox" [(ngModel)]="selectedAll" (change)="selectAll();" />
+            </td>
+            <td *ngFor="let n of names">
+              <input type="checkbox" [(ngModel)]="n.selected" (change)="checkIfAllSelected();">
+            </td>
+            <!---->
+            <!---->
+            <td>
+              <div class="popovercontainer"><a>More Permissions</a>
+                <!---->
+              </div>
+            </td>
+          </tr>
+          <!---->
+          <!---->
+          <!---->
+        </tbody>
+      </table>
+    </div>
+  </div>
+  <!-- <ul>
+      <li> <input type="checkbox" [(ngModel)]="selectedAll" (change)="selectAll();"/>All
+      </li>
+      <li *ngFor="let n of names"> 
+      <input type="checkbox" [(ngModel)]="n.selected" (change)="checkIfAllSelected();">
+      {{n.name}}
+      </li>
+    </ul> -->
+  <div class="tb-btn">
+    <button class="btn">Save</button>
+    <button mat-raised-button class="cancel" [routerLink]="['/roles']" [routerLinkActive]="['router-link-active']">Cancel</button>
+  </div>
+</div>

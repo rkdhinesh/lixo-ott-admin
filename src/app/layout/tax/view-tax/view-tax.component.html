@@ -1,0 +1,50 @@
+<div class="main-content">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-11">
+        <div class="card">
+          <div class="card-header card-header-primary card-header-icon">
+            <div class="card-icon">
+              <i class="material-icons">toll</i>
+            </div>
+            <h4 class="card-title">View Tax</h4>
+          </div>
+          <div class="card-body">
+            <form>
+              <div class="row">
+                <!--Tax Name Input-->
+                <div class="col-md-4">
+                  <mat-form-field class="dialog-full-width">
+                    <input matInput [(ngModel)]="selectedData.taxName" name="taxName" placeholder="Tax Name"
+                      [readonly]="true" [matTooltip]="'This field is Read-only'" matTooltipPosition="below" required>
+                  </mat-form-field>
+                </div>
+                <!--Tax Description Input-->
+                <div class="col-md-4">
+                  <mat-form-field class="dialog-full-width">
+                    <input matInput [(ngModel)]="selectedData.taxDescription" name="taxDescription"
+                      placeholder="Tax Description" [readonly]="true" [matTooltip]="'This field is Read-only'"
+                      matTooltipPosition="below" required>
+                  </mat-form-field>
+                </div>
+                <!--Tax Percentage Input-->
+                <div class="col-md-4">
+                  <mat-form-field class="dialog-full-width">
+                    <input matInput [(ngModel)]="selectedData.taxPercentage" name="taxPercentage"
+                      placeholder="Tax Percentage" [readonly]="true" [matTooltip]="'This field is Read-only'"
+                      matTooltipPosition="below" required>
+                  </mat-form-field>
+                </div>
+              </div>
+              <div class="dialog-half-width">
+                <button mat-raised-button class="btn btn-primary pull-right" [routerLink]="['/tax']"
+                  [routerLinkActive]="['router-link-active']">Cancel</button>
+              </div>
+              <div class="clearfix"></div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

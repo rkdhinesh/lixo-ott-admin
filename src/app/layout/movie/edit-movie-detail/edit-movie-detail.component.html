@@ -1,0 +1,121 @@
+<div class="main-content">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-11">
+        <div class="card">
+          <div class="card-header card-header-primary card-header-icon">
+            <div class="card-icon">
+              <i class="material-icons">local_movies</i>
+            </div>
+            <h4 class="card-title">Edit Movie Details</h4>
+          </div>
+          <div class="card-body">
+            <form [formGroup]="editMovieDetailForm">
+              <div class="row">
+                <!--Select Movie Name Input-->
+                <div class="col-md-4">
+                  <mat-form-field class="dialog-full-width">
+                    <input matInput name="movieName" placeholder="Select Movie Name" formControlName="movieName"
+                    [readonly]="true" [matTooltip]="'This field is Read-only'" matTooltipPosition="below">
+                  </mat-form-field>
+                </div>
+                <!--Language Input-->
+                <div class="col-md-4">
+                  <mat-form-field class="dialog-full-width">
+                    <input matInput name="language" placeholder="Languages" formControlName="language">
+                      <!--Language error handling-->
+                    <mat-error *ngIf="editMovieDetailForm.get('language')?.hasError('required')">
+                      This Field is required
+                    </mat-error>
+                    <mat-error *ngIf="editMovieDetailForm.get('language')?.hasError('pattern')">
+                      Invalid language details or format entered
+                    </mat-error>
+                  </mat-form-field>
+                </div>
+                <!--Subtitles Input-->
+                <div class="col-md-4">
+                  <mat-form-field class="dialog-full-width">
+                    <input matInput name="subtitle" placeholder="Subtitles" formControlName="subtitles">
+                    <!--Subtitles error handling-->
+                    <mat-error *ngIf="editMovieDetailForm.get('subtitles')?.hasError('required')">
+                      This Field is required
+                    </mat-error>
+                    <mat-error *ngIf="editMovieDetailForm.get('subtitles')?.hasError('pattern')">
+                      Invalid subtitle details or format entered
+                    </mat-error>
+                  </mat-form-field>
+                </div>
+              </div>
+              <div class="row">
+                <!--Directors Input-->
+                <div class="col-md-4">
+                  <mat-form-field class="dialog-full-width">
+                    <input matInput name="director" placeholder="Directors" formControlName="directors">
+                    <!--Directors error handling-->
+                    <mat-error *ngIf="editMovieDetailForm.get('directors')?.hasError('required')">
+                      This Field is required
+                    </mat-error>
+                    <mat-error *ngIf="editMovieDetailForm.get('directors')?.hasError('pattern')">
+                      Invalid director details entered
+                    </mat-error>
+                  </mat-form-field>
+                </div>
+                <!--Producers Input-->
+                <div class="col-md-4">
+                  <mat-form-field class="dialog-full-width">
+                    <input matInput name="producer" placeholder="Producers" formControlName="producers">
+                    <!--Producers error handling-->
+                    <mat-error *ngIf="editMovieDetailForm.get('producers')?.hasError('required')">
+                      This Field is required
+                    </mat-error>
+                  </mat-form-field>
+                </div>
+                <!--Studio Input-->
+                <div class="col-md-4">
+                  <mat-form-field class="dialog-full-width">
+                    <input matInput name="studio" placeholder="Studio" formControlName="studio">
+                    <!--Studio error handling-->
+                    <mat-error *ngIf="editMovieDetailForm.get('studio')?.hasError('required')">
+                      This Field is required
+                    </mat-error>
+                  </mat-form-field>
+                </div>
+              </div>
+              <div class="row">
+                <!--Cast Input-->
+                <div class="col-md-4">
+                  <mat-form-field class="dialog-full-width">
+                    <input matInput name="cast" placeholder="Star Cast" formControlName="starCast">
+                    <!--Cast error handling-->
+                    <mat-error *ngIf="editMovieDetailForm.get('starCast')?.hasError('required')">
+                      This Field is required
+                    </mat-error>
+                    <mat-error *ngIf="editMovieDetailForm.get('starCast')?.hasError('pattern')">
+                      Invalid star cast details entered
+                    </mat-error>
+                  </mat-form-field>
+                </div>
+              </div>
+              <div class="row">
+                <!--synopsis Input-->
+                <div class="col-md-8">
+                  <mat-form-field class="dialog-full-width">
+                    <textarea matInput name="synopsis" placeholder="synopsis" formControlName="synopsis"></textarea>
+                    <!--synopsis error handling-->
+                    <mat-error *ngIf="editMovieDetailForm.get('synopsis')?.hasError('required')">
+                      This Field is required
+                    </mat-error>
+                  </mat-form-field>
+                </div>
+              </div>
+              <button mat-raised-button class="btn btn-primary pull-right" (click)="goBack()"
+                [routerLinkActive]="['router-link-active']">Cancel</button>
+              <button mat-raised-button (click)="saveDetail()" class="btn btn-primary pull-right"
+                [disabled]="!editMovieDetailForm.valid">Save</button>
+              <div class="clearfix"></div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>

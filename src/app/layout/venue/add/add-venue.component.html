@@ -1,0 +1,185 @@
+<div class="main-content">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-11">
+        <div class="card">
+          <div class="card-header card-header-primary card-header-icon">
+            <div class="card-icon">
+              <i class="material-icons">my_location</i>
+            </div>
+            <h4 class="card-title">New Venue </h4>
+          </div>
+          <div class="card-body">
+            <form>
+              <div class="row">
+                <div class="col-md-4">
+                  <mat-form-field appearance="outline">
+                    <mat-label>Company</mat-label>
+                    <input type="text" placeholder="Company" matInput [formControl]="companyFormControl"
+                      [(ngModel)]="selectedCompany" [matAutocomplete]="companyAuto" required>
+                    <mat-autocomplete #companyAuto="matAutocomplete" [displayWith]="displayFn">
+                      <mat-option *ngFor="let option of filteredCompanyList | async" [value]="option">
+                        {{ option.name }}
+                      </mat-option>
+                    </mat-autocomplete>
+                  </mat-form-field>
+                </div>
+                <div class="col-md-4">
+                  <mat-form-field appearance="outline">
+                    <mat-label>Venue Name</mat-label>
+                    <input matInput [(ngModel)]="selectedData.venueName" name="venueName" placeholder="Venue Name"
+                      required>
+                  </mat-form-field>
+                </div>
+
+                <div class="col-md-4">
+                  <mat-form-field appearance="outline">
+                    <mat-label>Venue Category</mat-label>
+                    <input type="text" placeholder="Venue Category" matInput [formControl]="venueCategoriesFormControl"
+                      [(ngModel)]="selectedVenueCategoryData" [matAutocomplete]="auto" required>
+                    <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayFn">
+                      <mat-option *ngFor="let option of filteredVenueCategories | async" [value]="option">
+                        {{ option.name }}
+                      </mat-option>
+                    </mat-autocomplete>
+                  </mat-form-field>
+                </div>
+
+                <div class="col-md-4">
+                  <mat-form-field appearance="outline">
+                    <mat-label>Locality</mat-label>
+                    <input type="text" placeholder="Locality" matInput [formControl]="localitiesFormControl"
+                      [(ngModel)]="selectedLocalityData" [matAutocomplete]="localityAuto" required>
+                    <mat-autocomplete #localityAuto="matAutocomplete" [displayWith]="displayFn">
+                      <mat-option *ngFor="let option of filteredLocalities | async" [value]="option">
+                        {{ option.name }}
+                      </mat-option>
+                    </mat-autocomplete>
+                  </mat-form-field>
+                </div>
+                <div class="col-md-4">
+                  <mat-form-field appearance="outline">
+                    <mat-label>Address Line1</mat-label>
+                    <input matInput name="addressLine1" [(ngModel)]="selectedData.addressLine1"
+                      placeholder="Address Line1">
+                  </mat-form-field>
+                </div>
+                <div class="col-md-4">
+                  <mat-form-field appearance="outline">
+                    <mat-label>Address Line2</mat-label>
+                    <input matInput name="addressLine2" [(ngModel)]="selectedData.addressLine2"
+                      placeholder="Address Line2">
+                  </mat-form-field>
+                </div>
+
+                <div class="col-md-4">
+                  <mat-form-field appearance="outline">
+                    <mat-label>Default Days to Publish</mat-label>
+                    <input matInput name="defaultDaysToPublish" [(ngModel)]="selectedData.defaultDaysToPublish"
+                      placeholder="Default Days to Publish" required>
+                  </mat-form-field>
+                </div>
+
+                <div class="col-md-4">
+                  <mat-form-field appearance="outline">
+                    <mat-label>Landmark</mat-label>
+                    <input matInput name="landmark" [(ngModel)]="selectedData.landMark" placeholder="Landmark">
+                  </mat-form-field>
+                </div>
+                <div class="col-md-4">
+                  <mat-form-field appearance="outline">
+                    <mat-label>Synopsis</mat-label>
+                    <input matInput name="synopsis" [(ngModel)]="selectedData.synopsis" placeholder="Synopsis">
+                  </mat-form-field>
+                </div>
+                <div class="col-md-4">
+                  <mat-form-field appearance="outline">
+                    <mat-label>Vendor Percentage</mat-label>
+                    <input matInput name="vendorPercentage" [(ngModel)]="selectedData.vendorPercentage"
+                      placeholder="Vendor Percentage">
+                  </mat-form-field>
+                </div>
+                <div class="col-md-4">
+                  <mat-form-field appearance="outline">
+                    <mat-label>Account Number</mat-label>
+                    <input matInput name="accountNumber" [(ngModel)]="selectedData.accountNumber"
+                      placeholder="Account Number">
+                  </mat-form-field>
+                </div>
+                <div class="col-md-3">
+                  <section>
+                    <mat-checkbox name="live" [(ngModel)]="selectedData.live">Enable
+                    </mat-checkbox>
+                  </section>
+                </div>
+                <div class="col-md-3">
+                  <section class="example-section dialog-full-width">
+                    <mat-checkbox name="mobileTicketAvailable" required
+                      [(ngModel)]="selectedData.mobileTicketAvailableBoolean">Mobile Ticket Available</mat-checkbox>
+                  </section>
+                </div>
+                <div class="col-md-3">
+                  <section>
+                    <mat-checkbox name="additionalFare3d" required [(ngModel)]="selectedData.additionalFare3dBoolean">
+                      Additional Fare 3D</mat-checkbox>
+                  </section>
+                </div>
+                <div class="col-md-3">
+                  <section>
+                    <mat-checkbox name="foodAndBreverageAvailable" required
+                      [(ngModel)]="selectedData.foodAndBreverageAvailableBoolean">Food And Breverage Available
+                    </mat-checkbox>
+
+
+                    <!-- checkbox for venue terms -->
+
+                    <section>
+                      <mat-checkbox name="uploadVenue" required [(ngModel)]="uploadVenue">
+                        Venue Terms</mat-checkbox>
+                    </section>
+
+                    <!-- upload venue -->
+                    <section>
+                      <button *ngIf="uploadedVenueTerms != null " type="button" rel="tooltip" title=""
+                        class="btn btn-danger btn-link btn-sm" (click)="delete()"
+                        style="background: none !important;color: #f44336" data-original-title="Remove">
+                        <i class="fa fa-trash-o" aria-hidden="true"></i>
+                      </button>
+                      <input style="display: none" type="file" (change)="onFileSelected($event)" #fileInput>
+                      <button *ngIf="uploadVenue == true " mat-raised-button (click)="fileInput.click()"
+                        class="btn btn-primary pull-right">upload Terms</button>
+                      <span *ngIf="fileTypeInvalid==true" style="color:red">Invalid file</span>
+                      <span *ngIf="uploadSuccess==true" style="color:black">Terms Uploaded</span>
+                    </section>
+                  </section>
+                </div>
+              </div>
+              <br />
+              <!-- <div class="row">
+                <div class="col-md-10">
+                  Choose Venue Location
+                </div>
+              </div> -->
+              <!-- <div class="row">
+                <div class="col-md-10">
+                  <agm-map [latitude]="lat" [longitude]="lng" [zoom]="zoom" [disableDefaultUI]="false"
+                    [zoomControl]="false" (mapClick)="mapClicked($event)">
+                    <agm-marker [(latitude)]="marker.lat" [(longitude)]="marker.lng"
+                      [markerDraggable]="marker.draggable" (dragEnd)='markerDragEnd(marker,$event)'></agm-marker>
+
+                  </agm-map>
+                </div>
+              </div> -->
+              <button mat-raised-button class="btn btn-primary pull-right" [routerLink]="['/venue']"
+                [routerLinkActive]="['router-link-active']">Cancel</button>
+              <button mat-raised-button (click)="saveDetail()" class="btn btn-primary pull-right">Save</button>
+              
+              <div class="clearfix"></div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div>
+  </div>

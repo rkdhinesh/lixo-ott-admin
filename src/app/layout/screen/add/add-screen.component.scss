@@ -1,0 +1,45 @@
+.seat_input{
+    
+    color:#1abc9c;
+    text-align: center;
+    height: 20px;
+    width: 20px;
+    color: grey;
+   }
+
+   .seat{
+    padding: 1px 5px;
+    margin: 1px 2px;
+    color:#1abc9c;
+    text-align: center;
+    font-size: 10px;
+    height: 29px;
+    width: 40px;
+    padding: 2px 2px;
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    border: 1px solid #a7a7a7; 
+    border-radius: 2%;
+    float: left;
+    color: grey;
+   }
+
+   .screendisplay {
+    position: relative;
+    left: 23%;
+    width: 500px; 
+    height: 100px;  
+    border: solid 5px #219b67;
+    border-color: #219b67 transparent transparent transparent;
+    border-radius: 50%/90px 90px 0 0;
+  }
+
+  .screentext{
+    position: absolute;
+    top: 45px;
+    left: -24px;
+    color: #219b67;
+    width: 100%;
+    text-align: center;
+  }

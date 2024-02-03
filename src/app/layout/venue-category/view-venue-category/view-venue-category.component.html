@@ -1,0 +1,63 @@
+<form>
+    <div fxLayout="row" fxLayout.xs="column" fxLayout.sm="column">
+      <div fxLayout="column" fxFlex="100">
+        <mat-toolbar color="primary">
+          <span class="dialog-full-width">View Venue Category</span>
+          <span class="lx_fill_remaining_space"></span>
+          <!-- <div class="lx_button_list">
+            <button mat-raised-button color="secondary" (click)="saveDetail()">Save</button>
+            <button mat-raised-button color="secondary" [routerLink]="['/venue-category']" [routerLinkActive]="['router-link-active']">Cancel</button>
+          </div> -->
+        </mat-toolbar>
+      </div>
+    </div>
+    <div fxLayout="row" style="height:calc(100vh - 200px)" s fxLayoutAlign="start start">
+      <div fxLayout="column" fxLayoutAlign="start start">
+        <div style="width:500px">
+          <div fxLayout="column">
+              <div *ngIf="buttonStatus">
+                  <!-- <mat-toolbar color="accent">VenueCategory Details</mat-toolbar> -->
+                      <div align="right">
+                          <mat-icon class="lx_header_icon" matTooltip="Edit" mat-button (click)="editStatus()">mode_edit</mat-icon>
+                      </div>
+              </div>
+              <!-- <ng-template #templateName>
+                  <mat-toolbar color="accent" >VenueCategory Details</mat-toolbar>
+                      <div align="right">
+                          <mat-icon class="lx_header_icon"  matTooltip="Edit" mat-button >mode_edit</mat-icon>
+                      </div>           
+                      
+              </ng-template> -->
+            <!-- <div class="block-body"> -->
+  
+              <div fxLayout="row" fxLayout.xs="column" fxLayout.sm="column" fxFlex="100">
+                <div fxLayout="column" fxFlex="100">
+                    <mat-form-field class="dialog-full-width">
+                        <input matInput [(ngModel)]="selectedData.venueCategoryName" name="venueCategoryName" placeholder="venueCategoryName" [disabled]="buttonStatus" required>
+                      </mat-form-field>
+                 </div>
+              </div>
+  
+              <div fxLayout="row" fxLayout.xs="column" fxLayout.sm="column" fxFlex="100">
+                <div fxLayout="column" fxFlex="100">
+                    <mat-form-field class="dialog-full-width">
+                        <input matInput [(ngModel)]="selectedData.synopsis" name="synopsis" placeholder="synopsis" [disabled]="buttonStatus">
+                      </mat-form-field>
+                  </div>
+              </div>
+  
+              <div fxLayout="row" fxLayout.xs="column" fxLayout.sm="column">
+                <div fxLayout="column" fxFlex="100">
+                  <div class="lx_button_list dialog-full-width">
+                      <button mat-raised-button class="button" *ngIf="!buttonStatus">Save</button>
+                    <button mat-raised-button color="secondary" [routerLink]="['/venue-category']" [routerLinkActive]="['router-link-active']">Cancel</button>
+                    
+                  </div>
+                </div>
+              </div>
+            <!-- </div> -->
+          </div>
+        </div>
+      </div>
+    </div>
+  </form>

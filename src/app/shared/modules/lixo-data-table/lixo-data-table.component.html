@@ -1,0 +1,54 @@
+<div class="row">
+  <div class="col-md-5">
+    <mat-form-field appearance="outline">
+      <mat-label>Search</mat-label>
+      <input matInput type="text" (keyup)="applyFilter($event.target.value)" placeholder="Search">
+    </mat-form-field>
+  </div>
+</div>
+<mat-table [dataSource]="dataSource" matSort
+  class="table table-striped table-no-bordered table-hover dataTable no-footer dtr-inline">
+
+  <ng-container [matColumnDef]="tableData" *ngFor="let tableData of objectKeys(columnHeader)">
+
+
+    <div *ngIf="tableData !== 'action'">
+      <mat-header-cell *matHeaderCellDef mat-sort-header> {{columnHeader[tableData]}} </mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element[tableData] }} </mat-cell>
+    </div>
+
+    <div *ngIf="tableData === 'action'">
+      <mat-header-cell *matHeaderCellDef> {{columnHeader[tableData]}} </mat-header-cell>
+      <mat-cell *matCellDef="let row" data-label="action" class="td-actions text-right">
+        <button type="button" rel="tooltip" title="" class="btn btn-primary btn-link btn-sm"
+          style="background: none !important" (click)="editdata(row)" *ngIf="lixoDataTableModel.viewFlag"
+          [routerLink]="lixoDataTableModel.viewRouterLink" [routerLinkActive]="['router-link-active']"
+          data-original-title="View Task" aria-describedby="tooltip275129">
+          <i class="material-icons">info_outline</i>
+        </button>
+
+        <button type="button" rel="tooltip" title="" class="btn btn-primary btn-link btn-sm"
+          style="background: none !important" (click)="editdata(row)" *ngIf="lixoDataTableModel.editFlag"
+          [routerLink]="lixoDataTableModel.editRouterLink" [routerLinkActive]="['router-link-active']"
+          data-original-title="Edit Task" aria-describedby="tooltip275129">
+          <i class="material-icons">edit</i>
+        </button>
+
+        <button type="button" rel="tooltip" title="" class="btn btn-danger btn-link btn-sm" (click)="delete(row)"
+          *ngIf="lixoDataTableModel.deleteFlag" style="background: none !important;color: #f44336"
+          data-original-title="Remove">
+          <i class="material-icons">close</i>
+        </button>
+      </mat-cell>
+    </div>
+
+  </ng-container>
+
+  <mat-header-row *matHeaderRowDef="objectKeys(columnHeader)"></mat-header-row>
+  <mat-row *matRowDef="let row; columns: objectKeys(columnHeader);">
+  </mat-row>
+
+</mat-table>
+
+
+<mat-paginator [pageSizeOptions]="[25, 50, 100]" showFirstLastButtons></mat-paginator>

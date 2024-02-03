@@ -1,0 +1,103 @@
+<div class="main-content">
+
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-11">
+        <div class="card">
+          <div class="card-header card-header-primary card-header-icon">
+            <div class="card-icon">
+              <i class="material-icons">work</i>
+            </div>
+            <h4 class="card-title">New Company</h4>
+          </div>
+          <div class="card-body">
+            <form>
+
+              <div class="row">
+                <div class="col-md-4">
+                  <mat-form-field appearance="outline">
+                    <mat-label>Company Name</mat-label>
+                    <input matInput [(ngModel)]="selectedData.companyName" name="companyName" placeholder="Company Name"
+                      required>
+                  </mat-form-field>
+
+                </div>               
+               <div class="col-md-4">
+                  <mat-form-field appearance="outline">
+                    <mat-label>City</mat-label>
+                    <input type="text" placeholder="City" matInput [formControl]="cityFormControl"
+                      [(ngModel)]="selectedCityData" [matAutocomplete]="cityAuto" required>
+                    <mat-autocomplete #cityAuto="matAutocomplete" [displayWith]="displayFn">
+                      <mat-option *ngFor="let option of filteredCitys | async" (focusout)="onSelectCity(option.name)"
+                        [value]="option">
+                        {{ option.name }}
+                      </mat-option>
+                    </mat-autocomplete>
+                  </mat-form-field>
+                </div>
+                <div class="col-md-4">
+                  <mat-form-field appearance="outline">
+                    <mat-label>Address Line1</mat-label>
+                    <input matInput name="addressLine1" [(ngModel)]="selectedData.addressLine1"
+                      placeholder="Address Line1">
+                  </mat-form-field>
+                </div>
+                <div class="col-md-4">
+                  <mat-form-field appearance="outline">
+                    <mat-label>Address Line2</mat-label>
+                    <input matInput name="addressLine2" [(ngModel)]="selectedData.addressLine2"
+                      placeholder="Address Line2">
+                  </mat-form-field>
+                </div>
+
+                <div class="col-md-4">
+                  <mat-form-field appearance="outline">
+                    <mat-label>Pincode</mat-label>
+                    <input matInput name="pinCode" [(ngModel)]="selectedData.pinCode" placeholder="Pincode" required
+                      maxlength="6" pattern="[0-9]{6}" #pinCode="ngModel">
+                    <mat-error *ngIf="pinCode.errors?.pattern">
+                      Enter valid Pincode
+                    </mat-error>
+                  </mat-form-field>
+                </div>
+                <div class="col-md-4">
+                  <mat-form-field appearance="outline">
+                    <mat-label>Landmark</mat-label>
+                    <input matInput name="landMark" [(ngModel)]="selectedData.landMark" placeholder="Landmark">
+                  </mat-form-field>
+                </div>
+                <div class="col-md-4">
+                  <mat-form-field appearance="outline">
+                    <mat-label>Synopsis</mat-label>
+                    <input matInput name="synopsis" [(ngModel)]="selectedData.synopsis" placeholder="Synopsis">
+                  </mat-form-field>
+                </div>
+
+                <div class="col-md-4">
+                  <mat-form-field appearance="outline">
+                    <mat-label>Website</mat-label>
+                    <input matInput name="website" [(ngModel)]="selectedData.website" placeholder="Website">
+                  </mat-form-field>
+                </div>
+                <div class="col-md-4">
+                  <label></label>
+                  <section>
+                    <mat-checkbox name="live" [(ngModel)]="selectedData.live">Active</mat-checkbox>
+                  </section>
+
+                </div>
+
+
+              </div>
+              <button mat-raised-button class="btn btn-primary pull-right" [routerLink]="['/company']"
+              [routerLinkActive]="['router-link-active']">Cancel</button>
+              <button mat-raised-button (click)="saveDetail()" class="btn btn-primary pull-right">Save</button>
+             
+              <div class="clearfix"></div>
+            </form>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>

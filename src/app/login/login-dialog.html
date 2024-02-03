@@ -1,0 +1,41 @@
+<!-- <h1 mat-dialog-title>Hi {{data.name}}</h1> -->
+<!-- 
+<div mat-dialog-content>
+  <button mat-button (click)="signInWithFB()">Facebook</button>
+
+  <div *ngIf="user" class="card text-center"> 
+    <h6 class="card-header"> Social Login Demo </h6> 
+    <div class="card-block">
+    </div> 
+    <img class="card-img-top img-responsive photo" 
+    src="{{ user.photoUrl }}"> 
+    <div class="card-block"> 
+    <h4 class="card-title">{{ user.name }}</h4> 
+    <p class="card-text">{{ user.email }}</p> 
+    </div> 
+</div>
+<div mat-dialog-actions>
+  <button mat-button (click)="onNoClick()">No Thanks</button>
+  <button mat-button [mat-dialog-close]="data.animal" cdkFocusInitial>Ok</button>
+</div> -->
+<div>
+    
+    <form class="example-form">
+        <div>
+            <button mat-raised-button color="primary" (click)="signInWithFB()">Facebook</button>
+          </div>
+        <div>
+          <mat-form-field class="example-full-width">
+            <input matInput placeholder="UserName or PhoneNumber" value="">
+          </mat-form-field>
+        </div>
+        <div>
+          <mat-form-field class="example-full-width">
+            <input matInput placeholder="Password" value="">
+          </mat-form-field>
+        </div>
+        <div>
+         <button mat-raised-button color="primary">Login</button>
+        </div>
+    </form>
+</div>

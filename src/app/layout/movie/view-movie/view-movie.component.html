@@ -1,0 +1,171 @@
+<div class="main-content">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-11">
+        <div class="card">
+          <div class="card-header card-header-primary card-header-icon">
+            <div class="card-icon">
+              <i class="material-icons">local_movies</i>
+            </div>
+            <h4 class="card-title">View Movie</h4>
+          </div>
+          <div class="card-body">
+            <form>
+              <div class="row">
+                <!--Movie Id Input-->
+                <div class="col-md-4">
+                  <mat-form-field class="dialog-full-width">
+                    <input matInput name="movieId" [(ngModel)]="selectedData.movie.movieId" placeholder="Movie Id"
+                      [readonly]="true" [matTooltip]="'This field is Read-only'" matTooltipPosition="below">
+                  </mat-form-field>
+                </div>
+                <!--Movie Name Input-->
+                <div class="col-md-4">
+                  <mat-form-field class="dialog-full-width">
+                    <input matInput name="movieName" [(ngModel)]="selectedData.movie.movieName" placeholder="Movie Name"
+                      [readonly]="true" [matTooltip]="'This field is Read-only'" matTooltipPosition="below">
+                  </mat-form-field>
+                </div>
+                <!--Year of Release Input-->
+                <div class="col-md-4">
+                  <mat-form-field class="dialog-full-width">
+                    <input matInput name="yearReleased" [(ngModel)]="selectedData.movie.yearReleased"
+                      placeholder="Year of Release" [readonly]="true" [matTooltip]="'This field is Read-only'"
+                      matTooltipPosition="below">
+                  </mat-form-field>
+                </div>
+              </div>
+              <div class="row">
+                <!--Quality Input-->
+                <div class="col-md-4">
+                  <mat-form-field class="dialog-full-width">
+                    <input type="text" placeholder="Quality" [(ngModel)]="selectedData.movie.quality"
+                      aria-label="Number" matInput name="quality" [matAutocomplete]="autoQuality" [readonly]="true"
+                      [matTooltip]="'This field is Read-only'" matTooltipPosition="below">
+                    <mat-autocomplete #autoQuality="matAutocomplete">
+                      <mat-option *ngFor="let option of quality" [value]="option">
+                        {{option}}
+                      </mat-option>
+                    </mat-autocomplete>
+                  </mat-form-field>
+                </div>
+                <!--Duration Input-->
+                <div class="col-md-4">
+                  <mat-form-field class="dialog-full-width">
+                    <input matInput name="duration" [(ngModel)]="selectedData.movie.duration" placeholder="Duration"
+                      [readonly]="true" [matTooltip]="'This field is Read-only'" matTooltipPosition="below">
+                  </mat-form-field>
+                </div>
+                <!--Genre dropdown Input-->
+                <div class="col-md-4">
+                  <mat-form-field class="dialog-full-width">
+                    <input matInput name="genre" [(ngModel)]="selectedData.movieGenre.genreName" placeholder="Genre"
+                      [readonly]="true" [matTooltip]="'This field is Read-only'" matTooltipPosition="below">
+                  </mat-form-field>
+                </div>
+              </div>
+              <div class="row">
+                 <!--Fare dropdown Input-->
+                <div class="col-md-4">
+                  <mat-form-field class="dialog-full-width">
+                    <input type="text" placeholder="Fare" [(ngModel)]="selectedData.movie.fareId" aria-label="Number"
+                      matInput name="fare" [matAutocomplete]="autoFare" [readonly]="true"
+                      [matTooltip]="'This field is Read-only'" matTooltipPosition="below">
+                    <mat-autocomplete #autoFare="matAutocomplete">
+                      <mat-option *ngFor="let fare of fareList" [value]="fare.fareId">
+                        {{fare.fareId}}
+                      </mat-option>
+                    </mat-autocomplete>
+                  </mat-form-field>
+                </div>
+                <!--Censor Rating Input-->
+                <div class="col-md-4">
+                  <mat-form-field class="dialog-full-width">
+                    <input matInput name="censorRating" placeholder="censorRating"
+                      [(ngModel)]="selectedData.movie.censorRating" [readonly]="true"
+                      [matTooltip]="'This field is Read-only'" matTooltipPosition="below">
+                  </mat-form-field>
+                </div>
+                <!--Security Token Input-->
+                <div class="col-md-4">
+                  <mat-form-field class="dialog-full-width">
+                    <input matInput name="securityToken" placeholder="securityToken"
+                      [(ngModel)]="selectedData.movie.securityToken" [readonly]="true"
+                      [matTooltip]="'This field is Read-only'" matTooltipPosition="below">
+                  </mat-form-field>
+                </div>
+              </div>
+              <div class="row">
+                <!--Available From Input-->
+                <div class="col-md-4">
+                  <mat-form-field class="dialog-full-width">
+                    <input matInput name="releaseDate" [matDatepicker]=""
+                       [(ngModel)]="selectedData.movie.availableFrom"
+                      placeholder="Available From" class="form-control" id="releaseDate" [readonly]="true"
+                      [matTooltip]="'This field is Read-only'" matTooltipPosition="below">
+                    <!-- <mat-datepicker-toggle matSuffix [for]="releaseDatepicker "></mat-datepicker-toggle>
+                    <mat-datepicker #releaseDatepicker></mat-datepicker> -->
+                  </mat-form-field>
+                </div>
+                <!--available To Input-->
+                <div class="col-md-4">
+                  <mat-form-field class="dialog-full-width">
+                    <input matInput name="bookingOpeningDate" [matDatepicker]=""
+                       [(ngModel)]="selectedData.movie.availableTo"
+                      placeholder="Available Till" class="form-control" id="bookingOpeningDate" [readonly]="true"
+                      [matTooltip]="'This field is Read-only'" matTooltipPosition="below">
+                    <!-- <mat-datepicker-toggle matSuffix [for]="bookingopeningDateDatepicker  "></mat-datepicker-toggle>
+                    <mat-datepicker #bookingopeningDateDatepicker></mat-datepicker> -->
+                  </mat-form-field>
+                </div>
+              </div>
+              <div class="row">
+                <!--Thumbnail URL Input-->
+                <div class="col-md-8">
+                  <mat-form-field class="dialog-full-width">
+                    <input matInput name="thumbnailUrl" [(ngModel)]="selectedData.movie.thumbnailUrl"
+                      placeholder="Thumbnail URL" [readonly]="true" [matTooltip]="'This field is Read-only'"
+                      matTooltipPosition="below">
+                  </mat-form-field>
+                </div>
+              </div>
+              <div class="row">
+                <!--Preview Animation URL Input-->
+                <div class="col-md-8">
+                  <mat-form-field class="dialog-full-width">
+                    <input matInput name="previewUrl" [(ngModel)]="selectedData.movie.previewUrl"
+                      placeholder="Preview Animation URL" [readonly]="true" [matTooltip]="'This field is Read-only'"
+                      matTooltipPosition="below">
+                  </mat-form-field>
+                </div>
+                <br>
+              </div>
+              <div class="row">
+                <!--Movie URL Input-->
+                <div class="col-md-8">
+                  <mat-form-field class="dialog-full-width">
+                    <input matInput name="movieUrl" [(ngModel)]="selectedData.movie.movieUrl" placeholder="Movie URL"
+                      [readonly]="true" [matTooltip]="'This field is Read-only'" matTooltipPosition="below">
+                  </mat-form-field>
+                </div>
+                <!--Upcoming Movie Checkbox-->
+                <div class="col-md-4">
+                  <section>
+                    <mat-checkbox name="Upcoming" [(ngModel)]="selectedData.movie.upcomingMovie"
+                      [class.disabled]="true" [matTooltip]="'This field is Read-only'"
+                      matTooltipPosition="below">Upcoming Movie
+                    </mat-checkbox>
+                  </section>
+                </div>
+              </div>
+              <button mat-raised-button class="btn btn-primary pull-right" [routerLink]="['/movie']"
+                [routerLinkActive]="['router-link-active']">Cancel</button>
+              <button mat-raised-button class="btn btn-primary pull-right" [routerLinkActive]="['router-link-active']"
+                (click)="sendMovieDetail()">View Movie Detail</button>
+              <div class="clearfix"></div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>

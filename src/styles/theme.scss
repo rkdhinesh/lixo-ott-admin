@@ -1,0 +1,26 @@
+@import '~@angular/material/theming';
+@include mat-core();
+$custom-primary: mat-palette($mat-gray, 900);
+$custom-accent: mat-palette($mat-gray, 300);
+$custom-warn: mat-palette($mat-red);
+$custom-theme: mat-light-theme($custom-primary, $custom-accent, $custom-warn);
+@include angular-material-theme($custom-theme);
+// ALTERNATIVE THEME
+$alt-primary: mat-palette($mat-yellow);
+$alt-accent: mat-palette($mat-grey, 900);
+$alt-theme: mat-dark-theme($alt-primary, $alt-accent);
+.alternative {
+    @include angular-material-theme($alt-theme);
+}
+
+// Define a custom typography config that overrides the font-family as well as the
+// `headlines` and `body-1` levels.
+$custom-typography: mat-typography-config( $font-family: 'Raleway,Helvetica Neue', $headline: mat-typography-level(32px, 48px, 700), $body-1: mat-typography-level(12px, 16px, 500));
+// Override typography CSS classes (e.g., mat-h1, mat-display-1, mat-typography, etc.).
+@include mat-base-typography($custom-typography);
+// Override typography for a specific Angular Material components.
+@include mat-checkbox-typography($custom-typography);
+// Override the typography in the core CSS.
+@include mat-core($custom-typography);
+// Override typography for all Angular Material, including mat-base-typography and all components.
+@include angular-material-typography($custom-typography);

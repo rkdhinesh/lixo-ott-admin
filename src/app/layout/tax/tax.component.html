@@ -1,0 +1,91 @@
+<div class="main-content">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="card">
+          <div class="card-header card-header-primary card-header-icon">
+            <div class="card-icon">
+              <i class="material-icons">toll</i>
+            </div>
+            <h4 class="card-title">Taxes</h4>
+          </div>
+          <div class="card-body">
+            <div class="row" *ngIf="operationAccessMap.get('Tax-Create')">
+              <div class="col-12 text-right">
+                <a [routerLink]="['/add-tax']" [routerLinkActive]="['router-link-active']"
+                  class="btn btn-sm btn-primary">New Tax</a>
+              </div>
+            </div>
+            <mat-table [dataSource]="dataSource" matSort
+              class="table table-striped table-no-bordered table-hover dataTable no-footer dtr-inline">
+              <!--Tax Name Column-->
+              <ng-container matColumnDef="taxName">
+                <mat-header-cell *matHeaderCellDef mat-sort-header> Tax
+                </mat-header-cell>
+                <mat-cell *matCellDef="let row" data-label="Tax"> {{row.taxName}}
+                </mat-cell>
+              </ng-container>
+              <!--Tax Description Column-->
+              <ng-container matColumnDef="taxDescription">
+                <mat-header-cell *matHeaderCellDef mat-sort-header> Tax Desc </mat-header-cell>
+                <mat-cell *matCellDef="let row" data-label="taxDescription"> {{row.taxDescription}} </mat-cell>
+              </ng-container>
+              <!--Tax Percentage Column-->
+              <ng-container matColumnDef="taxPercentage">
+                <mat-header-cell *matHeaderCellDef mat-sort-header> Tax %
+                </mat-header-cell>
+                <mat-cell *matCellDef="let row" data-label="Tax %"> {{row.taxPercentage}}
+                </mat-cell>
+              </ng-container>
+              <!--Action Column-->
+              <ng-container matColumnDef="action">
+                <mat-header-cell *matHeaderCellDef> Action </mat-header-cell>
+                <mat-cell *matCellDef="let row" data-label="action" class="td-actions text-right">
+                  <!--View Tax Button-->
+                  <button type="button" rel="tooltip" title="" class="btn btn-primary btn-link btn-sm"
+                    style="background: none !important" (click)="editdata(row)" [routerLink]="['./view-tax']"
+                    [routerLinkActive]="['router-link-active']" data-original-title="View Task"
+                    aria-describedby="tooltip275129" *ngIf="operationAccessMap.get('Tax-View')">
+                    <i class="material-icons">visibility</i>
+                  </button>
+                  <!-- *ngIf="operationAccessMap.get('Tax-View')" -->
+                  <!--Edit Tax Button-->
+                  <button type="button" rel="tooltip" title="" class="btn btn-primary btn-link btn-sm"
+                    style="background: none !important" (click)="editdata(row)" [routerLink]="['./edit-tax']"
+                    [routerLinkActive]="['router-link-active']" data-original-title="Edit Task"
+                    aria-describedby="tooltip275129" *ngIf="operationAccessMap.get('Tax-Edit')">
+                    <i class="material-icons">edit</i>
+                  </button>
+                  <!-- *ngIf="operationAccessMap.get('Tax-Edit')" -->
+                  <!--Delete Tax Button-->
+                  <button type="button" rel="tooltip" title="" class="btn btn-danger btn-link btn-sm"
+                    (click)="delete(row)" style="background: none !important;color: #f44336"
+                    data-original-title="Remove" *ngIf="operationAccessMap.get('Tax-Delete')">
+                    <i class="material-icons">close</i>
+                  </button>
+                  <!-- *ngIf="operationAccessMap.get('Tax-Delete')" -->
+                </mat-cell>
+              </ng-container>
+              <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+              <mat-row *matRowDef="let row; columns: displayedColumns;">
+              </mat-row>
+            </mat-table>
+            <!--Loading Spinner div-->
+            <div *ngIf="isLoading && !noContent && !isContent" class="d-flex justify-content-center">
+              <div class="spinner-container">
+                <div class="spinner-border text-success" role="status">
+                </div>
+                <h4>Loading...</h4>
+              </div>
+            </div>
+            <!--No Content div-->
+            <div *ngIf="noContent" class="d-flex justify-content-center">
+              <h4>There isn't a tax available. Consider adding a new one.</h4>
+            </div>
+            <mat-paginator [pageSizeOptions]="[25, 50, 100]" showFirstLastButtons></mat-paginator>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

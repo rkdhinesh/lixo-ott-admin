@@ -1,0 +1,82 @@
+<div class="main-content">
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-md-11">
+          <div class="card">
+            <div class="card-header card-header-primary card-header-icon">
+              <div class="card-icon">
+                <i class="material-icons">monetization_on</i>
+              </div>
+              <h4 class="card-title">Edit Charge</h4>
+            </div>
+            <div class="card-body">
+              <form>
+                <div class="row">
+                  <div class="col-md-4">
+                    <mat-form-field class="dialog-full-width">
+                      <input matInput [(ngModel)]="selectedData.chargeName" name="chargeName" placeholder="Charge Name"
+                        required>
+                    </mat-form-field>
+                  </div>
+                  <div class="col-md-4">
+                    <mat-form-field class="dialog-full-width">
+                      <input matInput [(ngModel)]="selectedData.chargeDescription" name="chargeDescription"
+                        placeholder=" Charge Description" required>
+                    </mat-form-field>
+                  </div>
+  
+                  
+                  <div class="col-md-4">
+                    <mat-form-field class="dialog-full-width">
+                      <mat-chip-list #chipList>
+                        <mat-chip *ngFor="let tax of existingTaxes" required [selectable]="selectable" [removable]="removable"
+                          (removed)="remove(tax)">
+                          {{tax.taxName}}
+                          <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
+                        </mat-chip>
+                        <input [(ngModel)]="selectedData.taxIds" placeholder="Taxes" #taxInput [formControl]="taxControl"
+                          [matAutocomplete]="autoTaxComplete" [matChipInputFor]="chipList"
+                          [matChipInputSeparatorKeyCodes]="separatorKeysCodes" [matChipInputAddOnBlur]="addOnBlur"
+                          (matChipInputTokenEnd)="add($event)">
+                      </mat-chip-list>
+                      <mat-autocomplete #autoTaxComplete="matAutocomplete" (optionSelected)="selected($event)"
+                        [displayWith]="displayFn">
+                        <mat-option *ngFor="let tax of result" [value]="tax">
+                          {{tax.taxName}}
+                        </mat-option>
+                      </mat-autocomplete>
+                    </mat-form-field>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-md-4">
+                    <mat-form-field class="dialog-full-width">
+                      <input matInput [(ngModel)]="selectedData.chargeAmount" name="chargeAmount"
+                        placeholder=" Charge Amount " required>
+                    </mat-form-field>
+                  </div>
+                  <div class="col-md-4">
+                    <mat-form-field class="dialog-full-width">
+                      <input matInput [(ngModel)]="selectedData.gateWayPercentage" name="gateWayPercentage"
+                        placeholder="Gateway Percentage" required>
+                    </mat-form-field>
+                  </div>
+                  <div class="col-md-4">
+                    <mat-form-field class="dialog-full-width">
+                      <input matInput [(ngModel)]="selectedData.vendorPercentage" name="vendorPercentage"
+                        placeholder="Vendor Percentage" required>
+                    </mat-form-field>
+                  </div>
+                </div>
+                <button mat-raised-button class="btn btn-primary pull-right" [routerLink]="['/charge']"
+                [routerLinkActive]="['router-link-active']">Cancel</button>
+                <button mat-raised-button (click)="saveDetail()" class="btn btn-primary pull-right">Save</button>
+                
+                <div class="clearfix"></div>
+              </form>
+            </div>
+          </div>
+        </div>
+  
+      </div>
+    </div>

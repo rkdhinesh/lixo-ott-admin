@@ -1,0 +1,80 @@
+<div class="main-content">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-11">
+        <div class="card">
+          <div class="card-header card-header-primary card-header-icon">
+            <div class="card-icon">
+              <i class="material-icons">accessibility_new</i>
+            </div>
+            <h4 class="card-title">New Role</h4>
+          </div>
+          <div class="card-body">
+            <button mat-raised-button (click)="save()" class="btn btn-primary pull-right">Save</button>
+            <button mat-raised-button class="btn btn-primary pull-right" [routerLink]="['/roles']"
+              [routerLinkActive]="['router-link-active']">Cancel</button>
+            <div class="clearfix"></div>
+
+            <form>
+              <div class="row">
+                <div class="col-md-6">
+                  <mat-form-field class="dialog-full-width">
+                    <input matInput [(ngModel)]="selectedData.roleName" name="roleName" placeholder="Role Name"
+                      required>
+                  </mat-form-field>
+                </div>
+                <div class="col-md-6">
+                  <mat-form-field class="dialog-full-width">
+                    <input matInput [(ngModel)]="selectedData.roleDescription" name="roleDescription"
+                      placeholder="Role Description">
+                  </mat-form-field>
+                </div>
+              </div>
+
+              <div class="card" *ngFor="let module of modules">
+                <div class="card-header card-icon">
+                  <h4 class="card-title">{{module.moduleName}}</h4>
+                </div>
+                <div class="card-body">
+                  <div class="row">
+                    <div class="col-md-12">
+                      <mat-table [dataSource]="module.dataSource" matSort
+                        class="table table-striped table-no-bordered table-hover dataTable no-footer dtr-inline">
+
+                        <div *ngFor="let column of module.displayedColumns">
+                          <ng-container [matColumnDef]="column">
+                            <mat-header-cell *matHeaderCellDef> {{column}} </mat-header-cell>
+                            <div *ngIf="column == 'Sub Module'">
+                              <mat-cell *matCellDef="let row" data-label="Sub Module"> {{row.subModuleName}} </mat-cell>
+                            </div>
+                            <div *ngIf="column != 'Sub Module'">
+                              <mat-cell *matCellDef="let row" data-label="column">
+                                <div *ngFor="let item of row.map | keyvalue">
+                                  <!-- Key: <b>{{item.key}}</b> and Value: <b>{{item.value}}</b> -->
+
+                                  <section *ngIf="column == item.key">
+                                    <mat-checkbox name="sub_{{row.subModuleName}}_{{item.key}}"
+                                      [(ngModel)]="item.value">
+                                    </mat-checkbox>
+                                  </section>
+                                </div>
+                              </mat-cell>
+                            </div>
+                          </ng-container>
+                        </div>
+                        <mat-header-row *matHeaderRowDef="module.displayedColumns"></mat-header-row>
+                        <mat-row *matRowDef="let row; columns: module.displayedColumns;">
+                        </mat-row>
+                      </mat-table>
+                    </div>
+                  </div>
+                </div>
+
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>

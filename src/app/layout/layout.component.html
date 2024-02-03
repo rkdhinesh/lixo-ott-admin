@@ -1,0 +1,19 @@
+<div class="wrapper">
+        <div class="sidebar" data-color="danger" data-background-color="black" data-image="./assets/img/sidebar-1.jpg">
+            <app-sidebar [modules] = modules></app-sidebar>
+            <!-- <div class="sidebar-background" style="background-image: url(./assets/img/sidebar-4.jpg)"></div> -->
+        </div>
+        <div class="main-panel ps-container ps-active-y">
+            <app-navbar></app-navbar>
+            <router-outlet></router-outlet>
+            <!-- <app-footer></app-footer> -->
+            <div class="ps-scrollbar-x-rail" style="left: 0px; bottom: -309.727px; width: 405px;">
+                <div class="ps-scrollbar-x" tabindex="0" style="left: 0px; width: 0px;"></div>
+            </div>
+
+            <div class="ps-scrollbar-y-rail" style="top: 312.727px; height: 506px; right: 3px;">
+                <div class="ps-scrollbar-y" tabindex="0"></div>
+            </div>
+            
+        </div>
+    </div>
